@@ -25,5 +25,5 @@ Um die Software zur Produktionsreife zu bringen, müssen noch ein paar Dinge ent
 * ...
 
 ```{note}
-Auf geht's ;-)
+Auf geht's ;-) ...
 ```
