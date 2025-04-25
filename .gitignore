@@ -1,0 +1,26 @@
+# venv
+.venv
+# Django
+*.log
+*.pot
+*.pyc
+sdi_geocoder/__pycache__
+__pycache__
+db.sqlite3
+media
+# Backup files # 
+*.bak 
+# upload folders
+raw/
+static_collected/
+# vscode
+.vscode/*
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
+# sphinx
+_build/
+_static/
+_templates/
