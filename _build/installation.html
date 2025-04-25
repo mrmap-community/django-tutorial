@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation der Python Umgebung &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=79cc9f76"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)" href="initialize_project.html" />
+    <link rel="prev" title="Einführung" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#beispielimplementierungen">Beispielimplementierungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation der Python Umgebung</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#benotigte-software">Benötigte Software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#los-geht-s-am-terminal">Los geht’s am Terminal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vscode-einrichten-uber-oberflache">VSCODE einrichten über Oberfläche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#weitere-infos">Weitere Infos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_model.html">Organisationsmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plan_model.html">Planmodell</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="export_xml_1.html">XPlanung GML Export</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation der Python Umgebung</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation-der-python-umgebung">
+<h1>Installation der Python Umgebung<a class="headerlink" href="#installation-der-python-umgebung" title="Link to this heading"></a></h1>
+<section id="benotigte-software">
+<h2>Benötigte Software<a class="headerlink" href="#benotigte-software" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>VSCODE</p></li>
+<li><p>Virtuelle python Umgebung</p></li>
+<li><p>Internetzugang</p></li>
+</ol>
+</section>
+<section id="los-geht-s-am-terminal">
+<h2>Los geht’s am Terminal<a class="headerlink" href="#los-geht-s-am-terminal" title="Link to this heading"></a></h2>
+<p>Verzeichnis anlegen</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>komserv2
+</pre></div>
+</div>
+<p>Ins Verzeichnis wechseln</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>komserv2
+</pre></div>
+</div>
+<p>Virtuelle python-Umgebung anlegen</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</pre></div>
+</div>
+<p>Virtualle Umgebung aktivieren</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</pre></div>
+</div>
+<p>Paketmanager pip aktualisieren</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</pre></div>
+</div>
+<p>Django installieren</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django
+</pre></div>
+</div>
+<p>VSCODE im Verzeichnis starten</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>code<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="vscode-einrichten-uber-oberflache">
+<h2>VSCODE einrichten über Oberfläche<a class="headerlink" href="#vscode-einrichten-uber-oberflache" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Python Umgebung wählen</p></li>
+<li><p>Debugger konfigurieren - launch.json Datei in .vscode Ordner</p></li>
+</ol>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python Debugger: Django&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;debugpy&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="s2">&quot;runserver&quot;</span>
+<span class="w">            </span><span class="p">],</span>
+<span class="w">            </span><span class="nt">&quot;django&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;autoStartBrowser&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/manage.py&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Restart VSCODE - manchmal notwendig, um launch.json einlesen zu lassen</p></li>
+</ol>
+</section>
+<section id="weitere-infos">
+<h2>Weitere Infos<a class="headerlink" href="#weitere-infos" title="Link to this heading"></a></h2>
+<p>https://code.visualstudio.com/docs/python/tutorial-django</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Einführung" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="initialize_project.html" class="btn btn-neutral float-right" title="Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

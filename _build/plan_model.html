@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planmodell &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=79cc9f76"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Geometrie Editor" href="optimize_views.html" />
+    <link rel="prev" title="Organisationsmodell" href="organization_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#beispielimplementierungen">Beispielimplementierungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_model.html">Organisationsmodell</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Planmodell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#einleitung">Einleitung</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modelldefinition">Modelldefinition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verwaltungsviews">Verwaltungsviews</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vorarbeiten">Vorarbeiten</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urls">Urls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#views">Views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#templates">Templates</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#list">List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#confirm-delete">Confirm Delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create">Create</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update">Update</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="export_xml_1.html">XPlanung GML Export</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Planmodell</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/plan_model.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="planmodell">
+<h1>Planmodell<a class="headerlink" href="#planmodell" title="Link to this heading"></a></h1>
+<section id="einleitung">
+<h2>Einleitung<a class="headerlink" href="#einleitung" title="Link to this heading"></a></h2>
+<p>Das Modell zur Verwaltung von kommunalen Plänen orientiert sich am deutschen Standard <a class="reference external" href="https://xleitstelle.de/xplanung"><strong>XPlanung</strong></a> und am <a class="reference external" href="https://www.geoportal.rlp.de/metadata/Leitfaden_kommunale_Plaene_GDI_RP.pdf"><strong>Leitfaden für die Bereitstellung kommunaler Pläne und Satzungen im Rahmen der Geodateninfrastruktur Rheinland-Pfalz (GDI-RP)</strong></a>. Dieser Leitfaden wurde ab 2008 auf Basis von XPlanung 2.0 entwickelt. Neben den Vorgaben des Datenaustauschstandards wurden dabei auch Anforderungen aus der kommunalen Praxis übernommen und eine standardisierte Bereitstellung vorgegeben. Der Standard wurde mit den kommunalen Spitzenverbänden des Landes abgestimmt und wird vom Lenkungsausschuss für Geodateninfrastruktur Rheinland-Pfalz herausgegeben.</p>
+<p>In einer ersten Version des Modells wird nur eine minimale Zahl von Attributen definiert. Für den proof of concept (POC)  ist das zunächst ausreichend. Das abstrakte Grundmodell heißt XPlan und vererbt seine Attribute auf das konkrete Modell BPlan. Der Geltungsbereich ist als Geometry-Field modelliert und kann damit auch Multipolygone aufnehmen.</p>
+</section>
+<section id="modelldefinition">
+<h2>Modelldefinition<a class="headerlink" href="#modelldefinition" title="Link to this heading"></a></h2>
+<p>xplanung_light/models.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">https://xleitstelle.de/releases/objektartenkatalog_6_0</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">XPlan</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Name des Plans&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Offizieller Name des raumbezogenen Plans&#39;</span><span class="p">)</span>
+    <span class="c1">#nummer [0..1]</span>
+    <span class="n">nummer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Nummer des Plans.&quot;</span><span class="p">)</span>
+    <span class="c1">#internalId [0..1]</span>
+    <span class="c1">#beschreibung [0..1]</span>
+    <span class="c1">#kommentar [0..1]</span>
+    <span class="c1">#technHerstellDatum [0..1], Date</span>
+    <span class="c1">#genehmigungsDatum [0..1], Date</span>
+    <span class="c1">#untergangsDatum [0..1], Date</span>
+    <span class="c1">#aendertPlan [0..*], XP_VerbundenerPlan</span>
+    <span class="c1">#wurdeGeaendertVonPlan [0..*], XP_VerbundenerPlan</span>
+    <span class="c1">#aendertPlanBereich [0..*], Referenz, Testphase</span>
+    <span class="c1">#wurdeGeaendertVonPlanBereich [0..*], Referenz, Testphase</span>
+    <span class="c1">#erstellungsMassstab [0..1], Integer</span>
+    <span class="c1">#bezugshoehe [0..1], Length</span>
+    <span class="c1">#hoehenbezug [0..1]</span>
+    <span class="c1">#technischerPlanersteller, [0..1]</span>
+    <span class="c1">#raeumlicherGeltungsbereich [1], GM_Object</span>
+    <span class="n">geltungsbereich</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GeometryField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Grenze des räumlichen Geltungsbereiches des Plans.&#39;</span><span class="p">)</span>
+    <span class="c1">#verfahrensMerkmale [0..*], XP_VerfahrensMerkmal</span>
+    <span class="c1">#hatGenerAttribut [0..*], XP_GenerAttribut</span>
+    <span class="c1">#externeReferenz, [0..*], XP_SpezExterneReferenz</span>
+    <span class="c1">#texte [0..*], XP_TextAbschnitt</span>
+    <span class="c1">#begruendungsTexte [0..*], XP_BegruendungAbschnitt</span>
+    
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlan</span><span class="p">(</span><span class="n">XPlan</span><span class="p">):</span>
+
+    <span class="n">BPLAN</span> <span class="o">=</span> <span class="s2">&quot;1000&quot;</span>
+    <span class="n">EINFACHERBPLAN</span> <span class="o">=</span> <span class="s2">&quot;10000&quot;</span>
+    <span class="n">QUALIFIZIERTERBPLAN</span> <span class="o">=</span> <span class="s2">&quot;10001&quot;</span>
+    <span class="n">BEBAUUNGSPLANZURWOHNRAUMVERSORGUNG</span> <span class="o">=</span> <span class="s2">&quot;10002&quot;</span>
+    <span class="n">VORHABENBEZOGENERBPLAN</span> <span class="o">=</span> <span class="s2">&quot;3000&quot;</span>
+    <span class="n">VORHABENUNDERSCHLIESSUNGSPLAN</span> <span class="o">=</span> <span class="s2">&quot;3100&quot;</span>
+    <span class="n">INNENBEREICHSSATZUNG</span> <span class="o">=</span> <span class="s2">&quot;4000&quot;</span>
+    <span class="n">KLARSTELLUNGSSATZUNG</span> <span class="o">=</span> <span class="s2">&quot;40000&quot;</span>
+    <span class="n">ENTWICKLUNGSSATZUNG</span> <span class="o">=</span> <span class="s2">&quot;40001&quot;</span>
+    <span class="n">ERGAENZUNGSSATZUNG</span> <span class="o">=</span> <span class="s2">&quot;40002&quot;</span>
+    <span class="n">AUSSENBEREICHSSATZUNG</span> <span class="o">=</span> <span class="s2">&quot;5000&quot;</span>
+    <span class="n">OERTLICHEBAUVORSCHRIFT</span> <span class="o">=</span> <span class="s2">&quot;7000&quot;</span>
+    <span class="n">SONSTIGES</span> <span class="o">=</span> <span class="s2">&quot;9999&quot;</span>
+
+    <span class="n">BPLAN_TYPE_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">BPLAN</span><span class="p">,</span>  <span class="s2">&quot;BPlan&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">EINFACHERBPLAN</span><span class="p">,</span> <span class="s2">&quot;EinfacherBPlan&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">QUALIFIZIERTERBPLAN</span><span class="p">,</span> <span class="s2">&quot;QualifizierterBPlan&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">BEBAUUNGSPLANZURWOHNRAUMVERSORGUNG</span><span class="p">,</span> <span class="s2">&quot;BebauungsplanZurWohnraumversorgung&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">VORHABENBEZOGENERBPLAN</span><span class="p">,</span> <span class="s2">&quot;VorhabenbezogenerBPlan&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">VORHABENUNDERSCHLIESSUNGSPLAN</span><span class="p">,</span> <span class="s2">&quot;VorhabenUndErschliessungsplan&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">INNENBEREICHSSATZUNG</span><span class="p">,</span> <span class="s2">&quot;InnenbereichsSatzung&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">KLARSTELLUNGSSATZUNG</span><span class="p">,</span> <span class="s2">&quot;KlarstellungsSatzung&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">ENTWICKLUNGSSATZUNG</span><span class="p">,</span> <span class="s2">&quot;EntwicklungsSatzung&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">ERGAENZUNGSSATZUNG</span><span class="p">,</span> <span class="s2">&quot;ErgaenzungsSatzung&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">AUSSENBEREICHSSATZUNG</span><span class="p">,</span> <span class="s2">&quot;AussenbereichsSatzung&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">OERTLICHEBAUVORSCHRIFT</span><span class="p">,</span> <span class="s2">&quot;OertlicheBauvorschrift&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">SONSTIGES</span><span class="p">,</span> <span class="s2">&quot;Sonstiges&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="c1">#gemeinde [1], XP_Gemeinde</span>
+    <span class="n">gemeinde</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">AdministrativeOrganization</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">)</span>
+    <span class="c1">#planaufstellendeGemeinde [0..*], XP_Gemeinde</span>
+    <span class="c1">#plangeber [0..*], XP_Plangeber</span>
+    <span class="c1">#planArt [1..*], BP_PlanArt</span>
+    <span class="n">planart</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">BPLAN_TYPE_CHOICES</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;1000&#39;</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Typ des vorliegenden Bebauungsplans.&#39;</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+	<span class="c1">#sonstPlanArt [0..1], BP_SonstPlanArt</span>
+    <span class="c1">#rechtsstand [0..1], BP_Rechtsstand</span>
+    <span class="c1">#status [0..1], BP_Status</span>
+    <span class="c1">#aenderungenBisDatum [0..1], Date</span>
+    <span class="c1">#aufstellungsbeschlussDatum [0..1], Date</span>
+    <span class="c1">#veraenderungssperre [0..1], BP_VeraenderungssperreDaten</span>
+    <span class="c1">#auslegungsStartDatum [0..*], Date</span>
+    <span class="c1">#auslegungsEndDatum [0..*], Date</span>
+    <span class="c1">#traegerbeteiligungsStartDatum [0..*], Date</span>
+    <span class="c1">#traegerbeteiligungsEndDatum [0..*], Date</span>
+    <span class="c1">#satzungsbeschlussDatum [0..1], Date</span>
+    <span class="c1">#rechtsverordnungsDatum [0..1], Date</span>
+    <span class="c1">#inkrafttretensDatum [0..1], Date</span>
+    <span class="c1">#ausfertigungsDatum [0..1], Date</span>
+    <span class="c1">#staedtebaulicherVertrag [0..1], Boolean</span>
+    <span class="c1">#erschliessungsVertrag [0..1], Boolean</span>
+    <span class="c1">#durchfuehrungsVertrag [0..1], Boolean</span>
+    <span class="c1">#gruenordnungsplan [0..1], Boolean</span>
+    <span class="c1">#versionBauNVO [0..1], XP_GesetzlicheGrundlage</span>
+    <span class="c1">#versionBauGB [0..1], XP_GesetzlicheGrundlage</span>
+    <span class="c1">#versionSonstRechtsgrundlage [0..*], XP_GesetzlicheGrundlage</span>
+    <span class="c1">#bereich [0..*], BP_Bereich</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string representation of a BPlan.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">planart</span><span class="si">}</span><span class="s2">&#39;: &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="verwaltungsviews">
+<h2>Verwaltungsviews<a class="headerlink" href="#verwaltungsviews" title="Link to this heading"></a></h2>
+<section id="vorarbeiten">
+<h3>Vorarbeiten<a class="headerlink" href="#vorarbeiten" title="Link to this heading"></a></h3>
+<p>Um eine komfortable Verwaltung von Geometrien zu ermöglichen, bietet es sich an das Django Leaflet package (<a class="reference external" href="https://django-leaflet.readthedocs.io/en/latest/"><strong>django-leaflet</strong></a>) einzusetzen. Standardmäßig ist bei django noch eine älterer OpenLayers-Client (2.13) integriert.</p>
+<p>Installation des packages</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-leaflet
+</pre></div>
+</div>
+<p>Aktivieren des packages in komserv/settings.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+    <span class="s1">&#39;leaflet&#39;</span><span class="p">,</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+<p>Ersatz des OpenLayer Client im Admin backend  - xplanung_light/admin.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">leaflet.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeafletGeoAdmin</span>
+<span class="c1">#...</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">BPlan</span><span class="p">,</span> <span class="n">LeafletGeoAdmin</span><span class="p">)</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+</section>
+<section id="urls">
+<h3>Urls<a class="headerlink" href="#urls" title="Link to this heading"></a></h3>
+<p>xplanung_light/urls.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanCreateView</span><span class="p">,</span> <span class="n">BPlanUpdateView</span><span class="p">,</span> <span class="n">BPlanDeleteView</span><span class="p">,</span> <span class="n">BPlanListView</span>
+<span class="c1">#...</span>
+    <span class="c1"># urls for bplan</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;bplan/&quot;</span><span class="p">,</span> <span class="n">BPlanListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;bplan/create/&quot;</span><span class="p">,</span> <span class="n">BPlanCreateView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bplan-create&quot;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;bplan/&lt;int:pk&gt;/update/&quot;</span><span class="p">,</span> <span class="n">BPlanUpdateView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bplan-update&quot;</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;bplan/&lt;int:pk&gt;/delete/&quot;</span><span class="p">,</span> <span class="n">BPlanDeleteView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bplan-delete&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="views">
+<h3>Views<a class="headerlink" href="#views" title="Link to this heading"></a></h3>
+<p>Nutzung von einfachen ClassBasedGenericViews</p>
+<p>xplanung_light/views.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BPlanCreateView</span><span class="p">(</span><span class="n">CreateView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;nummer&quot;</span><span class="p">,</span> <span class="s2">&quot;geltungsbereich&quot;</span><span class="p">,</span> <span class="s2">&quot;gemeinde&quot;</span><span class="p">,</span> <span class="s2">&quot;planart&quot;</span><span class="p">]</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span> 
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanUpdateView</span><span class="p">(</span><span class="n">UpdateView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;nummer&quot;</span><span class="p">,</span> <span class="s2">&quot;geltungsbereich&quot;</span><span class="p">,</span> <span class="s2">&quot;gemeinde&quot;</span><span class="p">,</span> <span class="s2">&quot;planart&quot;</span><span class="p">]</span> 
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span> 
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanDeleteView</span><span class="p">(</span><span class="n">DeleteView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_success_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>xplanung_light/views.py</p>
+</section>
+<section id="templates">
+<h3>Templates<a class="headerlink" href="#templates" title="Link to this heading"></a></h3>
+<p>xplanung_light/templates/xplanung_light/*</p>
+<section id="list">
+<h4>List<a class="headerlink" href="#list" title="Link to this heading"></a></h4>
+<p>xplanung_light/templates/xplanung_light/bplan_list.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Liste der Bebauungspläne</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;p&gt;Treffer: </span><span class="cp">{{</span> <span class="nv">object_list.count</span> <span class="cp">}}</span><span class="x"> Bebauungspläne&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="confirm-delete">
+<h4>Confirm Delete<a class="headerlink" href="#confirm-delete" title="Link to this heading"></a></h4>
+<p>xplanung_light/templates/xplanung_light/bplan_confirm_delete.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;form method=&quot;post&quot;&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">    &lt;p&gt;Wollen sie das Objekt wirklich löschen? &quot;</span><span class="cp">{{</span> <span class="nv">object</span> <span class="cp">}}</span><span class="x">&quot;?&lt;/p&gt;</span>
+<span class="x">    </span><span class="cp">{{</span> <span class="nv">form</span> <span class="cp">}}</span>
+<span class="x">    &lt;input type=&quot;submit&quot; value=&quot;Bestätigung&quot;&gt;</span>
+<span class="x">&lt;/form&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="create">
+<h4>Create<a class="headerlink" href="#create" title="Link to this heading"></a></h4>
+<p>xplanung_light/templates/xplanung_light/bplan_form.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Bebauungsplan anlegen</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">    &lt;form method=&quot;post&quot;&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span>
+<span class="x">        &lt;input type=&quot;submit&quot; value=&quot;Save&quot;&gt;</span>
+<span class="x">    &lt;/form&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="update">
+<h4>Update<a class="headerlink" href="#update" title="Link to this heading"></a></h4>
+<p>xplanung_light/templates/xplanung_light/bplan_form_update.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Bebauungsplan editieren</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">    &lt;form method=&quot;post&quot;&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span>
+<span class="x">        &lt;input type=&quot;submit&quot; value=&quot;Aktualisieren&quot;&gt;</span>
+<span class="x">    &lt;/form&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="organization_model.html" class="btn btn-neutral float-left" title="Organisationsmodell" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="optimize_views.html" class="btn btn-neutral float-right" title="Geometrie Editor" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

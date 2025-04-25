@@ -1,0 +1,276 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geometrie Editor &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=79cc9f76"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Zentrale Konfiguration" href="leaflet_conf.html" />
+    <link rel="prev" title="Planmodell" href="plan_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#beispielimplementierungen">Beispielimplementierungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_model.html">Organisationsmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plan_model.html">Planmodell</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Geometrie Editor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#aktivieren-des-leaflet-clients-in-den-views">Aktivieren des Leaflet-Clients in den Views</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#anpassung-templates">Anpassung Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="export_xml_1.html">XPlanung GML Export</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Geometrie Editor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/optimize_views.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="geometrie-editor">
+<h1>Geometrie Editor<a class="headerlink" href="#geometrie-editor" title="Link to this heading"></a></h1>
+<section id="aktivieren-des-leaflet-clients-in-den-views">
+<h2>Aktivieren des Leaflet-Clients in den Views<a class="headerlink" href="#aktivieren-des-leaflet-clients-in-den-views" title="Link to this heading"></a></h2>
+<p>Leaflet Integration im Basis-Template xplanung_light/templates/xplanung_light/layout.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="c">{# ... #}</span>
+<span class="c">{# load leaflet specific parts #}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">leaflet_tags</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">leaflet_css</span> <span class="nv">plugins</span><span class="o">=</span><span class="s2">&quot;ALL&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">leaflet_js</span> <span class="nv">plugins</span><span class="o">=</span><span class="s2">&quot;ALL&quot;</span> <span class="cp">%}</span>
+<span class="c">{# ... #}</span>
+</pre></div>
+</div>
+<p>Anpassung der BPlanCreateView und BPlanUpdateView in xplanung_light/views.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">leaflet.forms.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeafletWidget</span>
+<span class="c1">#...</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanCreateView</span><span class="p">(</span><span class="n">CreateView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;nummer&quot;</span><span class="p">,</span> <span class="s2">&quot;geltungsbereich&quot;</span><span class="p">,</span> <span class="s2">&quot;gemeinde&quot;</span><span class="p">,</span> <span class="s2">&quot;planart&quot;</span><span class="p">]</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span> 
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_form</span><span class="p">(</span><span class="n">form_class</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;gemeinde&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;gemeinde&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span><span class="o">.</span><span class="n">only</span><span class="p">(</span><span class="s2">&quot;pk&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;geltungsbereich&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span> <span class="o">=</span> <span class="n">LeafletWidget</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;geom_type&#39;</span><span class="p">:</span> <span class="s1">&#39;MultiPolygon&#39;</span><span class="p">,</span> <span class="s1">&#39;map_height&#39;</span><span class="p">:</span> <span class="s1">&#39;500px&#39;</span><span class="p">,</span> <span class="s1">&#39;map_width&#39;</span><span class="p">:</span> <span class="s1">&#39;50%&#39;</span><span class="p">,</span><span class="s1">&#39;MINIMAP&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+	<span class="k">return</span> <span class="n">form</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanUpdateView</span><span class="p">(</span><span class="n">UpdateView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;nummer&quot;</span><span class="p">,</span> <span class="s2">&quot;geltungsbereich&quot;</span><span class="p">,</span> <span class="s2">&quot;gemeinde&quot;</span><span class="p">,</span> <span class="s2">&quot;planart&quot;</span><span class="p">]</span> 
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span> 
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">form_class</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_form</span><span class="p">(</span><span class="n">form_class</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;gemeinde&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;gemeinde&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">queryset</span><span class="o">.</span><span class="n">only</span><span class="p">(</span><span class="s2">&quot;pk&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">)</span>
+        <span class="n">form</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;geltungsbereich&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">widget</span> <span class="o">=</span> <span class="n">LeafletWidget</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;geom_type&#39;</span><span class="p">:</span> <span class="s1">&#39;MultiPolygon&#39;</span><span class="p">,</span> <span class="s1">&#39;map_height&#39;</span><span class="p">:</span> <span class="s1">&#39;500px&#39;</span><span class="p">,</span> <span class="s1">&#39;map_width&#39;</span><span class="p">:</span> <span class="s1">&#39;50%&#39;</span><span class="p">,</span><span class="s1">&#39;MINIMAP&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">form</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="tabellenanzeige">
+<h1>Tabellenanzeige<a class="headerlink" href="#tabellenanzeige" title="Link to this heading"></a></h1>
+<p>Um mit geringem Aufwand eine einfach zu pflegende Tabellenanzeige zu erhalten, bietet sich das package <a class="reference external" href="https://django-tables2.readthedocs.io/en/latest/"><strong>django-tables2</strong></a> an.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-tables2
+</pre></div>
+</div>
+<p>Package zu komserv/settings.py hinzufügen</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+    <span class="s1">&#39;django_tables2&#39;</span><span class="p">,</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+<p>Erstellen einer Python-Datei für das Management von Tabellen</p>
+<p>xplanung_light/tables.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tables</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Column</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django_tables2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">A</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanTable</span><span class="p">(</span><span class="n">tables</span><span class="o">.</span><span class="n">Table</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">BPlanTable</span><span class="p">(</span><span class="n">tables</span><span class="o">.</span><span class="n">Table</span><span class="p">):</span>
+    <span class="c1">#download = tables.LinkColumn(&#39;gedis-document-pdf&#39;, text=&#39;Download&#39;, args=[A(&#39;pk&#39;)], \</span>
+    <span class="c1">#                     orderable=False, empty_values=())</span>
+    <span class="n">edit</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">&#39;bplan-update&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Bearbeiten&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">&#39;pk&#39;</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">delete</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">&#39;bplan-delete&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Löschen&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">&#39;pk&#39;</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    geojson = Column(</span>
+<span class="sd">        accessor=A(&#39;geojson&#39;),</span>
+<span class="sd">        orderable=False,</span>
+<span class="sd">        # ...</span>
+<span class="sd">    )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;django_tables2/bootstrap5.html&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;gemeinde&quot;</span><span class="p">,</span> <span class="s2">&quot;edit&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Anpassung der Klasse BPlanListView in xplanung_light/views.py - Integration des Tabellenmoduls</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleTableView</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.tables</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanTable</span>
+<span class="c1">#...</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">SingleTableView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+    <span class="n">table_class</span> <span class="o">=</span> <span class="n">BPlanTable</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</section>
+<section id="anpassung-templates">
+<h1>Anpassung Templates<a class="headerlink" href="#anpassung-templates" title="Link to this heading"></a></h1>
+<p>Anpassung der Liste - Hinzufügen eines Create Buttons - xplanung_light/templates/xplanung_light/bplan_list.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="c">{# .... #}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;p&gt;&lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;bplan-create&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;BPlan anlegen&lt;/a&gt;&lt;/p&gt;</span>
+<span class="c">{# .... #}</span>
+</pre></div>
+</div>
+<p>Menüeintrag für Bebauungspläne hinzufügen - xplanung_light/templates/xplanung_light/layout.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="c">{# .... #}</span>
+<span class="x">&lt;ul class=&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;&gt;</span>
+<span class="x">              </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_authenticated</span> <span class="cp">%}</span>
+<span class="x">              &lt;li class=&quot;nav-item&quot;&gt;</span>
+<span class="x">                &lt;a class=&quot;nav-link&quot; aria-current=&quot;page&quot; href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;bplan-list&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;Bebauungspläne&lt;/a&gt;</span>
+<span class="x">              &lt;/li&gt;</span>
+<span class="x">              </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">              &lt;li class=&quot;nav-item&quot;&gt;</span>
+<span class="c">{# .... #}</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plan_model.html" class="btn btn-neutral float-left" title="Planmodell" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="leaflet_conf.html" class="btn btn-neutral float-right" title="Zentrale Konfiguration" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

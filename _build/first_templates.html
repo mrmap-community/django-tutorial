@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erstellung erster Versionen der Templates &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=79cc9f76"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung" href="add_login_register.html" />
+    <link rel="prev" title="Erste Schritte" href="first_steps.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#beispielimplementierungen">Beispielimplementierungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Erste Schritte</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Erstellung erster Versionen der Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basis-template-xplanung-light-templates-xplanung-light-layout-html">Basis Template xplanung_light/templates/xplanung_light/layout.html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#anpassung-der-views">Anpassung der views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#template-fur-home-xplanung-light-templates-xplanung-light-home-html">Template für home - xplanung_light/templates/xplanung_light/home.html</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#template-fur-about-xplanung-light-templates-xplanung-light-about-html">Template für about - xplanung_light/templates/xplanung_light/about.html</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_model.html">Organisationsmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plan_model.html">Planmodell</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="export_xml_1.html">XPlanung GML Export</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Erstellung erster Versionen der Templates</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/first_templates.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="erstellung-erster-versionen-der-templates">
+<h1>Erstellung erster Versionen der Templates<a class="headerlink" href="#erstellung-erster-versionen-der-templates" title="Link to this heading"></a></h1>
+<section id="basis-template-xplanung-light-templates-xplanung-light-layout-html">
+<h2>Basis Template xplanung_light/templates/xplanung_light/layout.html<a class="headerlink" href="#basis-template-xplanung-light-templates-xplanung-light-layout-html" title="Link to this heading"></a></h2>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!DOCTYPE html&gt;</span>
+<span class="x">&lt;html&gt;</span>
+<span class="x">&lt;head&gt;</span>
+<span class="x">    &lt;meta charset=&quot;utf-8&quot;/&gt;</span>
+<span class="x">    &lt;meta name=&quot;description&quot; content=&quot;Author: Armin Retterath, XPlanung, Django, Formular, Easy, kostenfrei, Open Source&quot;/&gt;</span>
+<span class="x">    &lt;title&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x">&lt;/title&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">load</span> <span class="nv">static</span> <span class="cp">%}</span>
+<span class="x">    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;</span><span class="cp">{%</span> <span class="k">static</span> <span class="s1">&#39;xplanung_light/site.css&#39;</span> <span class="cp">%}</span><span class="x">&quot;/&gt;</span>
+<span class="x">    </span>
+<span class="x">&lt;/head&gt;</span>
+<span class="x">&lt;body&gt;</span>
+<span class="x">    &lt;div class=&quot;navbar&quot;&gt;</span>
+<span class="x">    &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;home&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-brand&quot;&gt;XPlanung light&lt;/a&gt;</span>
+<span class="x">    &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;about&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Über&lt;/a&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_authenticated</span> <span class="cp">%}</span>
+<span class="x">        &lt;p&gt;</span>
+<span class="x">            Angemeldeter Benutzer: </span><span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span><span class="x"> &lt;br&gt;</span>
+<span class="x">            &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;logout&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Abmelden&lt;/a&gt;</span>
+<span class="x">        &lt;/p&gt;</span>
+<span class="x">        &lt;p&gt;&lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;admin:index&#39;</span> <span class="cp">%}</span><span class="x">&quot; &gt;Admin Backend&lt;/a&gt;&lt;/p&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">        &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;login&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Anmelden&lt;/a&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">&lt;/div&gt;</span>
+<span class="x">&lt;div class=&quot;body-content&quot;&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="x">    &lt;hr/&gt;</span>
+<span class="x">    &lt;footer&gt;</span>
+<span class="x">        &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
+<span class="x">        &lt;p&gt;Letzte Änderung: 2025-04-04 11:40 Initiales Anlegen&lt;/p&gt;</span>
+<span class="x">    &lt;/footer&gt;</span>
+<span class="x">&lt;/div&gt;</span>
+<span class="x">&lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="anpassung-der-views">
+<h2>Anpassung der views<a class="headerlink" href="#anpassung-der-views" title="Link to this heading"></a></h2>
+<p>Function based views für home und about Seiten - xplanung_light/views.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">render</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;xplanung_light/home.html&quot;</span><span class="p">)</span>
+    
+<span class="k">def</span><span class="w"> </span><span class="nf">about</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;xplanung_light/about.html&quot;</span><span class="p">)</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+<p>url für about zu xplanung_light/urls.py hinzufügen</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="n">path</span><span class="p">(</span><span class="s2">&quot;about/&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">about</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;about&quot;</span><span class="p">),</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+</section>
+<section id="template-fur-home-xplanung-light-templates-xplanung-light-home-html">
+<h2>Template für home - xplanung_light/templates/xplanung_light/home.html<a class="headerlink" href="#template-fur-home-xplanung-light-templates-xplanung-light-home-html" title="Link to this heading"></a></h2>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">Home</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;p&gt;Einfache Webanwendung zur Verwaltung kommunaler Pläne gemäß dem aktuellen Standard &lt;a href=&quot;https://xleitstelle.de/xplanung&quot; target=&quot;_blank&quot;&gt;XPlanung&lt;/a&gt;&lt;/p&gt;</span>
+<span class="x">&lt;p&gt;Der Betreiber übernimmt keinerlei Verantwortung für die Funktionsfähigkeit und Zuverlässigkeit der Anwendung. Es handelt sich nur um ein &lt;b&gt;Proof of Concept&lt;/b&gt;. Solange die Anwendung online ist, kann und darf sie von jedermann kostenfrei verwendet werden. Für die Sicherheit der Daten wird ebenfalls keine Verantwortung übernommen. Nutzer sollten nur ihre eigenen Daten sehen und editieren können. Das Projekt dient als Test zur Prüfung von Funktionen des zugrundeliegenden Webframeworks &lt;a href=&quot;https://www.djangoproject.com/&quot; target=&quot;_blank&quot;&gt;Django&lt;/a&gt; und wurde innerhalb weniger Tage unter Nutzung von &lt;a href=&quot;https://docs.djangoproject.com/en/5.0/topics/class-based-views/generic-display/&quot; target=&quot;_blank&quot;&gt;class-based generic views&lt;/a&gt; umgesetzt ;-) .&lt;/p&gt;</span>
+<span class="x">&lt;h4&gt;Funktionen&lt;/h4&gt;</span>
+<span class="x">&lt;ul&gt;</span>
+<span class="x">    &lt;li&gt;...&lt;/li&gt;</span>
+<span class="x">    &lt;li&gt;...&lt;/li&gt;</span>
+<span class="x">&lt;/ul&gt;</span>
+<span class="x">&lt;h4&gt;Technische Informationen&lt;/h4&gt;</span>
+<span class="x">&lt;ul&gt;</span>
+<span class="x">    &lt;li&gt;&lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;Projekt auf GitHub&lt;/a&gt;&lt;/li&gt;</span>
+<span class="x">    &lt;li&gt;&lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;Github Repo der ...&lt;/a&gt;&lt;/li&gt;</span>
+<span class="x">    &lt;li&gt;&lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;Standard&lt;/a&gt;&lt;/li&gt;</span>
+<span class="x">&lt;/ul&gt;</span>
+<span class="x">&lt;h4&gt;Validatoren&lt;/h4&gt;</span>
+<span class="x">&lt;ul&gt;</span>
+<span class="x">    &lt;li&gt;&lt;a href=&quot;#&quot; target=&quot;_blank&quot;&gt;...&lt;/a&gt;&lt;/li&gt;</span>
+<span class="x">&lt;/ul&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="template-fur-about-xplanung-light-templates-xplanung-light-about-html">
+<h2>Template für about - xplanung_light/templates/xplanung_light/about.html<a class="headerlink" href="#template-fur-about-xplanung-light-templates-xplanung-light-about-html" title="Link to this heading"></a></h2>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">Über</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;p&gt;Anwendung zur einfachen Verwaltung von kommunalen Plänen, konform zum deutschen Standard &lt;b&gt;XPlanung&lt;/b&gt;.&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="first_steps.html" class="btn btn-neutral float-left" title="Erste Schritte" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="add_login_register.html" class="btn btn-neutral float-right" title="Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

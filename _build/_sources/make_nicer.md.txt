@@ -1,0 +1,92 @@
+# Integration von bootstrap5
+
+[**django-bootstrap5**](https://django-bootstrap5.readthedocs.io/en/latest/)
+
+Installation per pip
+```shell
+python3 - pip install django-bootstrap5
+```
+
+Aktvieren in komserv/settings.py
+```python
+#...
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'xplanung_light',
+    'django_bootstrap5',
+]
+#...
+```
+
+Anpassen des Basis-Templates xplanung_light/templates/xplanung_light/layout.html
+```jinja
+{# Load the tag library #}
+{% load django_bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Author: Armin Retterath, XPlanung, Django, Formular, Easy, kostenfrei, Open Source"/>
+    <title>{% block title %}{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'xplanung_light/site.css' %}"/>    
+</head>
+<body>
+    <!-- https://getbootstrap.com/docs/5.0/components/navbar/ -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">XPlanung light</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'about' %}">Über</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}">Admin Backend</a>
+              </li>
+              {% endif %}
+            </ul>
+            <div class="d-flex">
+                {% if user.is_authenticated %}
+                <p>
+                    Angemeldeter Benutzer: {{ user.username }} <br>
+                    <a href="{% url 'logout' %}">Abmelden</a>
+                </p>
+                {% else %}
+                <a href="{% url 'login' %}">Anmelden</a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+    </nav>
+</div>
+<div class="body-content">
+    {% block content %}
+    {% endblock %}
+    <hr/>
+    <footer>
+        <p>&copy; 2025</p>
+        <p>Letzte Änderung: 2025-04-07 14:22 Bootstrap 5 Integration</p>
+    </footer>
+</div>
+</body>
+</html>
+```
+
+

@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organisationsmodell &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=79cc9f76"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Planmodell" href="plan_model.html" />
+    <link rel="prev" title="Vorbereitung" href="model_prerequisites.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#beispielimplementierungen">Beispielimplementierungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Organisationsmodell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#einleitung">Einleitung</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modelldefinition">Modelldefinition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#datenimport">Datenimport</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plan_model.html">Planmodell</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="export_xml_1.html">XPlanung GML Export</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Organisationsmodell</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/organization_model.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="organisationsmodell">
+<h1>Organisationsmodell<a class="headerlink" href="#organisationsmodell" title="Link to this heading"></a></h1>
+<section id="einleitung">
+<h2>Einleitung<a class="headerlink" href="#einleitung" title="Link to this heading"></a></h2>
+<p>Das initiale Modell für verantwortliche Organisationen soll die Gebietskörperschaften des Landes abbilden. Diese sind grundsätzlich hierarchisch geliedert und verfügen über bundesweit einheitlich definierte Schlüssel (AGS). Verantwortlich für die Bereitstellung der Struktur der Gebietskörperschaften ist in Rheinland-Pfalz das Statistische Landesamt. Dieses publiziert das s.g. <a class="reference external" href="https://www.statistik.rlp.de/fileadmin/statistik.rlp.de/Dokumente_und_Bilder/3_Produkte/3_Verzeichnisse/A1132_202201_ur_G.pdf"><strong>Amtliche Verzeichnis der Gemeinden und Gemeindeteile</strong></a> in Form einer PDF-Datei. Leider lässt sich das nicht ohne weiteres automatisiert verarbeiten, es gibt jedoch auch ein <a class="reference external" href="https://www.statistik.rlp.de/fileadmin/statistik.rlp.de/Dokumente_und_Bilder/3_Produkte/3_Verzeichnisse/Kommunalverwaltungen_01.01_2025.xlsm"><strong>Verzeichnis der Kommunalverwaltungen, Oberbürgermeister, Landräte und Bürgermeister</strong></a>. Dieses wird als xslm Mappe publiziert und enthält über verschiedene Tabellen verteilt die für unseren Zweck benötigte information.</p>
+<p>Wir benötigen sowohl Kontaktinformationen, als auch Adressen und Zuständigkeitsbereiche. Die Zuständigkeitsbereiche werden vom Landesamt für Vermessung und Geobasisinformation über eine OGC-WFS Schnittstelle publiziert und enthalten auch die jeweiligen einheitlichen AGS. Damit lassen sie sich automatisiert mit den Organisationen verknüpfen.
+Um das Modell nicht unnötig kompliziwert zu machen, speichern wir alle Informationen zunächst in einem einfachen flachen Modell.
+In Django werden Modelle pro App in einer Datei models.py abgelegt. In unserem Fall also xplanung_light/models.py. Da die Modelle python-Klassen sind, lässt sich vieles über Vererbung umsetzen. Wir definieren dazu einfach eine simple Klasse GenericMetadata, die zunächst einfach eine automatisch generierte UUID beinhaltet, die die davon abgeleiteteten Klassen erben.
+Die Integration von django-simple-history ist sehr einfach und erfolgt durch das Attribut <strong>history = HistoricalRecords()</strong>.</p>
+</section>
+<section id="modelldefinition">
+<h2>Modelldefinition<a class="headerlink" href="#modelldefinition" title="Link to this heading"></a></h2>
+<p>xplanung_light/models.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">simple_history.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">HistoricalRecords</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.gis.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+
+<span class="c1"># generic meta model</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GenericMetadata</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">generic_id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">UUIDField</span><span class="p">(</span><span class="n">default</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">)</span>
+    <span class="c1">#created = models.DateTimeField(null=True)</span>
+    <span class="c1">#changed = models.DateTimeField(null=True)</span>
+    <span class="c1">#deleted = models.DateTimeField(null=True)</span>
+    <span class="c1">#active = models.BooleanField(default=True)</span>
+    <span class="c1">#owned_by_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;def save(self, *args, **kwargs):</span>
+<span class="sd">        self.owned_by_user= self.request.user</span>
+<span class="sd">        super().save(*args, **kwargs)&quot;&quot;&quot;</span>
+
+
+<span class="c1"># administrative organizations</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AdministrativeOrganization</span><span class="p">(</span><span class="n">GenericMetadata</span><span class="p">):</span>
+
+    <span class="n">COUNTY</span> <span class="o">=</span> <span class="s2">&quot;KR&quot;</span>
+    <span class="n">COUNTY_FREE_CITY</span> <span class="o">=</span> <span class="s2">&quot;KFS&quot;</span>
+    <span class="n">COM_ASS</span> <span class="o">=</span> <span class="s2">&quot;VG&quot;</span>
+    <span class="n">COM_ASS_FREE_COM</span> <span class="o">=</span> <span class="s2">&quot;VFG&quot;</span>
+    <span class="n">COM</span> <span class="o">=</span> <span class="s2">&quot;GE&quot;</span>
+    <span class="n">UNKNOWN</span> <span class="o">=</span> <span class="s2">&quot;UK&quot;</span>
+
+    <span class="n">ADMIN_CLASS_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">COUNTY</span><span class="p">,</span>  <span class="s2">&quot;Landkreis&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">COUNTY_FREE_CITY</span><span class="p">,</span> <span class="s2">&quot;Kreisfreie Stadt&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">COM_ASS</span><span class="p">,</span> <span class="s2">&quot;Verbandsgemeinde&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">COM_ASS_FREE_COM</span><span class="p">,</span> <span class="s2">&quot;Verbandsfreie Gemeinde&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">COM</span><span class="p">,</span> <span class="s2">&quot;Gemeinde/Stadt&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s2">&quot;unbekannt&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">ls</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Landesschlüssel&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Eindeutiger zweistelliger Schlüssel für das Bundesland - RLP: 07&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;07&#39;</span><span class="p">)</span>
+    <span class="n">ks</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Kreisschlüssel&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Eindeutiger dreistelliger Schlüssel für den Landkreis&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;000&#39;</span><span class="p">)</span>
+    <span class="n">vs</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Gemeindeverbandsschlüssel&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Eindeutiger zweistelliger Schlüssel für den Gemeindeverband&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;00&#39;</span><span class="p">)</span>
+    <span class="n">gs</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Gemeindeschlüssel&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Eindeutiger dreistelliger Schlüssel für die Gemeinde&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;000&#39;</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Name der Gebietskörperschaft&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Offizieller Name der Gebietskörperschaft - z.B. Rhein-Lahn-Kreis&#39;</span><span class="p">)</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">ADMIN_CLASS_CHOICES</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;UK&#39;</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Typ der Gebietskörperschaft&#39;</span><span class="p">,</span> <span class="n">db_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">address_street</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Straße mit Hausnummer&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Straße und Hausnummer&#39;</span><span class="p">)</span>
+    <span class="n">address_postcode</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Postleitzahl&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Postleitzahl&#39;</span><span class="p">)</span>
+    
+    <span class="n">address_city</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Stadt&#39;</span><span class="p">)</span>
+    <span class="n">address_phone</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Telefon&#39;</span><span class="p">)</span>
+    <span class="n">address_facsimile</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Fax&#39;</span><span class="p">)</span>
+    <span class="n">address_email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;EMail&#39;</span><span class="p">)</span>
+    <span class="n">address_homepage</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">URLField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Homepage&#39;</span><span class="p">)</span>
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GeometryField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Gebiet&#39;</span><span class="p">)</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">HistoricalRecords</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string representation of a administrative unit.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">&#39; &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+</pre></div>
+</div>
+<p>Migration</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
+python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
+</pre></div>
+</div>
+</section>
+<section id="datenimport">
+<h2>Datenimport<a class="headerlink" href="#datenimport" title="Link to this heading"></a></h2>
+<p>Da die benötigten Daten für die Organisationen als xslm und in Form von Webservices bereitstehen, benötigen wir zwei weitere python-Bibliotheken.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>openpyxl
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>requests
+</pre></div>
+</div>
+<p>Wir laden die xslm Datei zunächst händisch herunter und legen sie in unser Arbeitsverzeichnis.</p>
+<p>Die Funktionen für den Import speichern wir in xplanung_light/views.py. Hier ist wichtig, dass die Proxy-Einstellungen in der Datei angepasst werden. Für produktive Zwecke ist es besser, die Proxy-Konfiguration in der zentralen Konfigurationsdatei abzulegen und zu importieren. Hierzu später mehr.</p>
+<p>xplanung_light/views.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdministrativeOrganization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.gis.geos</span><span class="w"> </span><span class="kn">import</span> <span class="n">GEOSGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openpyxl</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workbook</span><span class="p">,</span> <span class="n">load_workbook</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="c1">#...</span>
+
+<span class="n">PROXIES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;http_proxy&#39;</span><span class="p">:</span> <span class="s1">&#39;http://xxx:8080&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;https_proxy&#39;</span><span class="p">:</span> <span class="s1">&#39;http://xxx:8080&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_geometry</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="n">ags</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span><span class="s1">&#39;KR&#39;</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span><span class="s1">&#39;KFS&#39;</span><span class="p">:</span>
+        <span class="n">base_uri</span> <span class="o">=</span> <span class="s2">&quot;https://www.geoportal.rlp.de/spatial-objects/314/collections/vermkv:landkreise_rlp&quot;</span>
+        <span class="n">param_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;kreissch&#39;</span><span class="p">:</span> <span class="n">ags</span><span class="p">[:</span><span class="mi">3</span><span class="p">]}</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span><span class="s1">&#39;VG&#39;</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span><span class="s1">&#39;VFG&#39;</span><span class="p">:</span>
+        <span class="n">base_uri</span> <span class="o">=</span> <span class="s2">&quot;https://www.geoportal.rlp.de/spatial-objects/314/collections/vermkv:verbandsgemeinde_rlp&quot;</span>
+        <span class="n">param_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;vgnr&#39;</span><span class="p">:</span> <span class="n">ags</span><span class="p">[:</span><span class="mi">5</span><span class="p">]}</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;GE&#39;</span><span class="p">:</span>
+        <span class="n">base_uri</span> <span class="o">=</span> <span class="s2">&quot;https://www.geoportal.rlp.de/spatial-objects/314/collections/vermkv:gemeinde_rlp&quot;</span>
+        <span class="n">param_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="s1">&#39;ags&#39;</span><span class="p">:</span> <span class="s2">&quot;*7&quot;</span> <span class="o">+</span> <span class="n">ags</span><span class="p">}</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">base_uri</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">param_dict</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="n">PROXIES</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">base_uri</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">param_dict</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> 
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">import_organisations</span><span class="p">():</span>
+    <span class="n">wb</span> <span class="o">=</span> <span class="n">load_workbook</span><span class="p">(</span><span class="s1">&#39;Kommunalverwaltungen_01.01_2025.xlsm&#39;</span><span class="p">)</span>
+    <span class="c1"># nuts-1 - bundeslandebene</span>
+    <span class="c1"># nuts-2 - regierungsbezirke</span>
+    <span class="c1"># nuts-3 - landkreisebene</span>
+    <span class="c1"># lau-1 - verbandsgemeindeebene</span>
+    <span class="c1"># lau-2 - gemeideebene</span>
+
+    <span class="n">table_all_admin_units</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+    <span class="n">table_nuts_3_1</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+    <span class="n">table_nuts_3_2</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">table_lau_1_1</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+    <span class="n">table_lau_1_2</span> <span class="o">=</span> <span class="n">wb</span><span class="o">.</span><span class="n">worksheets</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+    <span class="c1"># table_lau_2 = wb.worksheets[10]</span>
+
+    <span class="n">count_landkreise</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count_kreisfreie_staedte</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count_verbandsgemeinden</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count_verbandsfreie_gemeinden</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count_gemeinden</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># read landkreisebene</span>
+    <span class="n">landkreisebene</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table_nuts_3_1</span><span class="o">.</span><span class="n">iter_rows</span><span class="p">(</span><span class="n">values_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">landkreis</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;kr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;vg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;KR&#39;</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;street&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;postcode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;phone&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;facsimile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>
+                <span class="n">landkreis</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;homepage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;https://&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span>
+                <span class="n">landkreisebene</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">landkreis</span>
+                <span class="n">count_landkreise</span> <span class="o">=</span> <span class="n">count_landkreise</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>           
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table_nuts_3_2</span><span class="o">.</span><span class="n">iter_rows</span><span class="p">(</span><span class="n">values_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">kreisfreie_stadt</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;kr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;vg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;KFS&#39;</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;street&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;postcode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;phone&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;facsimile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>
+                <span class="n">kreisfreie_stadt</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;homepage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;https://&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span>
+                <span class="n">landkreisebene</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">kreisfreie_stadt</span>
+                <span class="n">count_kreisfreie_staedte</span> <span class="o">=</span> <span class="n">count_kreisfreie_staedte</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1"># read verbandsgemeindeebene</span>
+    <span class="n">verbandsgemeindeebene</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table_lau_1_1</span><span class="o">.</span><span class="n">iter_rows</span><span class="p">(</span><span class="n">values_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">vg</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;kr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;vg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;VG&#39;</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;street&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;postcode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;phone&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;facsimile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;homepage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;https://&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span>
+                <span class="n">verbandsgemeindeebene</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">vg</span>
+                <span class="n">count_verbandsgemeinden</span> <span class="o">=</span> <span class="n">count_verbandsgemeinden</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table_lau_1_2</span><span class="o">.</span><span class="n">iter_rows</span><span class="p">(</span><span class="n">values_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">vg</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;kr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;vg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;VFG&#39;</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;street&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;postcode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;city&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;phone&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">])</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;facsimile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">14</span><span class="p">])</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>
+                <span class="n">vg</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">][</span><span class="s1">&#39;homepage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;https://&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">16</span><span class="p">])</span>
+                <span class="n">verbandsgemeindeebene</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">vg</span>
+                <span class="n">count_verbandsfreie_gemeinden</span> <span class="o">=</span> <span class="n">count_verbandsfreie_gemeinden</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1">#print(json.dumps(landkreise))</span>
+    <span class="n">all_admin_units</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table_all_admin_units</span><span class="o">.</span><span class="n">iter_rows</span><span class="p">(</span><span class="n">values_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">admin_unit</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;kr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;vg&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+                <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;plz&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;GE&#39;</span>
+                <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;00&#39;</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;000&#39;</span><span class="p">:</span>
+                    <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">landkreisebene</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+                    <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">landkreisebene</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]][</span><span class="s1">&#39;address&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;00&#39;</span> <span class="ow">and</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;000&#39;</span><span class="p">:</span>
+                    <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">verbandsgemeindeebene</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+                    <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;address&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">verbandsgemeindeebene</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]][</span><span class="s1">&#39;address&#39;</span><span class="p">]</span>
+                <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_geometry</span><span class="p">(</span><span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+                <span class="n">all_admin_units</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">])]</span> <span class="o">=</span> <span class="n">admin_unit</span>   
+                <span class="c1">#save object to database</span>
+                <span class="n">obj</span><span class="p">,</span> <span class="n">created</span> <span class="o">=</span> <span class="n">AdministrativeOrganization</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">update_or_create</span><span class="p">(</span>
+                    <span class="n">ks</span><span class="o">=</span><span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;kr&#39;</span><span class="p">],</span>
+                    <span class="n">vs</span><span class="o">=</span><span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;vg&#39;</span><span class="p">],</span>
+                    <span class="n">gs</span><span class="o">=</span><span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">],</span>
+                    <span class="n">defaults</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;ks&quot;</span><span class="p">:</span> <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;kr&#39;</span><span class="p">],</span>
+                        <span class="s2">&quot;vs&quot;</span><span class="p">:</span> <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;vg&#39;</span><span class="p">],</span>
+                        <span class="s2">&quot;gs&quot;</span><span class="p">:</span> <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;ge&#39;</span><span class="p">],</span>
+                        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span>
+                        <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">GEOSGeometry</span><span class="p">(</span><span class="n">admin_unit</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+                    <span class="p">},</span>
+                <span class="p">)</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                administration = AdministrativeOrganization()</span>
+<span class="sd">                administration.ks = admin_unit[&#39;kr&#39;]</span>
+<span class="sd">                administration.vs = admin_unit[&#39;vg&#39;]</span>
+<span class="sd">                administration.gs = admin_unit[&#39;ge&#39;]</span>
+<span class="sd">                administration.name = admin_unit[&#39;name&#39;]</span>
+<span class="sd">                administration.type = admin_unit[&#39;type&#39;]</span>
+<span class="sd">                administration.geometry = GEOSGeometry(admin_unit[&#39;geometry&#39;])</span>
+<span class="sd">                administration.save()</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Landkreise:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count_landkreise</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kreisfreie Städte:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count_kreisfreie_staedte</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Verbandsgemeinden:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count_verbandsgemeinden</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Verbandsfreie Gemeinden:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">count_verbandsfreie_gemeinden</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Der initiale Import wird einfach von der shell gestartet. Wir nutzen hier die Django shell, über die man direkten Zugriff auf die Funktionen im Projekt erhält.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>manage.py<span class="w"> </span>shell
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_organisations</span>
+<span class="n">import_organisations</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="model_prerequisites.html" class="btn btn-neutral float-left" title="Vorbereitung" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="plan_model.html" class="btn btn-neutral float-right" title="Planmodell" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

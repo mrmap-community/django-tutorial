@@ -21,6 +21,6 @@ static_collected/
 !.vscode/extensions.json 
 .history
 # sphinx
-_build/
+#_build/
 _static/
 _templates/

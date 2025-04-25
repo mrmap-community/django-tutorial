@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erste Schritte &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=79cc9f76"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Erstellung erster Versionen der Templates" href="first_templates.html" />
+    <link rel="prev" title="Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)" href="initialize_project.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#beispielimplementierungen">Beispielimplementierungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Erste Schritte</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#startseite-anpassen-einfache-functionbasedview">Startseite anpassen (einfache FunctionBasedView)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ausprobieren-der-admin-oberflache-und-der-startseite">Ausprobieren der Admin Oberfläche und der Startseite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aktivieren-der-debugtoolbar">Aktivieren der Debugtoolbar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_model.html">Organisationsmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plan_model.html">Planmodell</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="export_xml_1.html">XPlanung GML Export</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Erste Schritte</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/first_steps.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="erste-schritte">
+<h1>Erste Schritte<a class="headerlink" href="#erste-schritte" title="Link to this heading"></a></h1>
+<section id="startseite-anpassen-einfache-functionbasedview">
+<h2>Startseite anpassen (einfache FunctionBasedView)<a class="headerlink" href="#startseite-anpassen-einfache-functionbasedview" title="Link to this heading"></a></h2>
+<p>xplanung_light/views.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;Hello, XPlanung!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>urls.py erstellen: xplanung_light/urls.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">home</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;home&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Anpassung der Projekt urls.py: komserv/urls.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">path</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s2">&quot;xplanung_light.urls&quot;</span><span class="p">)),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>App xplanung_light zur Konfiguration in komserv/settings.py hinzufügen</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="c1"># Application definition</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="c1">#...</span>
+    <span class="s1">&#39;xplanung_light&#39;</span><span class="p">,</span>
+  <span class="c1">#...</span>
+<span class="p">]</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+<p>Erstellung der Verzeichnisse für staticfiles und templates - pwd: komserv2/xplanung_light/</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>templates
+<span class="nb">cd</span><span class="w"> </span>templates
+mkdir<span class="w"> </span>xplanung_light
+<span class="nb">cd</span><span class="w"> </span>..
+mkdir<span class="w"> </span>static
+<span class="nb">cd</span><span class="w"> </span>static
+mkdir<span class="w"> </span>xplanung_light
+<span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+<p>Erstellung eines minimalen stylesheets: xplanung_light/static/xplanung_light/site.css</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">message</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">blue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Anlegen der Konfiguration für die Ablage der static files in komserv/settings.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="n">BASE_DIR</span> <span class="o">/</span> <span class="s1">&#39;static_collected&#39;</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+<p>Kopieren der static files in die vorgesehenen Ordner</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>manage.py<span class="w"> </span>collectstatic
+</pre></div>
+</div>
+<p>Ausgabe</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="m">126</span><span class="w"> </span>static<span class="w"> </span>files<span class="w"> </span>copied<span class="w"> </span>to<span class="w"> </span><span class="s1">&#39;XXX/komserv2/static_collected&#39;</span>.
+</pre></div>
+</div>
+<p>Superuser anlegen</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>manage.py<span class="w"> </span>createsuperuser<span class="w"> </span>--username<span class="o">=</span>admin<span class="w"> </span>--email<span class="o">=</span>admin@example.com
+</pre></div>
+</div>
+</section>
+<section id="ausprobieren-der-admin-oberflache-und-der-startseite">
+<h2>Ausprobieren der Admin Oberfläche und der Startseite<a class="headerlink" href="#ausprobieren-der-admin-oberflache-und-der-startseite" title="Link to this heading"></a></h2>
+<p>dev-Server beenden (je nach Umgebung) und neu starten - jetzt am besten in VSCODE über F5 - Run-&gt;Start Debugging</p>
+<p>http://127.0.0.1:8000/</p>
+<p>http://127.0.0.1:8000/admin/</p>
+</section>
+<section id="aktivieren-der-debugtoolbar">
+<h2>Aktivieren der Debugtoolbar<a class="headerlink" href="#aktivieren-der-debugtoolbar" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://django-debug-toolbar.readthedocs.io">django-debug-toolbar</a></p>
+<p>Installation des Pakets</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-debug-toolbar
+</pre></div>
+</div>
+<p>Anpassen der Konfiguration</p>
+<p>komserv/settings.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="c1"># Application definition</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="c1">#...</span>
+    <span class="s1">&#39;debug_toolbar&#39;</span><span class="p">,</span>
+  <span class="c1">#...</span>
+<span class="p">]</span>
+<span class="c1">#...</span>
+<span class="n">MIDDLEWARE</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1">#...</span>
+    <span class="s1">&#39;debug_toolbar.middleware.DebugToolbarMiddleware&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="c1">#...</span>
+<span class="n">INTERNAL_IPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># ...</span>
+    <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Erweiterung der URLs</p>
+<p>komserv/urls.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">debug_toolbar.toolbar</span><span class="w"> </span><span class="kn">import</span> <span class="n">debug_toolbar_urls</span>
+<span class="c1">#...</span>
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">staticfiles_urlpatterns</span><span class="p">()</span> <span class="o">+</span> <span class="n">debug_toolbar_urls</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="initialize_project.html" class="btn btn-neutral float-left" title="Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="first_templates.html" class="btn btn-neutral float-right" title="Erstellung erster Versionen der Templates" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
