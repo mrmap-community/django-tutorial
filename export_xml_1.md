@@ -82,7 +82,7 @@ class BPlanDetailXmlRasterView(BPlanDetailView):
             context['multisurface_geometry_25832'] = ET.tostring(multi_polygon_element, encoding="utf-8", method="xml").decode('utf8')
         else:
             polygon_element = root.find('gml:Polygon', ns)
-            polygon_element.set("xmlns:gml", "http://www.opengis.net/gml/3.2")   
+            #polygon_element.set("xmlns:gml", "http://www.opengis.net/gml/3.2")   
             uuid_polygon = uuid.uuid4()
             polygon_element.set("gml:id", "GML_" + str(uuid_polygon))
             # Ausgabe der Geometrie in ein XML-Snippet - erweitert um den MultiSurface/surfaceMember Rahmen
@@ -152,7 +152,7 @@ class BPlanTable(tables.Table):
 
 Fehlt nur noch das Template ;-)
 
-xplanung_light/bplan_template_xplanung_raster_6.xml
+komserv2/xplanung_light/templates/xplanung_light/bplan_template_xplanung_raster_6.xml
 ```jinja
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <xplan:XPlanAuszug xmlns:xplan="http://www.xplanung.de/xplangml/6/0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wfs="http://www.opengis.net/wfs" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.xplanung.de/xplangml/6/0 http://repository.gdi-de.org/schemas/de.xleitstelle.xplanung/6.0/XPlanung-Operationen.xsd" gml:id="{{ auszug_uuid }}">
