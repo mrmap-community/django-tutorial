@@ -3093,7 +3093,7 @@ des querysets mit einer annotation l&ouml;sen. Zus&auml;tzlich zu den Polygonen 
             <span class="n">context</span><span class="p">[</span><span class="s1">'multisurface_geometry_25832'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">multi_polygon_element</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"xml"</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">polygon_element</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'gml:Polygon'</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
-            <span class="n">polygon_element</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"xmlns:gml"</span><span class="p">,</span> <span class="s2">"http://www.opengis.net/gml/3.2"</span><span class="p">)</span>   
+            <span class="c1">#polygon_element.set("xmlns:gml", "http://www.opengis.net/gml/3.2")   </span>
             <span class="n">uuid_polygon</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
             <span class="n">polygon_element</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"gml:id"</span><span class="p">,</span> <span class="s2">"GML_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid_polygon</span><span class="p">))</span>
             <span class="c1"># Ausgabe der Geometrie in ein XML-Snippet - erweitert um den MultiSurface/surfaceMember Rahmen</span>
@@ -3194,7 +3194,7 @@ des querysets mit einer annotation l&ouml;sen. Zus&auml;tzlich zu den Polygonen 
            Fehlt nur noch das Template ;-)
           </p>
           <p>
-           xplanung_light/bplan_template_xplanung_raster_6.xml
+           komserv2/xplanung_light/templates/xplanung_light/bplan_template_xplanung_raster_6.xml
           </p>
           <div class="highlight-jinja notranslate">
            <div class="highlight">
