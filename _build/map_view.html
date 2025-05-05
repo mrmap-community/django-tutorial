@@ -132,7 +132,10 @@
 <p>Bei der Liste der Bebauungspläne macht es Sinn sich die Lage der Pläne auch auf einer dynamischen Übersichtskarte anzeigen zu lassen. Hierzu kann django-leaflet genutzt werden.
 Im ersten Schritt muss man aber die Geodaten mit in den View übernehmen. Theoretisch wäre es ausreichend das Geometrie Feld <strong>geltungsbereich</strong> zu nutzen. Wenn man aber etwas Interaktion haben will, z.B. eine Selektierbarkeit einzelner Objekte im Viewer, dann ist es besser, ein gesamtes Geometrieobjekt mit ausgewählten Attributen zu verwenden.
 Hierzu überschreiben wir den die get_context_data Funktion der ListView um eine Serialisierung der Geoemtrien der aktuellen Seite und nennen sie <strong>markers</strong></p>
+<p>xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
+<span class="c1"># ...</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">FilterView</span><span class="p">,</span> <span class="n">SingleTableView</span><span class="p">):</span>
 <span class="c1"># ...</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -140,6 +143,14 @@ Hierzu überschreiben wir den die get_context_data Funktion der ListView um eine
             <span class="n">serialize</span><span class="p">(</span><span class="s2">&quot;geojson&quot;</span><span class="p">,</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;table&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">object_list</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">geometry_field</span><span class="o">=</span><span class="s1">&#39;geltungsbereich&#39;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">context</span>
+</pre></div>
+</div>
+<p>komserv2/settings.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
+<span class="n">SERIALIZATION_MODULES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;geojson&quot;</span><span class="p">:</span> <span class="s2">&quot;django.contrib.gis.serializers.geojson&quot;</span><span class="p">,</span> 
+<span class="p">}</span>
+<span class="c1"># ...</span>
 </pre></div>
 </div>
 <p>Die Marker wollen wir in einem LeafletViewer darstellen. Hierzu müssen wir das Template bearbeiten. Aber zunächst brauchen wir noch die js-lib <strong>turf</strong>, die geometrische Operationen zur Verfügung stellt.</p>
@@ -301,7 +312,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </section>
 <section id="erstellen-einer-filter-klasse">
 <h2>Erstellen einer Filter Klasse<a class="headerlink" href="#erstellen-einer-filter-klasse" title="Link to this heading"></a></h2>
-<p>komserv/xplanung_light/filters.py</p>
+<p>komserv/xplanung_light/filter.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django_filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterSet</span><span class="p">,</span> <span class="n">CharFilter</span><span class="p">,</span> <span class="n">ModelChoiceFilter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span><span class="p">,</span> <span class="n">AdministrativeOrganization</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.gis.geos</span><span class="w"> </span><span class="kn">import</span> <span class="n">Polygon</span>
@@ -344,6 +355,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </ul>
 <p>komserv/xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanFilter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django_filters.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterView</span>
 <span class="c1"># ...</span>
@@ -371,6 +383,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </section>
 <section id="anzeige-der-filterfunktionen-im-template">
 <h2>Anzeige der Filterfunktionen im template<a class="headerlink" href="#anzeige-der-filterfunktionen-im-template" title="Link to this heading"></a></h2>
+<p>templates/xplanung_light/bplan_list.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!-- ... --&gt;</span>
 <span class="cp">{%</span> <span class="k">leaflet_map</span> <span class="s2">&quot;bplan_list_map&quot;</span> <span class="nv">callback</span><span class="o">=</span><span class="s2">&quot;window.map_init_basic&quot;</span> <span class="cp">%}</span>
 <span class="x">Filter</span>

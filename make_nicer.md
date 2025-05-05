@@ -4,7 +4,7 @@
 
 Installation per pip
 ```shell
-python3 - pip install django-bootstrap5
+python3 -m pip install django-bootstrap5
 ```
 
 Aktvieren in komserv/settings.py
@@ -18,7 +18,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'xplanung_light',
+    #...
     'django_bootstrap5',
+    #...
 ]
 #...
 ```
@@ -47,7 +49,7 @@ Anpassen des Basis-Templates xplanung_light/templates/xplanung_light/layout.html
     <!-- https://getbootstrap.com/docs/5.0/components/navbar/ -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">XPlanung light</a>
+          <a class="navbar-brand" href="{% url 'home' %}">XPlanung light</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -75,16 +77,15 @@ Anpassen des Basis-Templates xplanung_light/templates/xplanung_light/layout.html
           </div>
         </div>
     </nav>
-</div>
-<div class="body-content">
-    {% block content %}
-    {% endblock %}
-    <hr/>
-    <footer>
-        <p>&copy; 2025</p>
-        <p>Letzte Änderung: 2025-04-07 14:22 Bootstrap 5 Integration</p>
-    </footer>
-</div>
+    <div class="body-content">
+        {% block content %}
+        {% endblock %}
+        <hr/>
+        <footer>
+            <p>&copy; 2025</p>
+            <p>Letzte Änderung: 2025-04-07 14:22 Bootstrap 5 Integration</p>
+        </footer>
+    </div>
 </body>
 </html>
 ```

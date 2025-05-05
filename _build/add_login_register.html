@@ -61,7 +61,11 @@
 <li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#anpassung-der-pfade-in-xplanung-light-urls-py">Anpassung der Pfade in xplanung_light/urls.py</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#html-templates">HTML-Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#html-templates">HTML-Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#erstellen-eines-verzeichnisses-fur-registrierungstemplates">Erstellen eines Verzeichnisses für Registrierungstemplates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#templates">Templates</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#formular-fur-registrierung">Formular für Registrierung</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#anpassung-der-views">Anpassung der views</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#stylesheets-optimieren">Stylesheets optimieren</a></li>
@@ -145,6 +149,15 @@
 </section>
 <section id="html-templates">
 <h2>HTML-Templates<a class="headerlink" href="#html-templates" title="Link to this heading"></a></h2>
+<section id="erstellen-eines-verzeichnisses-fur-registrierungstemplates">
+<h3>Erstellen eines Verzeichnisses für Registrierungstemplates<a class="headerlink" href="#erstellen-eines-verzeichnisses-fur-registrierungstemplates" title="Link to this heading"></a></h3>
+<p>Erstellung des Verzeichnisses für registration - pwd: komserv2/xplanung_light/templates/</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>xplanung_light/templates/registration
+</pre></div>
+</div>
+</section>
+<section id="templates">
+<h3>Templates<a class="headerlink" href="#templates" title="Link to this heading"></a></h3>
 <p>xplanung_light/templates/registration/login.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;../xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
@@ -195,6 +208,7 @@
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
+</section>
 </section>
 <section id="formular-fur-registrierung">
 <h2>Formular für Registrierung<a class="headerlink" href="#formular-fur-registrierung" title="Link to this heading"></a></h2>

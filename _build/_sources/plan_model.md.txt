@@ -132,6 +132,7 @@ Ersatz des OpenLayer Client im Admin backend  - xplanung_light/admin.py
 ```python
 #...
 from leaflet.admin import LeafletGeoAdmin
+from xplanung_light.models import BPlan
 #...
 admin.site.register(BPlan, LeafletGeoAdmin)
 #...
@@ -158,6 +159,12 @@ Nutzung von einfachen ClassBasedGenericViews
 
 xplanung_light/views.py
 ```python
+#...
+from django.views.generic import (ListView, CreateView, UpdateView, DeleteView)
+from xplanung_light.models import AdministrativeOrganization, BPlan
+from django.urls import reverse_lazy
+#...
+
 class BPlanCreateView(CreateView):
     model = BPlan
     fields = ["name", "nummer", "geltungsbereich", "gemeinde", "planart"]
@@ -181,8 +188,6 @@ class BPlanListView(ListView):
     model = BPlan
     success_url = reverse_lazy("bplan-list") 
 ```
-
-xplanung_light/views.py
 
 ### Templates
 

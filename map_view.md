@@ -4,8 +4,11 @@ Bei der Liste der Bebauungspläne macht es Sinn sich die Lage der Pläne auch au
 Im ersten Schritt muss man aber die Geodaten mit in den View übernehmen. Theoretisch wäre es ausreichend das Geometrie Feld **geltungsbereich** zu nutzen. Wenn man aber etwas Interaktion haben will, z.B. eine Selektierbarkeit einzelner Objekte im Viewer, dann ist es besser, ein gesamtes Geometrieobjekt mit ausgewählten Attributen zu verwenden. 
 Hierzu überschreiben wir den die get_context_data Funktion der ListView um eine Serialisierung der Geoemtrien der aktuellen Seite und nennen sie **markers**
 
+xplanung_light/views.py
 ```python
 from django.core.serializers import serialize
+# ...
+class BPlanListView(FilterView, SingleTableView):
 # ...
 def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -13,6 +16,15 @@ def get_context_data(self, **kwargs):
             serialize("geojson", context['table'].page.object_list.data, geometry_field='geltungsbereich')
         )
         return context
+```
+
+komserv2/settings.py
+```python
+# ...
+SERIALIZATION_MODULES = {
+    "geojson": "django.contrib.gis.serializers.geojson", 
+}
+# ...
 ```
 
 Die Marker wollen wir in einem LeafletViewer darstellen. Hierzu müssen wir das Template bearbeiten. Aber zunächst brauchen wir noch die js-lib **turf**, die geometrische Operationen zur Verfügung stellt.
@@ -179,7 +191,7 @@ INSTALLED_APPS = [
 ```
 ## Erstellen einer Filter Klasse
 
-komserv/xplanung_light/filters.py
+komserv/xplanung_light/filter.py
 
 ```python
 from django_filters import FilterSet, CharFilter, ModelChoiceFilter
@@ -224,6 +236,7 @@ class BPlanFilter(FilterSet):
 komserv/xplanung_light/views.py
 ```python
 # ...
+import json
 from .filter import BPlanFilter
 from django_filters.views import FilterView
 # ...
@@ -249,6 +262,7 @@ class BPlanListView(FilterView, SingleTableView):
 ```
 ## Anzeige der Filterfunktionen im template
 
+templates/xplanung_light/bplan_list.html
 ```jinja
 <!-- ... -->
 {% leaflet_map "bplan_list_map" callback="window.map_init_basic" %}

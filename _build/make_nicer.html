@@ -125,7 +125,7 @@
 <h1>Integration von bootstrap5<a class="headerlink" href="#integration-von-bootstrap5" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://django-bootstrap5.readthedocs.io/en/latest/"><strong>django-bootstrap5</strong></a></p>
 <p>Installation per pip</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-bootstrap5
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-bootstrap5
 </pre></div>
 </div>
 <p>Aktvieren in komserv/settings.py</p>
@@ -138,7 +138,9 @@
     <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
     <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
     <span class="s1">&#39;xplanung_light&#39;</span><span class="p">,</span>
+    <span class="c1">#...</span>
     <span class="s1">&#39;django_bootstrap5&#39;</span><span class="p">,</span>
+    <span class="c1">#...</span>
 <span class="p">]</span>
 <span class="c1">#...</span>
 </pre></div>
@@ -166,7 +168,7 @@
 <span class="x">    &lt;!-- https://getbootstrap.com/docs/5.0/components/navbar/ --&gt;</span>
 <span class="x">    &lt;nav class=&quot;navbar navbar-expand-lg navbar-dark bg-dark&quot;&gt;</span>
 <span class="x">        &lt;div class=&quot;container-fluid&quot;&gt;</span>
-<span class="x">        &lt;a class=&quot;navbar-brand&quot; href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;home&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;XPlanung light&lt;/a&gt;</span>
+<span class="x">          &lt;a class=&quot;navbar-brand&quot; href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;home&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;XPlanung light&lt;/a&gt;</span>
 <span class="x">          &lt;button class=&quot;navbar-toggler&quot; type=&quot;button&quot; data-bs-toggle=&quot;collapse&quot; data-bs-target=&quot;#navbarTogglerDemo01&quot; aria-controls=&quot;navbarTogglerDemo01&quot; aria-expanded=&quot;false&quot; aria-label=&quot;Toggle navigation&quot;&gt;</span>
 <span class="x">            &lt;span class=&quot;navbar-toggler-icon&quot;&gt;&lt;/span&gt;</span>
 <span class="x">          &lt;/button&gt;</span>
@@ -194,16 +196,15 @@
 <span class="x">          &lt;/div&gt;</span>
 <span class="x">        &lt;/div&gt;</span>
 <span class="x">    &lt;/nav&gt;</span>
-<span class="x">&lt;/div&gt;</span>
-<span class="x">&lt;div class=&quot;body-content&quot;&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
-<span class="x">    &lt;hr/&gt;</span>
-<span class="x">    &lt;footer&gt;</span>
-<span class="x">        &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
-<span class="x">        &lt;p&gt;Letzte Änderung: 2025-04-07 14:22 Bootstrap 5 Integration&lt;/p&gt;</span>
-<span class="x">    &lt;/footer&gt;</span>
-<span class="x">&lt;/div&gt;</span>
+<span class="x">    &lt;div class=&quot;body-content&quot;&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="x">        &lt;hr/&gt;</span>
+<span class="x">        &lt;footer&gt;</span>
+<span class="x">            &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
+<span class="x">            &lt;p&gt;Letzte Änderung: 2025-04-07 14:22 Bootstrap 5 Integration&lt;/p&gt;</span>
+<span class="x">        &lt;/footer&gt;</span>
+<span class="x">    &lt;/div&gt;</span>
 <span class="x">&lt;/body&gt;</span>
 <span class="x">&lt;/html&gt;</span>
 </pre></div>

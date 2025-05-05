@@ -18,6 +18,8 @@ Verwendete Django packages:
 * django-simple-history
 * django-leaflet
 * django-tables2
+* django-debug-toolbar
+* django-filters
 
 # Weitere Informationen
 

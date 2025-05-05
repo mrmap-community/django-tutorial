@@ -242,6 +242,7 @@ mkdir<span class="w"> </span>xplanung_light
 <p>Erweiterung der URLs</p>
 <p>komserv/urls.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.staticfiles.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">staticfiles_urlpatterns</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">debug_toolbar.toolbar</span><span class="w"> </span><span class="kn">import</span> <span class="n">debug_toolbar_urls</span>
 <span class="c1">#...</span>
 <span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">staticfiles_urlpatterns</span><span class="p">()</span> <span class="o">+</span> <span class="n">debug_toolbar_urls</span><span class="p">()</span>

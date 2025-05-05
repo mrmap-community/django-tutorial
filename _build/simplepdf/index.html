@@ -543,6 +543,16 @@
             django-tables2
            </p>
           </li>
+          <li>
+           <p>
+            django-debug-toolbar
+           </p>
+          </li>
+          <li>
+           <p>
+            django-filters
+           </p>
+          </li>
          </ul>
         </section>
         <section id="weitere-informationen">
@@ -843,6 +853,11 @@
           <ol class="arabic simple">
            <li>
             <p>
+             Debian 11
+            </p>
+           </li>
+           <li>
+            <p>
              VSCODE
             </p>
            </li>
@@ -916,6 +931,15 @@
           <div class="highlight-shell notranslate">
            <div class="highlight">
             <pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django
+</pre>
+           </div>
+          </div>
+          <p>
+           Installieren der Bibliotheken f&uuml;r spatialite
+          </p>
+          <div class="highlight-shell notranslate">
+           <div class="highlight">
+            <pre><span></span>apt<span class="w"> </span>install<span class="w"> </span>binutils<span class="w"> </span>libproj-dev<span class="w"> </span>gdal-bin<span class="w"> </span>spatialite-bin<span class="w"> </span>libsqlite3-mod-spatialite
 </pre>
            </div>
           </div>
@@ -1258,6 +1282,7 @@ mkdir<span class="w"> </span>xplanung_light
           <div class="highlight-python notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.staticfiles.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">staticfiles_urlpatterns</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">debug_toolbar.toolbar</span><span class="w"> </span><span class="kn">import</span> <span class="n">debug_toolbar_urls</span>
 <span class="c1">#...</span>
 <span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">staticfiles_urlpatterns</span><span class="p">()</span> <span class="o">+</span> <span class="n">debug_toolbar_urls</span><span class="p">()</span>
@@ -1296,27 +1321,27 @@ mkdir<span class="w"> </span>xplanung_light
 <span class="x">&lt;/head&gt;</span>
 <span class="x">&lt;body&gt;</span>
 <span class="x">    &lt;div class="navbar"&gt;</span>
-<span class="x">    &lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'home'</span> <span class="cp">%}</span><span class="x">" class="navbar-brand"&gt;XPlanung light&lt;/a&gt;</span>
-<span class="x">    &lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'about'</span> <span class="cp">%}</span><span class="x">" class="navbar-item"&gt;&Uuml;ber&lt;/a&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_authenticated</span> <span class="cp">%}</span>
-<span class="x">        &lt;p&gt;</span>
-<span class="x">            Angemeldeter Benutzer: </span><span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span><span class="x"> &lt;br&gt;</span>
-<span class="x">            &lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'logout'</span> <span class="cp">%}</span><span class="x">" class="navbar-item"&gt;Abmelden&lt;/a&gt;</span>
-<span class="x">        &lt;/p&gt;</span>
-<span class="x">        &lt;p&gt;&lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'admin:index'</span> <span class="cp">%}</span><span class="x">" &gt;Admin Backend&lt;/a&gt;&lt;/p&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
-<span class="x">        &lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'login'</span> <span class="cp">%}</span><span class="x">" class="navbar-item"&gt;Anmelden&lt;/a&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-<span class="x">&lt;/div&gt;</span>
-<span class="x">&lt;div class="body-content"&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
-<span class="x">    &lt;hr/&gt;</span>
-<span class="x">    &lt;footer&gt;</span>
-<span class="x">        &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
-<span class="x">        &lt;p&gt;Letzte &Auml;nderung: 2025-04-04 11:40 Initiales Anlegen&lt;/p&gt;</span>
-<span class="x">    &lt;/footer&gt;</span>
-<span class="x">&lt;/div&gt;</span>
+<span class="x">        &lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'home'</span> <span class="cp">%}</span><span class="x">" class="navbar-brand"&gt;XPlanung light&lt;/a&gt;</span>
+<span class="x">        &lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'about'</span> <span class="cp">%}</span><span class="x">" class="navbar-item"&gt;&Uuml;ber&lt;/a&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_authenticated</span> <span class="cp">%}</span>
+<span class="x">            &lt;p&gt;</span>
+<span class="x">                Angemeldeter Benutzer: </span><span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span><span class="x"> &lt;br&gt;</span>
+<span class="x">                &lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'logout'</span> <span class="cp">%}</span><span class="x">" class="navbar-item"&gt;Abmelden&lt;/a&gt;</span>
+<span class="x">            &lt;/p&gt;</span>
+<span class="x">            &lt;p&gt;&lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'admin:index'</span> <span class="cp">%}</span><span class="x">" &gt;Admin Backend&lt;/a&gt;&lt;/p&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">            &lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'login'</span> <span class="cp">%}</span><span class="x">" class="navbar-item"&gt;Anmelden&lt;/a&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="x">    &lt;div class="body-content"&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="x">        &lt;hr/&gt;</span>
+<span class="x">        &lt;footer&gt;</span>
+<span class="x">            &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
+<span class="x">            &lt;p&gt;Letzte &Auml;nderung: 2025-04-04 11:40 Initiales Anlegen&lt;/p&gt;</span>
+<span class="x">        &lt;/footer&gt;</span>
+<span class="x">    &lt;/div&gt;</span>
 <span class="x">&lt;/body&gt;</span>
 <span class="x">&lt;/html&gt;</span>
 </pre>
@@ -1452,12 +1477,36 @@ mkdir<span class="w"> </span>xplanung_light
             
            </a>
           </h3>
-          <p>
-           xplanung_light/templates/registration/login.html
-          </p>
-          <div class="highlight-jinja notranslate">
-           <div class="highlight">
-            <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"../xplanung_light/layout.html"</span> <span class="cp">%}</span>
+          <section id="erstellen-eines-verzeichnisses-fur-registrierungstemplates">
+           <h4>
+            Erstellen eines Verzeichnisses f&uuml;r Registrierungstemplates
+            <a class="headerlink" href="#erstellen-eines-verzeichnisses-fur-registrierungstemplates" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            Erstellung des Verzeichnisses f&uuml;r registration - pwd: komserv2/xplanung_light/templates/
+           </p>
+           <div class="highlight-shell notranslate">
+            <div class="highlight">
+             <pre><span></span>mkdir<span class="w"> </span>xplanung_light/templates/registration
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="templates">
+           <h4>
+            Templates
+            <a class="headerlink" href="#templates" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            xplanung_light/templates/registration/login.html
+           </p>
+           <div class="highlight-jinja notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"../xplanung_light/layout.html"</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">if</span> <span class="nv">form.errors</span> <span class="cp">%}</span>
 <span class="x">&lt;p&gt;Your username and password didn't match. Please try again.&lt;/p&gt;</span>
@@ -1490,14 +1539,14 @@ mkdir<span class="w"> </span>xplanung_light
 <span class="c">{# &lt;p&gt;&lt;a href="{% url 'password_reset' %}"&gt;Lost password?&lt;/a&gt;&lt;/p&gt; #}</span>
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre>
+            </div>
            </div>
-          </div>
-          <p>
-           xplanung_light/templates/registration/register.html
-          </p>
-          <div class="highlight-jinja notranslate">
-           <div class="highlight">
-            <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"../xplanung_light/layout.html"</span> <span class="cp">%}</span>
+           <p>
+            xplanung_light/templates/registration/register.html
+           </p>
+           <div class="highlight-jinja notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"../xplanung_light/layout.html"</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">load</span> <span class="nv">bootstrap4</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">bootstrap_css</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">bootstrap_javascript</span> <span class="nv">jquery</span><span class="o">=</span><span class="s1">'full'</span> <span class="cp">%}</span>
@@ -1510,8 +1559,9 @@ mkdir<span class="w"> </span>xplanung_light
 <span class="x">    &lt;/form&gt;</span>
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre>
+            </div>
            </div>
-          </div>
+          </section>
          </section>
          <section id="formular-fur-registrierung">
           <h3>
@@ -1702,7 +1752,7 @@ mkdir<span class="w"> </span>xplanung_light
          </p>
          <div class="highlight-shell notranslate">
           <div class="highlight">
-           <pre><span></span>python3<span class="w"> </span>-<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-bootstrap5
+           <pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-bootstrap5
 </pre>
           </div>
          </div>
@@ -1720,7 +1770,9 @@ mkdir<span class="w"> </span>xplanung_light
     <span class="s1">'django.contrib.messages'</span><span class="p">,</span>
     <span class="s1">'django.contrib.staticfiles'</span><span class="p">,</span>
     <span class="s1">'xplanung_light'</span><span class="p">,</span>
+    <span class="c1">#...</span>
     <span class="s1">'django_bootstrap5'</span><span class="p">,</span>
+    <span class="c1">#...</span>
 <span class="p">]</span>
 <span class="c1">#...</span>
 </pre>
@@ -1753,7 +1805,7 @@ mkdir<span class="w"> </span>xplanung_light
 <span class="x">    &lt;!-- https://getbootstrap.com/docs/5.0/components/navbar/ --&gt;</span>
 <span class="x">    &lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;</span>
 <span class="x">        &lt;div class="container-fluid"&gt;</span>
-<span class="x">        &lt;a class="navbar-brand" href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'home'</span> <span class="cp">%}</span><span class="x">"&gt;XPlanung light&lt;/a&gt;</span>
+<span class="x">          &lt;a class="navbar-brand" href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'home'</span> <span class="cp">%}</span><span class="x">"&gt;XPlanung light&lt;/a&gt;</span>
 <span class="x">          &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"&gt;</span>
 <span class="x">            &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;</span>
 <span class="x">          &lt;/button&gt;</span>
@@ -1781,16 +1833,15 @@ mkdir<span class="w"> </span>xplanung_light
 <span class="x">          &lt;/div&gt;</span>
 <span class="x">        &lt;/div&gt;</span>
 <span class="x">    &lt;/nav&gt;</span>
-<span class="x">&lt;/div&gt;</span>
-<span class="x">&lt;div class="body-content"&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
-<span class="x">    &lt;hr/&gt;</span>
-<span class="x">    &lt;footer&gt;</span>
-<span class="x">        &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
-<span class="x">        &lt;p&gt;Letzte &Auml;nderung: 2025-04-07 14:22 Bootstrap 5 Integration&lt;/p&gt;</span>
-<span class="x">    &lt;/footer&gt;</span>
-<span class="x">&lt;/div&gt;</span>
+<span class="x">    &lt;div class="body-content"&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="x">        &lt;hr/&gt;</span>
+<span class="x">        &lt;footer&gt;</span>
+<span class="x">            &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
+<span class="x">            &lt;p&gt;Letzte &Auml;nderung: 2025-04-07 14:22 Bootstrap 5 Integration&lt;/p&gt;</span>
+<span class="x">        &lt;/footer&gt;</span>
+<span class="x">    &lt;/div&gt;</span>
 <span class="x">&lt;/body&gt;</span>
 <span class="x">&lt;/html&gt;</span>
 </pre>
@@ -2048,6 +2099,11 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
           </div>
           <p>
            Wir laden die xslm Datei zun&auml;chst h&auml;ndisch herunter und legen sie in unser Arbeitsverzeichnis.
+          </p>
+          <p>
+           <a class="reference external" href="https://www.statistik.rlp.de/fileadmin/statistik.rlp.de/Dokumente_und_Bilder/3_Produkte/3_Verzeichnisse/Kommunalverwaltungen_01.01_2025.xlsm">
+            Verzeichnis der Kommunalverwaltungen, Oberb&uuml;rgermeister, Landr&auml;te und B&uuml;rgermeister
+           </a>
           </p>
           <p>
            Die Funktionen f&uuml;r den Import speichern wir in xplanung_light/views.py. Hier ist wichtig, dass die Proxy-Einstellungen in der Datei angepasst werden. F&uuml;r produktive Zwecke ist es besser, die Proxy-Konfiguration in der zentralen Konfigurationsdatei abzulegen und zu importieren. Hierzu sp&auml;ter mehr.
@@ -2466,6 +2522,7 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
             <div class="highlight">
              <pre><span></span><span class="c1">#...</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">leaflet.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeafletGeoAdmin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span>
 <span class="c1">#...</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">BPlan</span><span class="p">,</span> <span class="n">LeafletGeoAdmin</span><span class="p">)</span>
 <span class="c1">#...</span>
@@ -2513,7 +2570,13 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
            </p>
            <div class="highlight-python notranslate">
             <div class="highlight">
-             <pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BPlanCreateView</span><span class="p">(</span><span class="n">CreateView</span><span class="p">):</span>
+             <pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.views.generic</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">ListView</span><span class="p">,</span> <span class="n">CreateView</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">,</span> <span class="n">DeleteView</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdministrativeOrganization</span><span class="p">,</span> <span class="n">BPlan</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse_lazy</span>
+<span class="c1">#...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanCreateView</span><span class="p">(</span><span class="n">CreateView</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
     <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"nummer"</span><span class="p">,</span> <span class="s2">"geltungsbereich"</span><span class="p">,</span> <span class="s2">"gemeinde"</span><span class="p">,</span> <span class="s2">"planart"</span><span class="p">]</span>
     <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">"bplan-list"</span><span class="p">)</span> 
@@ -2538,9 +2601,6 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
 </pre>
             </div>
            </div>
-           <p>
-            xplanung_light/views.py
-           </p>
           </section>
           <section id="templates">
            <h4>
@@ -2763,7 +2823,6 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
 <span class="kn">from</span><span class="w"> </span><span class="nn">django_tables2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">A</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">BPlanTable</span><span class="p">(</span><span class="n">tables</span><span class="o">.</span><span class="n">Table</span><span class="p">):</span>
-    <span class="k">class</span><span class="w"> </span><span class="nc">BPlanTable</span><span class="p">(</span><span class="n">tables</span><span class="o">.</span><span class="n">Table</span><span class="p">):</span>
     <span class="c1">#download = tables.LinkColumn('gedis-document-pdf', text='Download', args=[A('pk')], \</span>
     <span class="c1">#                     orderable=False, empty_values=())</span>
     <span class="n">edit</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">'bplan-update'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'Bearbeiten'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">'pk'</span><span class="p">)],</span> \
@@ -2835,6 +2894,16 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
 <span class="x">              </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 <span class="x">              &lt;li class="nav-item"&gt;</span>
 <span class="c">{# .... #}</span>
+</pre>
+          </div>
+         </div>
+         <p>
+          Datenmodelle migrieren
+         </p>
+         <div class="highlight-shell notranslate">
+          <div class="highlight">
+           <pre><span></span>python3<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
+python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
 </pre>
           </div>
          </div>
@@ -3194,9 +3263,14 @@ Hierzu &uuml;berschreiben wir den die get_context_data Funktion der ListView um 
            markers
           </strong>
          </p>
+         <p>
+          xplanung_light/views.py
+         </p>
          <div class="highlight-python notranslate">
           <div class="highlight">
            <pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
+<span class="c1"># ...</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">FilterView</span><span class="p">,</span> <span class="n">SingleTableView</span><span class="p">):</span>
 <span class="c1"># ...</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -3204,6 +3278,19 @@ Hierzu &uuml;berschreiben wir den die get_context_data Funktion der ListView um 
             <span class="n">serialize</span><span class="p">(</span><span class="s2">"geojson"</span><span class="p">,</span> <span class="n">context</span><span class="p">[</span><span class="s1">'table'</span><span class="p">]</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">object_list</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">geometry_field</span><span class="o">=</span><span class="s1">'geltungsbereich'</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">context</span>
+</pre>
+          </div>
+         </div>
+         <p>
+          komserv2/settings.py
+         </p>
+         <div class="highlight-python notranslate">
+          <div class="highlight">
+           <pre><span></span><span class="c1"># ...</span>
+<span class="n">SERIALIZATION_MODULES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"geojson"</span><span class="p">:</span> <span class="s2">"django.contrib.gis.serializers.geojson"</span><span class="p">,</span> 
+<span class="p">}</span>
+<span class="c1"># ...</span>
 </pre>
           </div>
          </div>
@@ -3440,7 +3527,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html
            </a>
           </h3>
           <p>
-           komserv/xplanung_light/filters.py
+           komserv/xplanung_light/filter.py
           </p>
           <div class="highlight-python notranslate">
            <div class="highlight">
@@ -3519,6 +3606,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html
           <div class="highlight-python notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1"># ...</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanFilter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django_filters.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterView</span>
 <span class="c1"># ...</span>
@@ -3552,6 +3640,9 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html
             
            </a>
           </h3>
+          <p>
+           templates/xplanung_light/bplan_list.html
+          </p>
           <div class="highlight-jinja notranslate">
            <div class="highlight">
             <pre><span></span><span class="x">&lt;!-- ... --&gt;</span>

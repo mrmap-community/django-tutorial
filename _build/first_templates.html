@@ -143,27 +143,27 @@
 <span class="x">&lt;/head&gt;</span>
 <span class="x">&lt;body&gt;</span>
 <span class="x">    &lt;div class=&quot;navbar&quot;&gt;</span>
-<span class="x">    &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;home&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-brand&quot;&gt;XPlanung light&lt;/a&gt;</span>
-<span class="x">    &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;about&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Über&lt;/a&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_authenticated</span> <span class="cp">%}</span>
-<span class="x">        &lt;p&gt;</span>
-<span class="x">            Angemeldeter Benutzer: </span><span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span><span class="x"> &lt;br&gt;</span>
-<span class="x">            &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;logout&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Abmelden&lt;/a&gt;</span>
-<span class="x">        &lt;/p&gt;</span>
-<span class="x">        &lt;p&gt;&lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;admin:index&#39;</span> <span class="cp">%}</span><span class="x">&quot; &gt;Admin Backend&lt;/a&gt;&lt;/p&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
-<span class="x">        &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;login&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Anmelden&lt;/a&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
-<span class="x">&lt;/div&gt;</span>
-<span class="x">&lt;div class=&quot;body-content&quot;&gt;</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
-<span class="x">    &lt;hr/&gt;</span>
-<span class="x">    &lt;footer&gt;</span>
-<span class="x">        &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
-<span class="x">        &lt;p&gt;Letzte Änderung: 2025-04-04 11:40 Initiales Anlegen&lt;/p&gt;</span>
-<span class="x">    &lt;/footer&gt;</span>
-<span class="x">&lt;/div&gt;</span>
+<span class="x">        &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;home&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-brand&quot;&gt;XPlanung light&lt;/a&gt;</span>
+<span class="x">        &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;about&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Über&lt;/a&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_authenticated</span> <span class="cp">%}</span>
+<span class="x">            &lt;p&gt;</span>
+<span class="x">                Angemeldeter Benutzer: </span><span class="cp">{{</span> <span class="nv">user.username</span> <span class="cp">}}</span><span class="x"> &lt;br&gt;</span>
+<span class="x">                &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;logout&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Abmelden&lt;/a&gt;</span>
+<span class="x">            &lt;/p&gt;</span>
+<span class="x">            &lt;p&gt;&lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;admin:index&#39;</span> <span class="cp">%}</span><span class="x">&quot; &gt;Admin Backend&lt;/a&gt;&lt;/p&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">            &lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;login&#39;</span> <span class="cp">%}</span><span class="x">&quot; class=&quot;navbar-item&quot;&gt;Anmelden&lt;/a&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">    &lt;/div&gt;</span>
+<span class="x">    &lt;div class=&quot;body-content&quot;&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="x">        &lt;hr/&gt;</span>
+<span class="x">        &lt;footer&gt;</span>
+<span class="x">            &lt;p&gt;&amp;copy; 2025&lt;/p&gt;</span>
+<span class="x">            &lt;p&gt;Letzte Änderung: 2025-04-04 11:40 Initiales Anlegen&lt;/p&gt;</span>
+<span class="x">        &lt;/footer&gt;</span>
+<span class="x">    &lt;/div&gt;</span>
 <span class="x">&lt;/body&gt;</span>
 <span class="x">&lt;/html&gt;</span>
 </pre></div>

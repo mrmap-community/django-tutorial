@@ -94,6 +94,8 @@ python3 -m pip install requests
 
 Wir laden die xslm Datei zunächst händisch herunter und legen sie in unser Arbeitsverzeichnis.
 
+[Verzeichnis der Kommunalverwaltungen, Oberbürgermeister, Landräte und Bürgermeister](https://www.statistik.rlp.de/fileadmin/statistik.rlp.de/Dokumente_und_Bilder/3_Produkte/3_Verzeichnisse/Kommunalverwaltungen_01.01_2025.xlsm)
+
 Die Funktionen für den Import speichern wir in xplanung_light/views.py. Hier ist wichtig, dass die Proxy-Einstellungen in der Datei angepasst werden. Für produktive Zwecke ist es besser, die Proxy-Konfiguration in der zentralen Konfigurationsdatei abzulegen und zu importieren. Hierzu später mehr.
 
 xplanung_light/views.py

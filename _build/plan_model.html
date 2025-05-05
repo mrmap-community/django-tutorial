@@ -267,6 +267,7 @@
 <p>Ersatz des OpenLayer Client im Admin backend  - xplanung_light/admin.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">leaflet.admin</span><span class="w"> </span><span class="kn">import</span> <span class="n">LeafletGeoAdmin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span>
 <span class="c1">#...</span>
 <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">BPlan</span><span class="p">,</span> <span class="n">LeafletGeoAdmin</span><span class="p">)</span>
 <span class="c1">#...</span>
@@ -292,7 +293,13 @@
 <h3>Views<a class="headerlink" href="#views" title="Link to this heading"></a></h3>
 <p>Nutzung von einfachen ClassBasedGenericViews</p>
 <p>xplanung_light/views.py</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BPlanCreateView</span><span class="p">(</span><span class="n">CreateView</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.views.generic</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">ListView</span><span class="p">,</span> <span class="n">CreateView</span><span class="p">,</span> <span class="n">UpdateView</span><span class="p">,</span> <span class="n">DeleteView</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdministrativeOrganization</span><span class="p">,</span> <span class="n">BPlan</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse_lazy</span>
+<span class="c1">#...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanCreateView</span><span class="p">(</span><span class="n">CreateView</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
     <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;nummer&quot;</span><span class="p">,</span> <span class="s2">&quot;geltungsbereich&quot;</span><span class="p">,</span> <span class="s2">&quot;gemeinde&quot;</span><span class="p">,</span> <span class="s2">&quot;planart&quot;</span><span class="p">]</span>
     <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span> 
@@ -316,7 +323,6 @@
     <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">&quot;bplan-list&quot;</span><span class="p">)</span> 
 </pre></div>
 </div>
-<p>xplanung_light/views.py</p>
 </section>
 <section id="templates">
 <h3>Templates<a class="headerlink" href="#templates" title="Link to this heading"></a></h3>

@@ -65,7 +65,6 @@ from django_tables2 import Column
 from django_tables2.utils import A
 
 class BPlanTable(tables.Table):
-    class BPlanTable(tables.Table):
     #download = tables.LinkColumn('gedis-document-pdf', text='Download', args=[A('pk')], \
     #                     orderable=False, empty_values=())
     edit = tables.LinkColumn('bplan-update', text='Bearbeiten', args=[A('pk')], \
@@ -119,4 +118,10 @@ Menüeintrag für Bebauungspläne hinzufügen - xplanung_light/templates/xplanun
               {% endif %}
               <li class="nav-item">
 {# .... #}
+```
+
+Datenmodelle migrieren
+```shell
+python3 manage.py makemigrations
+python3 manage.py migrate
 ```

@@ -16,27 +16,27 @@
 </head>
 <body>
     <div class="navbar">
-    <a href="{% url 'home' %}" class="navbar-brand">XPlanung light</a>
-    <a href="{% url 'about' %}" class="navbar-item">Über</a>
-    {% if user.is_authenticated %}
-        <p>
-            Angemeldeter Benutzer: {{ user.username }} <br>
-            <a href="{% url 'logout' %}" class="navbar-item">Abmelden</a>
-        </p>
-        <p><a href="{% url 'admin:index' %}" >Admin Backend</a></p>
-    {% else %}
-        <a href="{% url 'login' %}" class="navbar-item">Anmelden</a>
-    {% endif %}
-</div>
-<div class="body-content">
-    {% block content %}
-    {% endblock %}
-    <hr/>
-    <footer>
-        <p>&copy; 2025</p>
-        <p>Letzte Änderung: 2025-04-04 11:40 Initiales Anlegen</p>
-    </footer>
-</div>
+        <a href="{% url 'home' %}" class="navbar-brand">XPlanung light</a>
+        <a href="{% url 'about' %}" class="navbar-item">Über</a>
+        {% if user.is_authenticated %}
+            <p>
+                Angemeldeter Benutzer: {{ user.username }} <br>
+                <a href="{% url 'logout' %}" class="navbar-item">Abmelden</a>
+            </p>
+            <p><a href="{% url 'admin:index' %}" >Admin Backend</a></p>
+        {% else %}
+            <a href="{% url 'login' %}" class="navbar-item">Anmelden</a>
+        {% endif %}
+    </div>
+    <div class="body-content">
+        {% block content %}
+        {% endblock %}
+        <hr/>
+        <footer>
+            <p>&copy; 2025</p>
+            <p>Letzte Änderung: 2025-04-04 11:40 Initiales Anlegen</p>
+        </footer>
+    </div>
 </body>
 </html>
 ```

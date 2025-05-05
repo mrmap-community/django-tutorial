@@ -2,9 +2,10 @@
 
 ## Benötigte Software
 
-1. VSCODE
-2. Virtuelle python Umgebung
-3. Internetzugang
+1. Debian 11
+2. VSCODE
+3. Virtuelle python Umgebung
+4. Internetzugang
 
 ## Los geht's am Terminal
 
@@ -31,6 +32,10 @@ python3 -m pip install --upgrade pip
 Django installieren
 ```shell
 python3 -m pip install django
+```
+Installieren der Bibliotheken für spatialite
+```shell
+apt install binutils libproj-dev gdal-bin spatialite-bin libsqlite3-mod-spatialite
 ```
 VSCODE im Verzeichnis starten
 ```shell

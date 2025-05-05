@@ -15,6 +15,14 @@ path("register/", views.register, name = "register"),
 
 ## HTML-Templates
 
+### Erstellen eines Verzeichnisses für Registrierungstemplates
+
+Erstellung des Verzeichnisses für registration - pwd: komserv2/xplanung_light/templates/
+```shell
+mkdir xplanung_light/templates/registration
+```
+
+### Templates
 xplanung_light/templates/registration/login.html
 ```jinja
 {% extends "../xplanung_light/layout.html" %}

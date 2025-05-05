@@ -130,6 +130,7 @@ Erweiterung der URLs
 komserv/urls.py
 ```python
 #...
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from debug_toolbar.toolbar import debug_toolbar_urls
 #...
 urlpatterns += staticfiles_urlpatterns() + debug_toolbar_urls()
