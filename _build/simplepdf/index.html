@@ -447,6 +447,38 @@
        </a>
       </li>
       <li class="toctree-l1">
+       <a class="reference internal" href="#addon">
+        Addon
+       </a>
+       <ul>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#neuer-endpunkt">
+          Neuer Endpunkt
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#anpassung-des-views">
+          Anpassung des Views
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#erstellen-des-xml-templates">
+          Erstellen des XML-Templates
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#anpassung-der-tabelle">
+          Anpassung der Tabelle
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="toctree-l1">
+       <a class="reference internal" href="#ergebnis-des-iso-metadaten-exports">
+        Ergebnis des ISO-Metadaten Exports
+       </a>
+      </li>
+      <li class="toctree-l1">
        <a class="reference internal" href="#todos">
         TODOs
        </a>
@@ -3680,8 +3712,737 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.
          <a class="bg-primary reference internal image-reference" href="_images/bplan_list_1.png">
           <img alt="Liste der Bebauungspl&auml;ne" class="bg-primary align-center" src="_images/bplan_list_1.png" style="width: 800px;"/>
          </a>
+        </section>
+        <section id="addon">
+         <h2>
+          Addon
+          <a class="headerlink" href="#addon" title="Link to this heading">
+           
+          </a>
+         </h2>
          <p>
-          Um die Software zur Produktionsreife zu bringen, m&uuml;ssen noch ein paar Dinge entwickelt werden.
+          Um zeigen zu k&ouml;nnen, wie schnell man das System anpassen kann, werden wir schnell noch ISO19193-konforme Metadaten generieren.
+         </p>
+         <section id="neuer-endpunkt">
+          <h3>
+           Neuer Endpunkt
+           <a class="headerlink" href="#neuer-endpunkt" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           Den View f&uuml;r XPlan GML k&ouml;nnen wir einfach beibehalten und sp&auml;ter etwas anpassen ;-)
+          </p>
+          <p>
+           komserv2/xplanung_light/urls.py
+          </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># ... </span>
+    <span class="c1"># iso metadata generator for each bplan</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">"bplan/&lt;int:pk&gt;/iso19139/"</span><span class="p">,</span> <span class="n">BPlanDetailXmlRasterView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">"xplanung_light/bplan_template_iso19139.xml"</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">"bplan-export-iso19139"</span><span class="p">),</span>
+<span class="p">]</span>
+</pre>
+           </div>
+          </div>
+         </section>
+         <section id="anpassung-des-views">
+          <h3>
+           Anpassung des Views
+           <a class="headerlink" href="#anpassung-des-views" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           Wir brauchen die Geometrien jetzt auch im EPSG:4326 - dazu schreiben wir auch eine kleine Funktion zum Qualifizieren des GMLs aus der DB.
+          </p>
+          <p>
+           komserv2/xplanung_light/views.py
+          </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1"># ...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse_lazy</span><span class="p">,</span> <span class="n">reverse</span>
+<span class="c1"># ...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">qualify_gml_geometry</span><span class="p">(</span><span class="n">gml_from_db</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+    <span class="n">ET</span><span class="o">.</span><span class="n">register_namespace</span><span class="p">(</span><span class="s1">'gml'</span><span class="p">,</span><span class="s1">'http://www.opengis.net/gml/3.2'</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">"&lt;?xml version='1.0' encoding='UTF-8'?&gt;&lt;snippet xmlns:gml='http://www.opengis.net/gml/3.2'&gt;"</span> <span class="o">+</span> <span class="n">gml_from_db</span> <span class="o">+</span> <span class="s2">"&lt;/snippet&gt;"</span><span class="p">)</span>
+    <span class="n">ns</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">'gml'</span><span class="p">:</span> <span class="s1">'http://www.opengis.net/gml/3.2'</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1"># print("&lt;?xml version='1.0' encoding='UTF-8'?&gt;&lt;snippet xmlns:gml='http://www.opengis.net/gml/3.2'&gt;" + context['bplan'].geltungsbereich_gml_25832 + "&lt;/snippet&gt;")</span>
+    <span class="c1"># Test ob ein Polygon zur&uuml;ck kommt - damit w&auml;re nur ein einziges Polygon im geometry Field</span>
+    <span class="n">polygons</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">'gml:Polygon'</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+    <span class="c1"># print(len(polygons))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">polygons</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># print("Kein Polygon auf oberer Ebene gefunden - es sind wahrscheinlich mehrere!")</span>
+        <span class="n">multi_polygon_element</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'gml:MultiSurface'</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+        <span class="n">uuid_multisurface</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+        <span class="n">multi_polygon_element</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"gml:id"</span><span class="p">,</span> <span class="s2">"GML_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid_multisurface</span><span class="p">))</span>
+        <span class="c1"># F&uuml;ge gml_id Attribute hinzu - besser diese als Hash aus den Geometrien zu rechnen, oder in Zukunft generic_ids der Bereiche zu verwenden </span>
+        <span class="n">polygons</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">'gml:MultiSurface/gml:surfaceMember/gml:Polygon'</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">polygon</span> <span class="ow">in</span> <span class="n">polygons</span><span class="p">:</span>
+            <span class="n">uuid_polygon</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+            <span class="n">polygon</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"gml:id"</span><span class="p">,</span> <span class="s2">"GML_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid_polygon</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">multi_polygon_element</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"xml"</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">polygon_element</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'gml:Polygon'</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+        <span class="c1">#polygon_element.set("xmlns:gml", "http://www.opengis.net/gml/3.2")   </span>
+        <span class="n">uuid_polygon</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+        <span class="n">polygon_element</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"gml:id"</span><span class="p">,</span> <span class="s2">"GML_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid_polygon</span><span class="p">))</span>
+        <span class="c1"># Ausgabe der Geometrie in ein XML-Snippet - erweitert um den MultiSurface/surfaceMember Rahmen</span>
+        <span class="n">ET</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">polygon_element</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="s1">'&lt;gml:MultiSurface srsName="EPSG:25832"&gt;&lt;gml:surfaceMember&gt;'</span> <span class="o">+</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">polygon_element</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"xml"</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'&lt;/gml:surfaceMember&gt;&lt;/gml:MultiSurface&gt;'</span>
+
+<span class="c1"># ...</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanDetailXmlRasterView</span><span class="p">(</span><span class="n">BPlanDetailView</span><span class="p">):</span>  
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Erweiterung der auszulesenden Objekte um eine transformierte Geomtrie im Format GML 3</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_queryset</span><span class="p">()</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">geltungsbereich_gml_25832</span><span class="o">=</span><span class="n">AsGML</span><span class="p">(</span><span class="n">Transform</span><span class="p">(</span><span class="s2">"geltungsbereich"</span><span class="p">,</span> <span class="mi">25832</span><span class="p">),</span> <span class="n">version</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">geltungsbereich_gml_4326</span><span class="o">=</span><span class="n">AsGML</span><span class="p">(</span><span class="s2">"geltungsbereich"</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">queryset</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Um einen XPlanung-konformen Auszug zu bekommen, werden gml_id(s) verwendet.</span>
+        <span class="c1"># Es handelt sich um uuids, die noch das Prefix "GML_" bekommen. Grunds&auml;tzlich sollten die </span>
+        <span class="c1"># aus den Daten in der DB stammen und dort vergeben werden. </span>
+        <span class="c1"># Im ersten Schritt synthetisieren wir sie einfach ;-)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">'auszug_uuid'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"GML_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">'bplan_uuid'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"GML_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="c1"># Irgendwie gibt es keine django model function um direkt den Extent der Geometrie zu erhalten. Daher nutzen wir hier gdal</span>
+        <span class="c1"># und Transformieren die Daten erneut im RAM</span>
+        <span class="c1"># Definition der Transformation (Daten sind immer in WGS 84 - 4326)</span>
+        <span class="n">ct</span> <span class="o">=</span> <span class="n">CoordTransform</span><span class="p">(</span><span class="n">SpatialReference</span><span class="p">(</span><span class="mi">4326</span><span class="p">,</span> <span class="n">srs_type</span><span class="o">=</span><span class="s1">'epsg'</span><span class="p">),</span> <span class="n">SpatialReference</span><span class="p">(</span><span class="mi">25832</span><span class="p">,</span> <span class="n">srs_type</span><span class="o">=</span><span class="s1">'epsg'</span><span class="p">))</span>
+        <span class="c1"># OGRGeoemtry Objekt erstellen</span>
+        <span class="n">ogr_geom</span> <span class="o">=</span> <span class="n">OGRGeometry</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s1">'bplan'</span><span class="p">]</span><span class="o">.</span><span class="n">geltungsbereich</span><span class="p">),</span> <span class="n">srs</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">'wgs84_extent'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ogr_geom</span><span class="o">.</span><span class="n">extent</span>
+        <span class="c1"># Transformation nach EPSG:25832</span>
+        <span class="n">ogr_geom</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+        <span class="c1"># Speichern des Extents in den Context</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">'extent'</span><span class="p">]</span> <span class="o">=</span> <span class="n">ogr_geom</span><span class="o">.</span><span class="n">extent</span>
+        <span class="c1"># Ausgabe der GML Variante zu Testzwecken </span>
+        <span class="c1"># print(context['bplan'].geltungsbereich_gml_25832)</span>
+        <span class="c1"># Da die GML Daten nicht alle Attribute beinhalten, die XPlanung fordert, m&uuml;ssen wir sie anpassen, bzw. umschreiben</span>
+        <span class="c1"># Hierzu nutzen wir die Funktion qualify_gml_geometry</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">'multisurface_geometry_25832'</span><span class="p">]</span> <span class="o">=</span> <span class="n">qualify_gml_geometry</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s1">'bplan'</span><span class="p">]</span><span class="o">.</span><span class="n">geltungsbereich_gml_25832</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">'multisurface_geometry_4326'</span><span class="p">]</span> <span class="o">=</span> <span class="n">qualify_gml_geometry</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s1">'bplan'</span><span class="p">]</span><span class="o">.</span><span class="n">geltungsbereich_gml_4326</span><span class="p">)</span>
+
+        <span class="n">relative_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">'bplan-export-xplan-raster-6'</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">'pk'</span><span class="p">:</span> <span class="n">context</span><span class="p">[</span><span class="s1">'bplan'</span><span class="p">]</span><span class="o">.</span><span class="n">id</span><span class="p">})</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">'iso19139_url'</span><span class="p">]</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_absolute_uri</span><span class="p">(</span><span class="n">relative_url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">context</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">[</span><span class="s1">'Content-type'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"application/xml"</span>  <span class="c1"># set header</span>
+        <span class="k">return</span> <span class="n">response</span>
+    <span class="c1"># ...</span>
+</pre>
+           </div>
+          </div>
+         </section>
+         <section id="erstellen-des-xml-templates">
+          <h3>
+           Erstellen des XML-Templates
+           <a class="headerlink" href="#erstellen-des-xml-templates" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           komserv2/xplanung_light/templates/xplanung_light/bplan_template_iso19139.xml
+          </p>
+          <div class="highlight-jinja notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="x">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="x">&lt;gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd"&gt;</span>
+<span class="x">  &lt;gmd:fileIdentifier&gt;</span>
+<span class="x">    &lt;gco:CharacterString&gt;</span><span class="cp">{{</span> <span class="nv">bplan.generic_id</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">  &lt;/gmd:fileIdentifier&gt;</span>
+<span class="x">  &lt;gmd:language&gt;</span>
+<span class="x">    &lt;gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2" codeListValue="ger"&gt;Deutsch&lt;/gmd:LanguageCode&gt;</span>
+<span class="x">  &lt;/gmd:language&gt;</span>
+<span class="x">  &lt;gmd:characterSet&gt;</span>
+<span class="x">    &lt;gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8"/&gt;</span>
+<span class="x">  &lt;/gmd:characterSet&gt;</span>
+<span class="x">  &lt;gmd:hierarchyLevel&gt;</span>
+<span class="x">    &lt;gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"&gt;dataset&lt;/gmd:MD_ScopeCode&gt;</span>
+<span class="x">  &lt;/gmd:hierarchyLevel&gt;</span>
+<span class="x">  &lt;gmd:contact&gt;</span>
+<span class="x">    &lt;gmd:CI_ResponsibleParty&gt;</span>
+<span class="x">      &lt;gmd:organisationName&gt;</span>
+<span class="x">        &lt;gco:CharacterString&gt;</span><span class="cp">{{</span> <span class="nv">bplan.gemeinde.name</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">      &lt;/gmd:organisationName&gt;</span>
+<span class="x">      &lt;gmd:contactInfo&gt;</span>
+<span class="x">        &lt;gmd:CI_Contact&gt;</span>
+<span class="x">          &lt;gmd:address&gt;</span>
+<span class="x">            &lt;gmd:CI_Address&gt;</span>
+<span class="x">              &lt;gmd:administrativeArea&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;Rheinland-Pfalz&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:administrativeArea&gt;</span>
+<span class="x">              &lt;gmd:country&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;DE&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:country&gt;</span>
+<span class="x">              &lt;gmd:electronicMailAddress&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;</span><span class="cp">{{</span> <span class="nv">bplan.gemeinde.address_email</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:electronicMailAddress&gt;</span>
+<span class="x">            &lt;/gmd:CI_Address&gt;</span>
+<span class="x">          &lt;/gmd:address&gt;</span>
+<span class="x">        &lt;/gmd:CI_Contact&gt;</span>
+<span class="x">      &lt;/gmd:contactInfo&gt;</span>
+<span class="x">      &lt;gmd:role&gt;</span>
+<span class="x">        &lt;gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"&gt;pointOfContact&lt;/gmd:CI_RoleCode&gt;</span>
+<span class="x">      &lt;/gmd:role&gt;</span>
+<span class="x">    &lt;/gmd:CI_ResponsibleParty&gt;</span>
+<span class="x">  &lt;/gmd:contact&gt;</span>
+<span class="x">  &lt;gmd:dateStamp&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">bplan.history.date</span> <span class="cp">%}</span>
+<span class="x">    &lt;gco:Date&gt;</span><span class="cp">{{</span> <span class="nv">bplan.history.date</span> <span class="cp">}}</span><span class="x">&lt;/gco:Date&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">    &lt;gco:Date&gt;2025-05-07&lt;/gco:Date&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">  &lt;/gmd:dateStamp&gt;</span>
+<span class="x">  &lt;gmd:metadataStandardName&gt;</span>
+<span class="x">    &lt;gco:CharacterString&gt;ISO19115&lt;/gco:CharacterString&gt;</span>
+<span class="x">  &lt;/gmd:metadataStandardName&gt;</span>
+<span class="x">  &lt;gmd:metadataStandardVersion&gt;</span>
+<span class="x">    &lt;gco:CharacterString&gt;2003/Cor.1:2006&lt;/gco:CharacterString&gt;</span>
+<span class="x">  &lt;/gmd:metadataStandardVersion&gt;</span>
+<span class="x">  &lt;gmd:referenceSystemInfo&gt;</span>
+<span class="x">    &lt;gmd:MD_ReferenceSystem&gt;</span>
+<span class="x">      &lt;gmd:referenceSystemIdentifier&gt;</span>
+<span class="x">        &lt;gmd:RS_Identifier&gt;</span>
+<span class="x">          &lt;gmd:authority&gt;</span>
+<span class="x">            &lt;gmd:CI_Citation&gt;</span>
+<span class="x">              &lt;gmd:title&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;European Petroleum Survey Group (EPSG) Geodetic Parameter Registry&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:title&gt;</span>
+<span class="x">              &lt;gmd:date&gt;</span>
+<span class="x">                &lt;gmd:CI_Date&gt;</span>
+<span class="x">                  &lt;gmd:date&gt;</span>
+<span class="x">                    &lt;gco:Date&gt;2008-11-12&lt;/gco:Date&gt;</span>
+<span class="x">                  &lt;/gmd:date&gt;</span>
+<span class="x">                  &lt;gmd:dateType&gt;</span>
+<span class="x">                    &lt;gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication"&gt;publication&lt;/gmd:CI_DateTypeCode&gt;</span>
+<span class="x">                  &lt;/gmd:dateType&gt;</span>
+<span class="x">                &lt;/gmd:CI_Date&gt;</span>
+<span class="x">              &lt;/gmd:date&gt;</span>
+<span class="x">              &lt;gmd:citedResponsibleParty&gt;</span>
+<span class="x">                &lt;gmd:CI_ResponsibleParty&gt;</span>
+<span class="x">                  &lt;gmd:organisationName&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;European Petroleum Survey Group&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:organisationName&gt;</span>
+<span class="x">                  &lt;gmd:contactInfo&gt;</span>
+<span class="x">                    &lt;gmd:CI_Contact&gt;</span>
+<span class="x">                      &lt;gmd:onlineResource&gt;</span>
+<span class="x">                        &lt;gmd:CI_OnlineResource&gt;</span>
+<span class="x">                          &lt;gmd:linkage&gt;</span>
+<span class="x">                            &lt;gmd:URL&gt;http://www.epsg-registry.org/&lt;/gmd:URL&gt;</span>
+<span class="x">                          &lt;/gmd:linkage&gt;</span>
+<span class="x">                        &lt;/gmd:CI_OnlineResource&gt;</span>
+<span class="x">                      &lt;/gmd:onlineResource&gt;</span>
+<span class="x">                    &lt;/gmd:CI_Contact&gt;</span>
+<span class="x">                  &lt;/gmd:contactInfo&gt;</span>
+<span class="x">                  &lt;gmd:role gco:nilReason="missing"/&gt;</span>
+<span class="x">                &lt;/gmd:CI_ResponsibleParty&gt;</span>
+<span class="x">              &lt;/gmd:citedResponsibleParty&gt;</span>
+<span class="x">            &lt;/gmd:CI_Citation&gt;</span>
+<span class="x">          &lt;/gmd:authority&gt;</span>
+<span class="x">          &lt;gmd:code&gt;</span>
+<span class="x">            &lt;gco:CharacterString&gt;http://www.opengis.net/def/crs/EPSG/0/4326&lt;/gco:CharacterString&gt;</span>
+<span class="x">          &lt;/gmd:code&gt;</span>
+<span class="x">          &lt;gmd:version&gt;</span>
+<span class="x">            &lt;gco:CharacterString&gt;6.18.3&lt;/gco:CharacterString&gt;</span>
+<span class="x">          &lt;/gmd:version&gt;</span>
+<span class="x">        &lt;/gmd:RS_Identifier&gt;</span>
+<span class="x">      &lt;/gmd:referenceSystemIdentifier&gt;</span>
+<span class="x">    &lt;/gmd:MD_ReferenceSystem&gt;</span>
+<span class="x">  &lt;/gmd:referenceSystemInfo&gt;</span>
+<span class="x">  &lt;gmd:identificationInfo&gt;</span>
+<span class="x">    &lt;gmd:MD_DataIdentification&gt;</span>
+<span class="x">      &lt;gmd:citation&gt;</span>
+<span class="x">        &lt;gmd:CI_Citation&gt;</span>
+<span class="x">          &lt;gmd:title&gt;</span>
+<span class="x">            &lt;gco:CharacterString&gt;Bebauungsplan </span><span class="cp">{{</span> <span class="nv">bplan.name</span> <span class="cp">}}</span><span class="x"> von </span><span class="cp">{{</span> <span class="nv">bplan.gemeinde.name</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">          &lt;/gmd:title&gt;</span>
+<span class="x">          &lt;gmd:date&gt;</span>
+<span class="x">            &lt;gmd:CI_Date&gt;</span>
+<span class="x">              &lt;gmd:date&gt;</span>
+<span class="x">                </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">bplan.history.date</span> <span class="cp">%}</span>
+<span class="x">                &lt;gco:Date&gt;</span><span class="cp">{{</span> <span class="nv">bplan.history.date</span> <span class="cp">}}</span><span class="x">&lt;/gco:Date&gt;</span>
+<span class="x">                </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">                &lt;gco:Date&gt;2025-05-07&lt;/gco:Date&gt;</span>
+<span class="x">                </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">              &lt;/gmd:date&gt;</span>
+<span class="x">              &lt;gmd:dateType&gt;</span>
+<span class="x">                &lt;gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision"&gt;revision&lt;/gmd:CI_DateTypeCode&gt;</span>
+<span class="x">              &lt;/gmd:dateType&gt;</span>
+<span class="x">            &lt;/gmd:CI_Date&gt;</span>
+<span class="x">          &lt;/gmd:date&gt;</span>
+<span class="x">          &lt;gmd:identifier&gt;</span>
+<span class="x">            &lt;gmd:MD_Identifier&gt;</span>
+<span class="x">              &lt;gmd:code&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;https://komserv4gdi.service24.rlp.de/</span><span class="cp">{{</span> <span class="nv">bplan.generic_id</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:code&gt;</span>
+<span class="x">            &lt;/gmd:MD_Identifier&gt;</span>
+<span class="x">          &lt;/gmd:identifier&gt;</span>
+<span class="x">        &lt;/gmd:CI_Citation&gt;</span>
+<span class="x">      &lt;/gmd:citation&gt;</span>
+<span class="x">      &lt;gmd:abstract&gt;</span>
+<span class="x">        &lt;gco:CharacterString&gt;Bebauungsplan </span><span class="cp">{{</span> <span class="nv">bplan.name</span> <span class="cp">}}</span><span class="x"> von </span><span class="cp">{{</span> <span class="nv">bplan.gemeinde.name</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">      &lt;/gmd:abstract&gt;</span>
+<span class="x">      &lt;gmd:pointOfContact&gt;</span>
+<span class="x">        &lt;gmd:CI_ResponsibleParty&gt;</span>
+<span class="x">          &lt;gmd:organisationName&gt;</span>
+<span class="x">            &lt;gco:CharacterString&gt;</span><span class="cp">{{</span> <span class="nv">bplan.gemeinde.address_street</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">          &lt;/gmd:organisationName&gt;</span>
+<span class="x">          &lt;gmd:contactInfo&gt;</span>
+<span class="x">            &lt;gmd:CI_Contact&gt;</span>
+<span class="x">              &lt;gmd:address&gt;</span>
+<span class="x">                &lt;gmd:CI_Address&gt;</span>
+<span class="x">                  &lt;gmd:administrativeArea&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;Rheinland-Pfalz&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:administrativeArea&gt;</span>
+<span class="x">                  &lt;gmd:country&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;DE&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:country&gt;</span>
+<span class="x">                  &lt;gmd:electronicMailAddress&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;</span><span class="cp">{{</span> <span class="nv">bplan.gemeinde.address_email</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:electronicMailAddress&gt;</span>
+<span class="x">                &lt;/gmd:CI_Address&gt;</span>
+<span class="x">              &lt;/gmd:address&gt;</span>
+<span class="x">            &lt;/gmd:CI_Contact&gt;</span>
+<span class="x">          &lt;/gmd:contactInfo&gt;</span>
+<span class="x">          &lt;gmd:role&gt;</span>
+<span class="x">            &lt;gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="publisher"&gt;publisher&lt;/gmd:CI_RoleCode&gt;</span>
+<span class="x">          &lt;/gmd:role&gt;</span>
+<span class="x">        &lt;/gmd:CI_ResponsibleParty&gt;</span>
+<span class="x">      &lt;/gmd:pointOfContact&gt;</span>
+<span class="x">      &lt;gmd:resourceMaintenance&gt;</span>
+<span class="x">        &lt;gmd:MD_MaintenanceInformation&gt;</span>
+<span class="x">          &lt;gmd:maintenanceAndUpdateFrequency&gt;</span>
+<span class="x">            &lt;gmd:MD_MaintenanceFrequencyCode codeListValue="irregular" codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_MaintenanceFrequencyCode"/&gt;</span>
+<span class="x">          &lt;/gmd:maintenanceAndUpdateFrequency&gt;</span>
+<span class="x">        &lt;/gmd:MD_MaintenanceInformation&gt;</span>
+<span class="x">      &lt;/gmd:resourceMaintenance&gt;</span>
+<span class="x">      &lt;gmd:descriptiveKeywords&gt;</span>
+<span class="x">        &lt;gmd:MD_Keywords&gt;</span>
+<span class="x">          &lt;gmd:keyword&gt;</span>
+<span class="x">            &lt;gco:CharacterString&gt;Regional&lt;/gco:CharacterString&gt;</span>
+<span class="x">          &lt;/gmd:keyword&gt;</span>
+<span class="x">          &lt;gmd:thesaurusName&gt;</span>
+<span class="x">            &lt;gmd:CI_Citation&gt;</span>
+<span class="x">              &lt;gmd:title&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;Spatial scope&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:title&gt;</span>
+<span class="x">              &lt;gmd:date&gt;</span>
+<span class="x">                &lt;gmd:CI_Date&gt;</span>
+<span class="x">                  &lt;gmd:date&gt;</span>
+<span class="x">                    &lt;gco:Date&gt;2019-05-22&lt;/gco:Date&gt;</span>
+<span class="x">                  &lt;/gmd:date&gt;</span>
+<span class="x">                  &lt;gmd:dateType&gt;</span>
+<span class="x">                    &lt;gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication"&gt;publication&lt;/gmd:CI_DateTypeCode&gt;</span>
+<span class="x">                  &lt;/gmd:dateType&gt;</span>
+<span class="x">                &lt;/gmd:CI_Date&gt;</span>
+<span class="x">              &lt;/gmd:date&gt;</span>
+<span class="x">            &lt;/gmd:CI_Citation&gt;</span>
+<span class="x">          &lt;/gmd:thesaurusName&gt;</span>
+<span class="x">        &lt;/gmd:MD_Keywords&gt;</span>
+<span class="x">      &lt;/gmd:descriptiveKeywords&gt;</span>
+<span class="x">      &lt;gmd:resourceConstraints&gt;</span>
+<span class="x">&lt;!-- TODO: pull license information from user defined license information --&gt;</span>
+<span class="x">&lt;gmd:MD_LegalConstraints&gt;</span>
+<span class="x">&lt;gmd:accessConstraints&gt;</span>
+<span class="x">&lt;gmd:MD_RestrictionCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions"/&gt;</span>
+<span class="x">&lt;/gmd:accessConstraints&gt;</span>
+<span class="x">&lt;gmd:otherConstraints&gt;</span>
+<span class="x">&lt;gmx:Anchor xlink:href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations"&gt;Es gelten keine Zugriffsbeschr&auml;nkungen&lt;/gmx:Anchor&gt;</span>
+<span class="x">&lt;/gmd:otherConstraints&gt;</span>
+<span class="x">&lt;/gmd:MD_LegalConstraints&gt;</span>
+<span class="x">&lt;/gmd:resourceConstraints&gt;</span>
+<span class="x">&lt;gmd:resourceConstraints&gt;</span>
+<span class="x">&lt;gmd:MD_LegalConstraints&gt;</span>
+<span class="x">&lt;gmd:useConstraints&gt;</span>
+<span class="x">&lt;gmd:MD_RestrictionCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions"/&gt;</span>
+<span class="x">&lt;/gmd:useConstraints&gt;</span>
+<span class="x">&lt;gmd:otherConstraints&gt;</span>
+<span class="x">&lt;gco:CharacterString&gt;</span>
+<span class="x">Lizenz: cc-by-3.0 - Creative Commons: Namensnennung 3.0 Deutschland - http://creativecommons.org/licenses/by/3.0/de/ - Quellenvermerk: Source note required by license, but not given!</span>
+<span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">&lt;/gmd:otherConstraints&gt;</span>
+<span class="x">&lt;gmd:otherConstraints&gt;</span>
+<span class="x">&lt;gco:CharacterString&gt;</span>
+<span class="x">{"id":"cc-by-3.0","name":"Creative Commons: Namensnennung 3.0 Deutschland","url":"http:\/\/creativecommons.org\/licenses\/by\/3.0\/de\/","quelle":"Source note required by license, but not given!"}</span>
+<span class="x">&lt;/gco:CharacterString&gt;</span>
+<span class="x">&lt;/gmd:otherConstraints&gt;</span>
+<span class="x">&lt;/gmd:MD_LegalConstraints&gt;</span>
+<span class="x">&lt;/gmd:resourceConstraints&gt;</span>
+<span class="x">&lt;gmd:spatialRepresentationType&gt;</span>
+<span class="x">&lt;gmd:MD_SpatialRepresentationTypeCode codeList="https://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="vector"&gt;vector&lt;/gmd:MD_SpatialRepresentationTypeCode&gt;</span>
+<span class="x">&lt;/gmd:spatialRepresentationType&gt;</span>
+<span class="x">      &lt;gmd:spatialResolution&gt;</span>
+<span class="x">        &lt;gmd:MD_Resolution&gt;</span>
+<span class="x">          &lt;gmd:equivalentScale&gt;</span>
+<span class="x">            &lt;gmd:MD_RepresentativeFraction&gt;</span>
+<span class="x">              &lt;gmd:denominator&gt;</span>
+<span class="x">                &lt;gco:Integer&gt;1000&lt;/gco:Integer&gt;</span>
+<span class="x">              &lt;/gmd:denominator&gt;</span>
+<span class="x">            &lt;/gmd:MD_RepresentativeFraction&gt;</span>
+<span class="x">          &lt;/gmd:equivalentScale&gt;</span>
+<span class="x">        &lt;/gmd:MD_Resolution&gt;</span>
+<span class="x">      &lt;/gmd:spatialResolution&gt;</span>
+<span class="x">      &lt;gmd:language&gt;</span>
+<span class="x">        &lt;gmd:LanguageCode codeListValue="ger" codeList="http://www.loc.gov/standards/iso639-2"&gt;Deutsch&lt;/gmd:LanguageCode&gt;</span>
+<span class="x">      &lt;/gmd:language&gt;</span>
+
+<span class="x">      &lt;gmd:characterSet&gt;</span>
+<span class="x">        &lt;gmd:MD_CharacterSetCode codeListValue="utf8" codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_CharacterSetCode"/&gt;</span>
+<span class="x">      &lt;/gmd:characterSet&gt;</span>
+<span class="x">      &lt;gmd:topicCategory&gt;</span>
+<span class="x">        &lt;gmd:MD_TopicCategoryCode&gt;location&lt;/gmd:MD_TopicCategoryCode&gt;</span>
+<span class="x">      &lt;/gmd:topicCategory&gt;</span>
+<span class="x">      &lt;gmd:extent&gt;</span>
+<span class="x">        &lt;gmd:EX_Extent&gt;</span>
+<span class="x">          &lt;gmd:geographicElement&gt;</span>
+<span class="x">            &lt;gmd:EX_GeographicBoundingBox&gt;</span>
+<span class="x">              &lt;gmd:westBoundLongitude&gt;</span>
+<span class="x">                &lt;gco:Decimal&gt;</span><span class="cp">{{</span> <span class="nv">wgs84_extent.0</span> <span class="cp">}}</span><span class="x">&lt;/gco:Decimal&gt;</span>
+<span class="x">              &lt;/gmd:westBoundLongitude&gt;</span>
+<span class="x">              &lt;gmd:eastBoundLongitude&gt;</span>
+<span class="x">                &lt;gco:Decimal&gt;</span><span class="cp">{{</span> <span class="nv">wgs84_extent.1</span> <span class="cp">}}</span><span class="x">&lt;/gco:Decimal&gt;</span>
+<span class="x">              &lt;/gmd:eastBoundLongitude&gt;</span>
+<span class="x">              &lt;gmd:southBoundLatitude&gt;</span>
+<span class="x">                &lt;gco:Decimal&gt;</span><span class="cp">{{</span> <span class="nv">wgs84_extent.2</span> <span class="cp">}}</span><span class="x">&lt;/gco:Decimal&gt;</span>
+<span class="x">              &lt;/gmd:southBoundLatitude&gt;</span>
+<span class="x">              &lt;gmd:northBoundLatitude&gt;</span>
+<span class="x">                &lt;gco:Decimal&gt;</span><span class="cp">{{</span> <span class="nv">wgs84_extent.3</span> <span class="cp">}}</span><span class="x">&lt;/gco:Decimal&gt;</span>
+<span class="x">              &lt;/gmd:northBoundLatitude&gt;</span>
+<span class="x">            &lt;/gmd:EX_GeographicBoundingBox&gt;</span>
+<span class="x">          &lt;/gmd:geographicElement&gt;</span>
+<span class="x">        &lt;/gmd:EX_Extent&gt;</span>
+<span class="x">      &lt;/gmd:extent&gt;</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">multisurface_geometry_4326</span> <span class="cp">%}</span>
+<span class="x">      &lt;gmd:extent&gt;</span>
+<span class="x">        &lt;gmd:EX_Extent&gt;</span>
+<span class="x">          &lt;gmd:geographicElement&gt;</span>
+<span class="x">            &lt;gmd:EX_BoundingPolygon&gt;</span>
+<span class="x">              &lt;gmd:polygon&gt;</span>
+<span class="x">                </span><span class="cp">{%</span> <span class="k">autoescape</span> <span class="nv">off</span> <span class="cp">%}</span>
+<span class="x">                </span><span class="cp">{{</span> <span class="nv">multisurface_geometry_4326</span> <span class="cp">}}</span>
+<span class="x">                </span><span class="cp">{%</span> <span class="k">endautoescape</span> <span class="cp">%}</span>
+<span class="x">              &lt;/gmd:polygon&gt;</span>
+<span class="x">            &lt;/gmd:EX_BoundingPolygon&gt;</span>
+<span class="x">          &lt;/gmd:geographicElement&gt;</span>
+<span class="x">        &lt;/gmd:EX_Extent&gt;</span>
+<span class="x">      &lt;/gmd:extent&gt;</span>
+<span class="x">      </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">      &lt;!--&lt;gmd:extent&gt;</span>
+<span class="x">        &lt;gmd:EX_Extent&gt;</span>
+<span class="x">          &lt;gmd:temporalElement&gt;</span>
+<span class="x">            &lt;gmd:EX_TemporalExtent&gt;</span>
+<span class="x">              &lt;gmd:extent&gt;</span>
+<span class="x">                &lt;gml:TimePeriod gml:id="temporalextent"&gt;</span>
+<span class="x">                  &lt;gml:beginPosition&gt;2024-11-08&lt;/gml:beginPosition&gt;</span>
+<span class="x">                  &lt;gml:endPosition&gt;2024-11-09&lt;/gml:endPosition&gt;</span>
+<span class="x">                &lt;/gml:TimePeriod&gt;</span>
+<span class="x">              &lt;/gmd:extent&gt;</span>
+<span class="x">            &lt;/gmd:EX_TemporalExtent&gt;</span>
+<span class="x">          &lt;/gmd:temporalElement&gt;</span>
+<span class="x">        &lt;/gmd:EX_Extent&gt;</span>
+<span class="x">      &lt;/gmd:extent&gt;--&gt;</span>
+<span class="x">    &lt;/gmd:MD_DataIdentification&gt;</span>
+<span class="x">  &lt;/gmd:identificationInfo&gt;</span>
+<span class="x">  &lt;gmd:distributionInfo&gt;</span>
+<span class="x">    &lt;gmd:MD_Distribution&gt;</span>
+<span class="x">      &lt;gmd:distributionFormat&gt;</span>
+<span class="x">        &lt;gmd:MD_Format&gt;</span>
+<span class="x">          &lt;gmd:name&gt;</span>
+<span class="x">            &lt;gco:CharacterString&gt;GML&lt;/gco:CharacterString&gt;</span>
+<span class="x">          &lt;/gmd:name&gt;</span>
+<span class="x">          &lt;gmd:version&gt;</span>
+<span class="x">            &lt;gco:CharacterString&gt;3.2&lt;/gco:CharacterString&gt;</span>
+<span class="x">          &lt;/gmd:version&gt;</span>
+<span class="x">        &lt;/gmd:MD_Format&gt;</span>
+<span class="x">      &lt;/gmd:distributionFormat&gt;</span>
+<span class="x">      &lt;gmd:distributor&gt;</span>
+<span class="x">        &lt;gmd:MD_Distributor&gt;</span>
+<span class="x">          &lt;gmd:distributorContact&gt;</span>
+<span class="x">            &lt;gmd:CI_ResponsibleParty&gt;</span>
+<span class="x">              &lt;gmd:organisationName&gt;</span>
+<span class="x">                </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">responsible_party_address</span> <span class="cp">%}</span>
+<span class="x">                &lt;gco:CharacterString&gt;</span><span class="cp">{{</span> <span class="nv">responsible_party_address</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt; </span>
+<span class="x">                </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">                &lt;gco:CharacterString&gt;Musterstra&szlig;e 10&lt;/gco:CharacterString&gt;</span>
+<span class="x">                </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">              &lt;/gmd:organisationName&gt;</span>
+<span class="x">              &lt;gmd:contactInfo&gt;</span>
+<span class="x">                &lt;gmd:CI_Contact&gt;</span>
+<span class="x">                  &lt;gmd:address&gt;</span>
+<span class="x">                    &lt;gmd:CI_Address&gt;</span>
+<span class="x">                      &lt;gmd:administrativeArea&gt;</span>
+<span class="x">                        &lt;gco:CharacterString&gt;Rheinland-Pfalz&lt;/gco:CharacterString&gt;</span>
+<span class="x">                      &lt;/gmd:administrativeArea&gt;</span>
+<span class="x">                      &lt;gmd:country&gt;</span>
+<span class="x">                        &lt;gco:CharacterString&gt;DE&lt;/gco:CharacterString&gt;</span>
+<span class="x">                      &lt;/gmd:country&gt;</span>
+<span class="x">                      &lt;gmd:electronicMailAddress&gt;</span>
+<span class="x">                        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">responsible_party_email</span> <span class="cp">%}</span>
+<span class="x">                        &lt;gco:CharacterString&gt;</span><span class="cp">{{</span> <span class="nv">responsible_party_email</span> <span class="cp">}}</span><span class="x">&lt;/gco:CharacterString&gt; </span>
+<span class="x">                        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+<span class="x">                        &lt;gco:CharacterString&gt;test@example.com&lt;/gco:CharacterString&gt;</span>
+<span class="x">                        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">                      &lt;/gmd:electronicMailAddress&gt;</span>
+<span class="x">                    &lt;/gmd:CI_Address&gt;</span>
+<span class="x">                  &lt;/gmd:address&gt;</span>
+<span class="x">                &lt;/gmd:CI_Contact&gt;</span>
+<span class="x">              &lt;/gmd:contactInfo&gt;</span>
+<span class="x">              &lt;gmd:role&gt;</span>
+<span class="x">                &lt;gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact"&gt;pointOfContact&lt;/gmd:CI_RoleCode&gt;</span>
+<span class="x">              &lt;/gmd:role&gt;</span>
+<span class="x">            &lt;/gmd:CI_ResponsibleParty&gt;</span>
+<span class="x">          &lt;/gmd:distributorContact&gt;</span>
+<span class="x">        &lt;/gmd:MD_Distributor&gt;</span>
+<span class="x">      &lt;/gmd:distributor&gt;</span>
+<span class="x">      &lt;gmd:transferOptions&gt;</span>
+<span class="x">        &lt;gmd:MD_DigitalTransferOptions&gt;</span>
+<span class="x">          &lt;gmd:onLine&gt;</span>
+<span class="x">            &lt;gmd:CI_OnlineResource&gt;</span>
+<span class="x">              &lt;gmd:linkage&gt;</span>
+<span class="x">                &lt;gmd:URL&gt;</span><span class="cp">{{</span> <span class="nv">iso19139_url</span> <span class="cp">}}</span><span class="x">&lt;/gmd:URL&gt;</span>
+<span class="x">              &lt;/gmd:linkage&gt;</span>
+<span class="x">              &lt;gmd:function&gt;</span>
+<span class="x">                &lt;gmd:CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml" codeListValue="download"&gt;download&lt;/gmd:CI_OnLineFunctionCode&gt;</span>
+<span class="x">              &lt;/gmd:function&gt;</span>
+<span class="x">            &lt;/gmd:CI_OnlineResource&gt;</span>
+<span class="x">          &lt;/gmd:onLine&gt;</span>
+<span class="x">        &lt;/gmd:MD_DigitalTransferOptions&gt;</span>
+<span class="x">      &lt;/gmd:transferOptions&gt;</span>
+<span class="x">    &lt;/gmd:MD_Distribution&gt;</span>
+<span class="x">  &lt;/gmd:distributionInfo&gt;</span>
+<span class="x">  &lt;gmd:dataQualityInfo&gt;</span>
+<span class="x">    &lt;!-- Fix --&gt;</span>
+<span class="x">    &lt;gmd:DQ_DataQuality&gt;</span>
+<span class="x">      &lt;gmd:scope&gt;</span>
+<span class="x">        &lt;gmd:DQ_Scope&gt;</span>
+<span class="x">          &lt;gmd:level&gt;</span>
+<span class="x">            &lt;gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset"&gt;dataset&lt;/gmd:MD_ScopeCode&gt;</span>
+<span class="x">          &lt;/gmd:level&gt;</span>
+<span class="x">        &lt;/gmd:DQ_Scope&gt;</span>
+<span class="x">      &lt;/gmd:scope&gt;</span>
+
+<span class="x">      &lt;gmd:report xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco"&gt;</span>
+<span class="x">        &lt;gmd:DQ_DomainConsistency xsi:type="gmd:DQ_DomainConsistency_Type"&gt;</span>
+<span class="x">          &lt;gmd:result&gt;</span>
+<span class="x">            &lt;gmd:DQ_ConformanceResult xsi:type="gmd:DQ_ConformanceResult_Type"&gt;</span>
+<span class="x">              &lt;gmd:specification&gt;</span>
+<span class="x">                &lt;gmd:CI_Citation&gt;</span>
+<span class="x">                  &lt;gmd:title&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;VERORDNUNG (EG) Nr. 1205/2008 DER KOMMISSION vom 3. Dezember 2008 zur Durchf&uuml;hrung der Richtlinie 2007/2/EG des Europ&auml;ischen Parlaments und des Rates hinsichtlich Metadaten&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:title&gt;</span>
+<span class="x">                  &lt;gmd:date&gt;</span>
+<span class="x">                    &lt;gmd:CI_Date&gt;</span>
+<span class="x">                      &lt;gmd:date&gt;</span>
+<span class="x">                        &lt;gco:Date&gt;2008-12-04&lt;/gco:Date&gt;</span>
+<span class="x">                      &lt;/gmd:date&gt;</span>
+<span class="x">                      &lt;gmd:dateType&gt;</span>
+<span class="x">                        &lt;gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication"&gt;publication&lt;/gmd:CI_DateTypeCode&gt;</span>
+<span class="x">                      &lt;/gmd:dateType&gt;</span>
+<span class="x">                    &lt;/gmd:CI_Date&gt;</span>
+<span class="x">                  &lt;/gmd:date&gt;</span>
+<span class="x">                  &lt;gmd:edition&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;1.0&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:edition&gt;</span>
+<span class="x">                &lt;/gmd:CI_Citation&gt;</span>
+<span class="x">              &lt;/gmd:specification&gt;</span>
+<span class="x">              &lt;gmd:explanation&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;No explanation available&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:explanation&gt;</span>
+<span class="x">              &lt;gmd:pass&gt;</span>
+<span class="x">                &lt;gco:Boolean&gt;true&lt;/gco:Boolean&gt;</span>
+<span class="x">              &lt;/gmd:pass&gt;</span>
+<span class="x">            &lt;/gmd:DQ_ConformanceResult&gt;</span>
+<span class="x">          &lt;/gmd:result&gt;</span>
+<span class="x">        &lt;/gmd:DQ_DomainConsistency&gt;</span>
+<span class="x">      &lt;/gmd:report&gt;</span>
+<span class="x">      &lt;gmd:report xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco"&gt;</span>
+<span class="x">        &lt;gmd:DQ_DomainConsistency xsi:type="gmd:DQ_DomainConsistency_Type"&gt;</span>
+<span class="x">          &lt;gmd:result&gt;</span>
+<span class="x">            &lt;gmd:DQ_ConformanceResult xsi:type="gmd:DQ_ConformanceResult_Type"&gt;</span>
+<span class="x">              &lt;gmd:specification&gt;</span>
+<span class="x">                &lt;gmd:CI_Citation&gt;</span>
+<span class="x">                  &lt;gmd:title&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;VERORDNUNG (EU) Nr. 1253/2013 DER KOMMISSION vom 21. Oktober 2013 zur &Auml;nderung der Verordnung (EU) Nr. 1089/2010 zur Durchf&uuml;hrung der Richtlinie 2007/2/EG hinsichtlich der Interoperabilit&auml;t von Geodatens&auml;tzen und -diensten&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:title&gt;</span>
+<span class="x">                  &lt;gmd:date&gt;</span>
+<span class="x">                    &lt;gmd:CI_Date&gt;</span>
+<span class="x">                      &lt;gmd:date&gt;</span>
+<span class="x">                        &lt;gco:Date&gt;2013-12-10&lt;/gco:Date&gt;</span>
+<span class="x">                      &lt;/gmd:date&gt;</span>
+<span class="x">                      &lt;gmd:dateType&gt;</span>
+<span class="x">                        &lt;gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication"&gt;publication&lt;/gmd:CI_DateTypeCode&gt;</span>
+<span class="x">                      &lt;/gmd:dateType&gt;</span>
+<span class="x">                    &lt;/gmd:CI_Date&gt;</span>
+<span class="x">                  &lt;/gmd:date&gt;</span>
+<span class="x">                  &lt;gmd:edition&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;1.0&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:edition&gt;</span>
+<span class="x">                &lt;/gmd:CI_Citation&gt;</span>
+<span class="x">              &lt;/gmd:specification&gt;</span>
+<span class="x">              &lt;gmd:explanation&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;No explanation available&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:explanation&gt;</span>
+<span class="x">              &lt;gmd:pass&gt;</span>
+<span class="x">                &lt;gco:Boolean&gt;false&lt;/gco:Boolean&gt;</span>
+<span class="x">              &lt;/gmd:pass&gt;</span>
+<span class="x">            &lt;/gmd:DQ_ConformanceResult&gt;</span>
+<span class="x">          &lt;/gmd:result&gt;</span>
+<span class="x">        &lt;/gmd:DQ_DomainConsistency&gt;</span>
+<span class="x">      &lt;/gmd:report&gt;</span>
+<span class="x">      &lt;gmd:report xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco"&gt;</span>
+<span class="x">        &lt;gmd:DQ_DomainConsistency xsi:type="gmd:DQ_DomainConsistency_Type"&gt;</span>
+<span class="x">          &lt;gmd:result&gt;</span>
+<span class="x">            &lt;gmd:DQ_ConformanceResult xsi:type="gmd:DQ_ConformanceResult_Type"&gt;</span>
+<span class="x">              &lt;gmd:specification&gt;</span>
+<span class="x">                &lt;gmd:CI_Citation&gt;</span>
+<span class="x">                  &lt;gmd:title&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;VERORDNUNG (EU) Nr. 102/2011 DER KOMMISSION vom 4. Februar 2011 zur &Auml;nderung der Verordnung (EU) Nr. 1089/2010 zur Durchf&uuml;hrung der Richtlinie 2007/2/EG des Europ&auml;ischen Parlaments und des Rates hinsichtlich der Interoperabilit&auml;t von Geodatens&auml;tzen und -diensten&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:title&gt;</span>
+<span class="x">                  &lt;gmd:date&gt;</span>
+<span class="x">                    &lt;gmd:CI_Date&gt;</span>
+<span class="x">                      &lt;gmd:date&gt;</span>
+<span class="x">                        &lt;gco:Date&gt;2011-02-05&lt;/gco:Date&gt;</span>
+<span class="x">                      &lt;/gmd:date&gt;</span>
+<span class="x">                      &lt;gmd:dateType&gt;</span>
+<span class="x">                        &lt;gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication"&gt;publication&lt;/gmd:CI_DateTypeCode&gt;</span>
+<span class="x">                      &lt;/gmd:dateType&gt;</span>
+<span class="x">                    &lt;/gmd:CI_Date&gt;</span>
+<span class="x">                  &lt;/gmd:date&gt;</span>
+<span class="x">                  &lt;gmd:edition&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;1.0&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:edition&gt;</span>
+<span class="x">                &lt;/gmd:CI_Citation&gt;</span>
+<span class="x">              &lt;/gmd:specification&gt;</span>
+<span class="x">              &lt;gmd:explanation&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;No explanation available&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:explanation&gt;</span>
+<span class="x">              &lt;gmd:pass&gt;</span>
+<span class="x">                &lt;gco:Boolean&gt;false&lt;/gco:Boolean&gt;</span>
+<span class="x">              &lt;/gmd:pass&gt;</span>
+<span class="x">            &lt;/gmd:DQ_ConformanceResult&gt;</span>
+<span class="x">          &lt;/gmd:result&gt;</span>
+<span class="x">        &lt;/gmd:DQ_DomainConsistency&gt;</span>
+<span class="x">      &lt;/gmd:report&gt;</span>
+<span class="x">      &lt;gmd:report xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco"&gt;</span>
+<span class="x">        &lt;gmd:DQ_DomainConsistency xsi:type="gmd:DQ_DomainConsistency_Type"&gt;</span>
+<span class="x">          &lt;gmd:result&gt;</span>
+<span class="x">            &lt;gmd:DQ_ConformanceResult xsi:type="gmd:DQ_ConformanceResult_Type"&gt;</span>
+<span class="x">              &lt;gmd:specification&gt;</span>
+<span class="x">                &lt;gmd:CI_Citation&gt;</span>
+<span class="x">                  &lt;gmd:title&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;VERORDNUNG (EG) Nr. 1089/2010 DER KOMMISSION vom 23. November 2010 zur Durchf&uuml;hrung der Richtlinie 2007/2/EG des Europ&auml;ischen Parlaments und des Rates hinsichtlich der Interoperabilit&auml;t von Geodatens&auml;tzen und -diensten&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:title&gt;</span>
+<span class="x">                  &lt;gmd:date&gt;</span>
+<span class="x">                    &lt;gmd:CI_Date&gt;</span>
+<span class="x">                      &lt;gmd:date&gt;</span>
+<span class="x">                        &lt;gco:Date&gt;2010-12-08&lt;/gco:Date&gt;</span>
+<span class="x">                      &lt;/gmd:date&gt;</span>
+<span class="x">                      &lt;gmd:dateType&gt;</span>
+<span class="x">                        &lt;gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication"&gt;publication&lt;/gmd:CI_DateTypeCode&gt;</span>
+<span class="x">                      &lt;/gmd:dateType&gt;</span>
+<span class="x">                    &lt;/gmd:CI_Date&gt;</span>
+<span class="x">                  &lt;/gmd:date&gt;</span>
+<span class="x">                  &lt;gmd:edition&gt;</span>
+<span class="x">                    &lt;gco:CharacterString&gt;1.0&lt;/gco:CharacterString&gt;</span>
+<span class="x">                  &lt;/gmd:edition&gt;</span>
+<span class="x">                &lt;/gmd:CI_Citation&gt;</span>
+<span class="x">              &lt;/gmd:specification&gt;</span>
+<span class="x">              &lt;gmd:explanation&gt;</span>
+<span class="x">                &lt;gco:CharacterString&gt;No explanation available&lt;/gco:CharacterString&gt;</span>
+<span class="x">              &lt;/gmd:explanation&gt;</span>
+<span class="x">              &lt;gmd:pass&gt;</span>
+<span class="x">                &lt;gco:Boolean&gt;false&lt;/gco:Boolean&gt;</span>
+<span class="x">              &lt;/gmd:pass&gt;</span>
+<span class="x">            &lt;/gmd:DQ_ConformanceResult&gt;</span>
+<span class="x">          &lt;/gmd:result&gt;</span>
+<span class="x">        &lt;/gmd:DQ_DomainConsistency&gt;</span>
+<span class="x">      &lt;/gmd:report&gt;</span>
+<span class="x">      &lt;gmd:lineage&gt;</span>
+<span class="x">        &lt;gmd:LI_Lineage&gt;</span>
+<span class="x">          &lt;gmd:statement&gt;</span>
+<span class="x">            &lt;gco:CharacterString&gt;Geodaten basieren auf den generalisierten amtlichen Grenzen der Gebietsk&ouml;rperschaften.&lt;/gco:CharacterString&gt;</span>
+<span class="x">          &lt;/gmd:statement&gt;</span>
+<span class="x">        &lt;/gmd:LI_Lineage&gt;</span>
+<span class="x">      &lt;/gmd:lineage&gt;</span>
+<span class="x">    &lt;/gmd:DQ_DataQuality&gt;</span>
+<span class="x">  &lt;/gmd:dataQualityInfo&gt;</span>
+<span class="x">&lt;/gmd:MD_Metadata&gt;</span>
+</pre>
+           </div>
+          </div>
+         </section>
+         <section id="anpassung-der-tabelle">
+          <h3>
+           Anpassung der Tabelle
+           <a class="headerlink" href="#anpassung-der-tabelle" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           komserv2/xplanung_light/tables.py
+          </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tables</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Column</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django_tables2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">A</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanTable</span><span class="p">(</span><span class="n">tables</span><span class="o">.</span><span class="n">Table</span><span class="p">):</span>
+    <span class="c1">#download = tables.LinkColumn('gedis-document-pdf', text='Download', args=[A('pk')], \</span>
+    <span class="c1">#                     orderable=False, empty_values=())</span>
+    <span class="n">xplan_gml</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">'bplan-export-xplan-raster-6'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'Exportieren'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">'pk'</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">iso_metadata</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">'bplan-export-iso19139'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'Exportieren'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">'pk'</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">edit</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">'bplan-update'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'Bearbeiten'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">'pk'</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">delete</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">'bplan-delete'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'L&ouml;schen'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">'pk'</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    geojson = Column(</span>
+<span class="sd">        accessor=A('geojson'),</span>
+<span class="sd">        orderable=False,</span>
+<span class="sd">        # ...</span>
+<span class="sd">    )</span>
+<span class="sd">    """</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s2">"django_tables2/bootstrap5.html"</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"gemeinde"</span><span class="p">,</span> <span class="s2">"planart"</span><span class="p">,</span> <span class="s2">"xplan_gml"</span><span class="p">,</span> <span class="s2">"iso_metadata"</span><span class="p">,</span> <span class="s2">"edit"</span><span class="p">,</span> <span class="s2">"delete"</span><span class="p">)</span>
+</pre>
+           </div>
+          </div>
+         </section>
+        </section>
+        <section id="ergebnis-des-iso-metadaten-exports">
+         <h2>
+          Ergebnis des ISO-Metadaten Exports
+          <a class="headerlink" href="#ergebnis-des-iso-metadaten-exports" title="Link to this heading">
+           
+          </a>
+         </h2>
+         <p>
+          Die Bebauungsplantabelle hat jetzt eine Spalte mit dem jeweiligen Link zu einem konformen
+          <strong>
+           ISO-19139 dataset Metadatensatz
+          </strong>
+          .
+Den k&ouml;nnen wir sp&auml;ter verwenden um die Serverkomponenten damit anzureichen -
+          <strong>
+           GDI very easy  ;-)
+          </strong>
+          .
          </p>
         </section>
         <section id="todos">
@@ -3691,6 +4452,9 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.
            
           </a>
          </h2>
+         <p>
+          Um die Software zur Produktionsreife zu bringen, m&uuml;ssen noch ein paar Dinge entwickelt werden.
+         </p>
          <ul class="simple">
           <li>
            <p>
