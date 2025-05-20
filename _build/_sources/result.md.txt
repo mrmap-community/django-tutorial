@@ -12,7 +12,8 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.
 :align: center
 ```
 
-# Addon 
+# Metadatenexport
+ 
 Um zeigen zu können, wie schnell man das System anpassen kann, werden wir schnell noch ISO19193-konforme Metadaten generieren.
 
 ## Neuer Endpunkt

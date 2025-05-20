@@ -74,3 +74,10 @@ map_view.md
 
 result.md
 ```
+
+```{toctree}
+:maxdepth: 2
+:caption: Addons 
+
+addons.md
+```

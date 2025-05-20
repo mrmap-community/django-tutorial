@@ -447,8 +447,8 @@
        </a>
       </li>
       <li class="toctree-l1">
-       <a class="reference internal" href="#addon">
-        Addon
+       <a class="reference internal" href="#metadatenexport">
+        Metadatenexport
        </a>
        <ul>
         <li class="toctree-l2">
@@ -482,6 +482,50 @@
        <a class="reference internal" href="#todos">
         TODOs
        </a>
+      </li>
+     </ul>
+     <p class="caption" role="heading">
+      <span class="caption-text">
+       Addons
+      </span>
+     </p>
+     <ul>
+      <li class="toctree-l1">
+       <a class="reference internal" href="#zusatzliche-funktionen">
+        Zus&auml;tzliche Funktionen
+       </a>
+       <ul>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#import-von-xplan-gml-files">
+          Import von XPlan-GML Files
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#integration-mapserver">
+          Integration Mapserver
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#anzeige-der-getcapabilities-urls">
+          Anzeige der GetCapabilities URLs
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#anzeige-des-links-zu-den-publizierenden-organisationen">
+          Anzeige des Links zu den Publizierenden Organisationen
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#sortieren-der-bplane-nach-letzte-anderung-desc">
+          Sortieren der BPl&auml;ne nach letzte &Auml;nderung desc
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#screenshots">
+          Screenshots
+         </a>
+        </li>
+       </ul>
       </li>
      </ul>
     </div>
@@ -3713,10 +3757,10 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.
           <img alt="Liste der Bebauungspl&auml;ne" class="bg-primary align-center" src="_images/bplan_list_1.png" style="width: 800px;"/>
          </a>
         </section>
-        <section id="addon">
+        <section id="metadatenexport">
          <h2>
-          Addon
-          <a class="headerlink" href="#addon" title="Link to this heading">
+          Metadatenexport
+          <a class="headerlink" href="#metadatenexport" title="Link to this heading">
            
           </a>
          </h2>
@@ -4507,6 +4551,1164 @@ Den k&ouml;nnen wir sp&auml;ter verwenden um die Serverkomponenten damit anzurei
            Auf geht&rsquo;s ;-) &hellip;
           </p>
          </div>
+        </section>
+       </div>
+       <div class="toctree-wrapper compound">
+        <span id="document-addons">
+        </span>
+        <section id="zusatzliche-funktionen">
+         <h2>
+          Zus&auml;tzliche Funktionen
+          <a class="headerlink" href="#zusatzliche-funktionen" title="Link to this heading">
+           
+          </a>
+         </h2>
+         <section id="import-von-xplan-gml-files">
+          <h3>
+           Import von XPlan-GML Files
+           <a class="headerlink" href="#import-von-xplan-gml-files" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <section id="formular-und-validator">
+           <h4>
+            Formular und Validator
+            <a class="headerlink" href="#formular-und-validator" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            F&uuml;r den Import von GML-Dateien bauen wir uns eine spezielles Formular. Dazu schreiben wir eine neue Form-Klasse.
+Die Klasse wird nicht von einem Model abgeleitet und hat einen eigenen Validator, der in der validators.py abgelegt ist.
+Der Validator pr&uuml;ft zun&auml;chst, ob es sich um eine unterst&uuml;tzte XPlan-GML-Datei handelt. Ausserdem werden die Plichtfelder gecheckt, sowie
+der AGS. Der muss einer im System vorhandenen Organisation zugeordnet werden k&ouml;nnen.
+           </p>
+           <p>
+            komserv2/xplanung_light/forms.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># ...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">xplan_content_validator</span>
+<span class="c1"># ...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanImportForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">confirm</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">"Vorhandenen Plan &uuml;berschreiben"</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">FileField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"BPlan GML"</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">xplan_content_validator</span><span class="p">])</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    for crispy-forms</span>
+<span class="sd">    """</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">BPlanImportForm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">FormHelper</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">helper</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">Fieldset</span><span class="p">(</span><span class="s2">"Bebauungsplan importieren"</span><span class="p">,</span> <span class="s2">"file"</span><span class="p">,</span> <span class="s2">"confirm"</span><span class="p">),</span> <span class="n">Submit</span><span class="p">(</span><span class="s2">"submit"</span><span class="p">,</span> <span class="s2">"Hochladen"</span><span class="p">))</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            komserv2/xplanung_light/validators.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django</span><span class="w"> </span><span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.gis.geos</span><span class="w"> </span><span class="kn">import</span> <span class="n">GEOSGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdministrativeOrganization</span>
+<span class="c1">#https://www.tommygeorge.com/blog/validating-content-of-django-file-uploads/</span>
+
+
+<span class="sd">"""</span>
+<span class="sd">Funktion zur Validierung der zu importierenden XPlan-GML Datei.</span>
+
+<span class="sd">Validierungen:</span>
+
+<span class="sd">* Datei ist XML</span>
+<span class="sd">* Namespace ist http://www.xplanung.de/xplangml/6/0 und Element ist XPlanAuszug</span>
+<span class="sd">* XPlan-Pflichtfelder</span>
+<span class="sd">* Spezielle Pflichtfelder</span>
+<span class="sd">"""</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">xplan_content_validator</span><span class="p">(</span><span class="n">xplan_file</span><span class="p">):</span>
+    <span class="n">xml_string</span> <span class="o">=</span> <span class="n">xplan_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'UTF-8'</span><span class="p">)</span>
+    <span class="n">validation_error_messages</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ET</span><span class="o">.</span><span class="n">register_namespace</span><span class="p">(</span><span class="s2">"gml"</span><span class="p">,</span> <span class="s2">"http://www.opengis.net/gml/3.2"</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">xml_string</span><span class="p">)</span>
+        <span class="n">root_element_name</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+        <span class="n">supported_element_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"{http://www.xplanung.de/xplangml/6/0}XPlanAuszug"</span><span class="p">,</span> <span class="p">]</span>
+        <span class="k">if</span> <span class="n">root_element_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported_element_names</span><span class="p">:</span>
+            <span class="n">validation_error_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"XML-Dokument mit root-Element *"</span> <span class="o">+</span> <span class="n">root_element_name</span> <span class="o">+</span> <span class="s2">"* wird nicht unterst&uuml;tzt!"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># check Pflichtfelder</span>
+            <span class="c1"># check zus&auml;tzliche Pflichtfelder aus eigenem Standard - nummer, rechtsstand, ...</span>
+            <span class="n">ns</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">'xplan'</span><span class="p">:</span> <span class="s1">'http://www.xplanung.de/xplangml/6/0'</span><span class="p">,</span>
+                <span class="s1">'gml'</span><span class="p">:</span> <span class="s1">'http://www.opengis.net/gml/3.2'</span><span class="p">,</span>
+                <span class="s1">'xlink'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/1999/xlink'</span><span class="p">,</span>
+                <span class="s1">'xsi'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/2001/XMLSchema-instance'</span><span class="p">,</span>
+                <span class="s1">'wfs'</span><span class="p">:</span> <span class="s1">'http://www.opengis.net/wfs'</span><span class="p">,</span>
+                <span class="s1">'xsd'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/2001/XMLSchema'</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="c1"># check Pflichtfelder aus XPlannung Standard - name, geltungsbereich, gemeinde, planart</span>
+            <span class="n">mandatory_fields</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">'name'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'xpath'</span><span class="p">:</span> <span class="s1">'gml:featureMember/xplan:BP_Plan/'</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'text'</span><span class="p">,</span> <span class="s1">'xplan_element'</span><span class="p">:</span> <span class="s1">'xplan:name'</span><span class="p">},</span>
+                <span class="s1">'planart'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'xpath'</span><span class="p">:</span> <span class="s1">'gml:featureMember/xplan:BP_Plan/'</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'text'</span><span class="p">,</span> <span class="s1">'xplan_element'</span><span class="p">:</span> <span class="s1">'xplan:planArt'</span><span class="p">},</span>
+                <span class="s1">'gemeinde_name'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'xpath'</span><span class="p">:</span> <span class="s1">'gml:featureMember/xplan:BP_Plan/xplan:gemeinde/xplan:XP_Gemeinde/'</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'text'</span><span class="p">,</span> <span class="s1">'xplan_element'</span><span class="p">:</span> <span class="s1">'xplan:gemeindeName'</span><span class="p">},</span>
+                <span class="s1">'gemeinde_ags'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'xpath'</span><span class="p">:</span> <span class="s1">'gml:featureMember/xplan:BP_Plan/xplan:gemeinde/xplan:XP_Gemeinde/'</span><span class="p">,</span> <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'text'</span><span class="p">,</span> <span class="s1">'xplan_element'</span><span class="p">:</span> <span class="s1">'xplan:ags'</span><span class="p">},</span>
+            <span class="p">}</span>
+            <span class="c1"># Auslesen der Information zur Gemeinde - hier wird aktuell von nur einem XP_Gemeinde-Objekt ausgegangen!</span>
+            <span class="n">gemeinde_ags</span> <span class="o">=</span> <span class="s2">"000000000000"</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mandatory_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'text'</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span> 
+                        <span class="n">test</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="s1">'xpath'</span><span class="p">]</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="s1">'xplan_element'</span><span class="p">],</span> <span class="n">ns</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+                        <span class="k">if</span> <span class="n">value</span><span class="p">[</span><span class="s1">'xplan_element'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'xplan:ags'</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+                                <span class="n">gemeinde_ags</span> <span class="o">=</span> <span class="n">test</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">"Die gefundene AGS im Dokument hat keine 10 Stellen - es werden nur 10-stellige AGS akzeptiert!"</span><span class="p">)</span>
+                    <span class="k">except</span><span class="p">:</span>
+                       <span class="n">validation_error_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Das Pflichtelement *"</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="s1">'xplan_element'</span><span class="p">]</span> <span class="o">+</span> <span class="s2">"* wurde nicht gefunden!"</span><span class="p">)</span> 
+            
+            <span class="n">geltungsbereich_element</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"gml:featureMember/xplan:BP_Plan/xplan:raeumlicherGeltungsbereich/gml:MultiSurface"</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>        
+            <span class="n">geltungsbereich_text</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">geltungsbereich_element</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>  
+            <span class="c1"># Bauen eines GEOS-Geometrie Objektes aus dem GML</span>
+            <span class="n">geometry</span> <span class="o">=</span> <span class="n">GEOSGeometry</span><span class="o">.</span><span class="n">from_gml</span><span class="p">(</span><span class="n">geltungsbereich_text</span><span class="p">)</span>
+            <span class="c1"># Definition des Koordinatenreferenzsystems</span>
+            <span class="n">geometry</span><span class="o">.</span><span class="n">srid</span> <span class="o">=</span> <span class="mi">25832</span>
+            <span class="c1"># Transformation in WGS84 f&uuml;r die Ablage im System</span>
+            <span class="n">geometry</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+            <span class="c1"># DEBUG Ausgaben</span>
+            <span class="c1">#print("Name des BPlans: " + name)</span>
+            <span class="c1">#print("Gemeinde des BPlans: " + gemeinde_name)</span>
+            <span class="c1">#print("AGS der Gemeinde: " + gemeinde_ags)</span>
+            <span class="c1">#print("Geltungsbereich: " + geltungsbereich_text)</span>
+            <span class="c1">#print("geometry: " + geometry.wkt)</span>
+            <span class="c1">#0723507001</span>
+            <span class="c1">#print(gemeinde_ags[:2] + " - " + gemeinde_ags[2:5] + " - " + gemeinde_ags[5:7] + " - " + gemeinde_ags[7:10])</span>
+            <span class="c1"># check zus&auml;tzliche Pflichtfelder aus eigenem Standard - nummer, rechtsstand, ...</span>
+
+            <span class="c1"># Zuordnung einer Organisation aus den vorhandenen AdministrativeOrganizations &uuml;ber AGS</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">orga</span> <span class="o">=</span> <span class="n">AdministrativeOrganization</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="n">gemeinde_ags</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">ks</span><span class="o">=</span><span class="n">gemeinde_ags</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">vs</span><span class="o">=</span><span class="n">gemeinde_ags</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="n">gs</span><span class="o">=</span><span class="n">gemeinde_ags</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">validation_error_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Es wurde keine Organisation mit dem AGS *"</span> <span class="o">+</span> <span class="n">gemeinde_ags</span> <span class="o">+</span> <span class="s2">"* im System gefunden!"</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">validation_error_messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"XML-Dokument konnte nicht geparsed werden!"</span><span class="p">)</span>
+
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">validation_error_messages</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">validation_error_messages</span><span class="p">))</span>
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="importfunktion">
+           <h4>
+            Importfunktion
+            <a class="headerlink" href="#importfunktion" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            F&uuml;r die Importfunktion wird ein Verzeichnis
+            <strong>
+             helper
+            </strong>
+            angelegt.
+           </p>
+           <div class="highlight-shell notranslate">
+            <div class="highlight">
+             <pre><span></span>mkdir<span class="w"> </span>komserv2/xplanung_light/helper
+</pre>
+            </div>
+           </div>
+           <p>
+            Dort erstellen wir eine Datei xplanung.py
+           </p>
+           <p>
+            komserv2/xplanung_light/helper/xplanung.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django</span><span class="w"> </span><span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.gis.geos</span><span class="w"> </span><span class="kn">import</span> <span class="n">GEOSGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span><span class="p">,</span> <span class="n">AdministrativeOrganization</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">XPlanung</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Klasse mit Hilfsfunktionen f&uuml;r den Import von XPlan-GML Dokumenten. </span>
+
+<span class="sd">    """</span>
+    <span class="n">xml_string</span><span class="p">:</span><span class="nb">str</span>
+    <span class="n">xplan_version</span> <span class="o">=</span> <span class="s2">"6.0"</span>
+    <span class="n">xplan_name</span><span class="p">:</span><span class="nb">str</span>
+    <span class="n">xplan_orga</span><span class="p">:</span><span class="n">AdministrativeOrganization</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_file</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Constructor method</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xml_string</span> <span class="o">=</span> <span class="n">xml_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'UTF-8'</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">import_bplan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># for exporting gml with right namespace</span>
+        <span class="n">ET</span><span class="o">.</span><span class="n">register_namespace</span><span class="p">(</span><span class="s2">"gml"</span><span class="p">,</span> <span class="s2">"http://www.opengis.net/gml/3.2"</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xml_string</span><span class="p">)</span>
+        <span class="c1"># check for version</span>
+        <span class="c1">#&lt;xplan:XPlanAuszug xmlns:xplan="http://www.xplanung.de/xplangml/6/0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wfs="http://www.opengis.net/wfs" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.xplanung.de/xplangml/6/0 http://repository.gdi-de.org/schemas/de.xleitstelle.xplanung/6.0/XPlanung-Operationen.xsd" gml:id="GML_080e46d4-9a9f-4f1d-8f3b-f17f79228417"&gt;</span>
+        <span class="n">ns</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">'xplan'</span><span class="p">:</span> <span class="s1">'http://www.xplanung.de/xplangml/6/0'</span><span class="p">,</span>
+            <span class="s1">'gml'</span><span class="p">:</span> <span class="s1">'http://www.opengis.net/gml/3.2'</span><span class="p">,</span>
+            <span class="s1">'xlink'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/1999/xlink'</span><span class="p">,</span>
+            <span class="s1">'xsi'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/2001/XMLSchema-instance'</span><span class="p">,</span>
+            <span class="s1">'wfs'</span><span class="p">:</span> <span class="s1">'http://www.opengis.net/wfs'</span><span class="p">,</span>
+            <span class="s1">'xsd'</span><span class="p">:</span> <span class="s1">'http://www.w3.org/2001/XMLSchema'</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># Auslesen der Pflichtelemente aus der GML-Datei - Pr&uuml;fung erfolgte bereits im Formular</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"gml:featureMember/xplan:BP_Plan/xplan:name"</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">planart</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"gml:featureMember/xplan:BP_Plan/xplan:planArt"</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">geltungsbereich_element</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"gml:featureMember/xplan:BP_Plan/xplan:raeumlicherGeltungsbereich/gml:MultiSurface"</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>        
+        <span class="n">geltungsbereich_text</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">geltungsbereich_element</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>  
+        <span class="c1"># Bauen eines GEOS-Geometrie Objektes aus dem GML</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">GEOSGeometry</span><span class="o">.</span><span class="n">from_gml</span><span class="p">(</span><span class="n">geltungsbereich_text</span><span class="p">)</span>
+        <span class="c1"># Definition des Koordinatenreferenzsystems</span>
+        <span class="n">geometry</span><span class="o">.</span><span class="n">srid</span> <span class="o">=</span> <span class="mi">25832</span>
+        <span class="c1">#print(geometry.wkt)</span>
+        <span class="c1"># Transformation in WGS84 f&uuml;r die Ablage im System</span>
+        <span class="n">geometry</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span>
+        <span class="c1"># Auslesen der Information zur Gemeinde - hier wird aktuell von nur einem XP_Gemeinde-Objekt ausgegangen!</span>
+        <span class="n">gemeinde_name</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"gml:featureMember/xplan:BP_Plan/xplan:gemeinde/xplan:XP_Gemeinde/xplan:gemeindeName"</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">gemeinde_ags</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"gml:featureMember/xplan:BP_Plan/xplan:gemeinde/xplan:XP_Gemeinde/xplan:ags"</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="c1"># DEBUG Ausgaben</span>
+        <span class="c1">#print("Name des BPlans: " + name)</span>
+        <span class="c1">#print("Gemeinde des BPlans: " + gemeinde_name)</span>
+        <span class="c1">#print("AGS der Gemeinde: " + gemeinde_ags)</span>
+        <span class="c1">#print("Geltungsbereich: " + geltungsbereich_text)</span>
+        <span class="c1">#print("geometry: " + geometry.wkt)</span>
+        <span class="c1">#0723507001</span>
+        <span class="c1">#print(gemeinde_ags[:2] + " - " + gemeinde_ags[2:5] + " - " + gemeinde_ags[5:7] + " - " + gemeinde_ags[7:10])</span>
+        <span class="c1"># Selektion einer Organisation anhand des AGS - Existenz wurde vorher schon durch Validierung gepr&uuml;ft</span>
+        <span class="n">orga</span> <span class="o">=</span> <span class="n">AdministrativeOrganization</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="n">gemeinde_ags</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">ks</span><span class="o">=</span><span class="n">gemeinde_ags</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">vs</span><span class="o">=</span><span class="n">gemeinde_ags</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">],</span> <span class="n">gs</span><span class="o">=</span><span class="n">gemeinde_ags</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+        <span class="c1"># Test, ob ein BPlan mit gleichem name und gemeinde schon existiert</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">existing_bplan</span> <span class="o">=</span> <span class="n">BPlan</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">gemeinde</span><span class="o">=</span><span class="n">orga</span><span class="p">)</span>
+            <span class="c1">#print(existing_bplan)</span>
+            <span class="k">if</span> <span class="n">overwrite</span><span class="p">:</span>
+                <span class="n">existing_bplan</span><span class="o">.</span><span class="n">planart</span> <span class="o">=</span> <span class="n">planart</span>
+                <span class="n">existing_bplan</span><span class="o">.</span><span class="n">geltungsbereich</span> <span class="o">=</span> <span class="n">geometry</span>
+                <span class="n">existing_bplan</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="c1">#raise forms.ValidationError("Plan existiert bereits - bitte &Uuml;berschreiben w&auml;hlen!")</span>
+            <span class="k">return</span> <span class="kc">False</span>
+            <span class="c1">#return False</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c1">#print("BPlan not found - will be created!")</span>
+            <span class="k">pass</span>
+        <span class="c1"># Erstellen eines neuen BPlan-Objektes</span>
+        <span class="n">bplan</span> <span class="o">=</span> <span class="n">BPlan</span><span class="p">()</span>
+        <span class="n">bplan</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">bplan</span><span class="o">.</span><span class="n">planart</span> <span class="o">=</span> <span class="n">planart</span>
+        <span class="n">bplan</span><span class="o">.</span><span class="n">geltungsbereich</span> <span class="o">=</span> <span class="n">geometry</span>
+        <span class="n">bplan</span><span class="o">.</span><span class="n">gemeinde</span> <span class="o">=</span> <span class="n">orga</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">bplan</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">"Fehler beim Abspeichern des BPlan-Objekts"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            Um die Pl&auml;ne historisieren zu k&ouml;nnen, erweitern wir das XPlan Modell um die Historisierungsfunktion des
+simple-history packages
+           </p>
+           <p>
+            komserv2/xplanung_light/models.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># ...</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">XPlan</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="c1">#name [1]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">'Name des Plans'</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">'Offizieller Name des raumbezogenen Plans'</span><span class="p">)</span>
+    <span class="c1">#nummer [0..1]</span>
+    <span class="n">nummer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">"Nummer des Plans."</span><span class="p">)</span>
+    <span class="c1">#internalId [0..1]</span>
+    <span class="c1">#beschreibung [0..1]</span>
+    <span class="c1">#kommentar [0..1]</span>
+    <span class="c1">#technHerstellDatum [0..1], Date</span>
+    <span class="c1">#genehmigungsDatum [0..1], Date</span>
+    <span class="c1">#untergangsDatum [0..1], Date</span>
+    <span class="c1">#aendertPlan [0..*], XP_VerbundenerPlan</span>
+    <span class="c1">#wurdeGeaendertVonPlan [0..*], XP_VerbundenerPlan</span>
+    <span class="c1">#aendertPlanBereich [0..*], Referenz, Testphase</span>
+    <span class="c1">#wurdeGeaendertVonPlanBereich [0..*], Referenz, Testphase</span>
+    <span class="c1">#erstellungsMassstab [0..1], Integer</span>
+    <span class="c1">#bezugshoehe [0..1], Length</span>
+    <span class="c1">#hoehenbezug [0..1]</span>
+    <span class="c1">#technischerPlanersteller, [0..1]</span>
+    <span class="c1">#raeumlicherGeltungsbereich [1], GM_Object</span>
+    <span class="n">geltungsbereich</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GeometryField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">'Grenze des r&auml;umlichen Geltungsbereiches des Plans.'</span><span class="p">)</span>
+    <span class="c1">#verfahrensMerkmale [0..*], XP_VerfahrensMerkmal</span>
+    <span class="c1">#hatGenerAttribut [0..*], XP_GenerAttribut</span>
+    <span class="c1">#externeReferenz, [0..*], XP_SpezExterneReferenz</span>
+    <span class="c1">#texte [0..*], XP_TextAbschnitt</span>
+    <span class="c1">#begruendungsTexte [0..*], XP_BegruendungAbschnitt</span>
+    <span class="c1">#history = HistoricalRecords(related_name="histories", inherit=True)</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">HistoricalRecords</span><span class="p">(</span><span class="n">inherit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># ...</span>
+
+</pre>
+            </div>
+           </div>
+           <p>
+            Da damit eine &Auml;nderung des Datenmodells einhergeht, m&uuml;ssen wir eine Migration durchf&uuml;hren.
+           </p>
+           <div class="highlight-shell notranslate">
+            <div class="highlight">
+             <pre><span></span>python3<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
+python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
+</pre>
+            </div>
+           </div>
+           <p>
+            Es fehlt noch die View - diesmal &uuml;ber eine Function-based view umgesetzt, das html-Template und der zugeh&ouml;rige Eintrag in der urls.py
+           </p>
+           <p>
+            komserv2/xplanung_light/views.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># ...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.helper.xplanung</span><span class="w"> </span><span class="kn">import</span> <span class="n">XPlanung</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">messages</span>
+<span class="c1"># ...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bplan_import</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">"POST"</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">BPlanImportForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+        <span class="c1">#print("bplan_import: form rendered")</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="c1">#print("bplan_import: form valid")</span>
+            <span class="c1"># https://stackoverflow.com/questions/44722885/reading-inmemoryuploadedfile-twice</span>
+            <span class="c1"># pointer muss auf Dateianfang gesetzt sein!</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s1">'file'</span><span class="p">]</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">xplanung</span> <span class="o">=</span> <span class="n">XPlanung</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">[</span><span class="s2">"file"</span><span class="p">])</span>
+            <span class="c1"># import xml file after prevalidation - check is done, if object already exists</span>
+            <span class="n">overwrite</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">'confirm'</span><span class="p">]</span>
+            <span class="c1">#print(overwrite)</span>
+            <span class="n">bplan_created</span> <span class="o">=</span> <span class="n">xplanung</span><span class="o">.</span><span class="n">import_bplan</span><span class="p">(</span><span class="n">overwrite</span><span class="o">=</span><span class="n">overwrite</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">bplan_created</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'Bebauungsplan ist schon vorhanden - bitte selektieren sie explizit </span><span class="se">\"</span><span class="s1">Vorhandenen Plan &uuml;berschreiben</span><span class="se">\"</span><span class="s1">!'</span><span class="p">)</span>
+                <span class="c1"># extent form  with confirmation field!</span>
+                <span class="c1"># https://amgcomputing.blogspot.com/2015/11/django-form-confirm-before-saving.html</span>
+                <span class="c1"># reload form</span>
+                <span class="n">form</span> <span class="o">=</span> <span class="n">BPlanImportForm</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">"xplanung_light/bplan_import.html"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"form"</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">overwrite</span><span class="p">:</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'Bebauungsplan wurde erfolgreich aktualisiert!'</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">'Bebauungsplan wurde erfolgreich importiert!'</span><span class="p">)</span>
+            <span class="c1">#print("bplan_import: import done")</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">'bplan-list'</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"bplan_import: form invalid"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#print("bplan_import: no post")</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">BPlanImportForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">"xplanung_light/bplan_import.html"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"form"</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span>
+<span class="c1"># ...</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            komserv2/xplanung_light/templates/xplanung_light/bplan_import.html
+           </p>
+           <div class="highlight-jinja notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"xplanung_light/layout.html"</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">crispy_forms_tags</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Bebauungsplan importieren</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;form method="post" enctype="multipart/form-data"&gt;</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">crispy</span> <span class="nv">form</span> <span class="cp">%}</span>
+<span class="x">&lt;/form&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre>
+            </div>
+           </div>
+           <p>
+            komserv2/xplanung_light/urls.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># ...</span>
+<span class="n">path</span><span class="p">(</span><span class="s2">"bplan/import/"</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">bplan_import</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"bplan-import"</span><span class="p">),</span>
+<span class="c1"># ...</span>
+</pre>
+            </div>
+           </div>
+          </section>
+         </section>
+         <section id="integration-mapserver">
+          <h3>
+           Integration Mapserver
+           <a class="headerlink" href="#integration-mapserver" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <section id="installation-der-benotigten-libraries">
+           <h4>
+            Installation der ben&ouml;tigten Libraries
+            <a class="headerlink" href="#installation-der-benotigten-libraries" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            Zur Bereitstellung der Planungsdaten &uuml;ber WMS- und WFS-Schnittstellen ben&ouml;tigen wir eine Kartenserverkomponente.
+Aus Gr&uuml;nden der Einfachheit werden wir hier den
+            <strong>
+             UMN-Mapserver
+            </strong>
+            einsetzen. Die Serverkomponente ben&ouml;tigt Konfigurationsdateien,
+die jeweils pro bereitstellender Organisation generiert werden. Die Konfigurationsdatein k&ouml;nnen entweder statisch abgelegt, oder zur Laufzeit
+erstellt und eingelesen werden. Der Einfachheit halber, setzen wir zun&auml;chst den dynamischen Ansatz um.
+           </p>
+           <p>
+            F&uuml;r die Mapserver Integration ben&ouml;tigen wir zwei zus&auml;tzliche python Pakete:
+           </p>
+           <ul class="simple">
+            <li>
+             <p>
+              <a class="reference external" href="https://mappyfile.readthedocs.io/en/latest/">
+               mappyfile
+              </a>
+              : Bibliothek zum Parsen, Validieren und erstellen von Mapserver Konfiguretaionsdateien (mapfiles)
+             </p>
+            </li>
+            <li>
+             <p>
+              <a class="reference external" href="https://pypi.org/project/mapscript/">
+               mapscript
+              </a>
+              : Interface zu den Mapserver Klassen vis SWIG (Python 3.8+)
+             </p>
+            </li>
+           </ul>
+           <p>
+            Installation in venv:
+           </p>
+           <div class="highlight-shell notranslate">
+            <div class="highlight">
+             <pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">mapscript</span><span class="o">==</span><span class="m">7</span>.6.0
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>mapppyfile
+</pre>
+            </div>
+           </div>
+           <p>
+            Aufgrund eines Fehlers wird die C-lib nicht in die venv kopiert - wir m&uuml;ssen das also per Hand nachziehen
+           </p>
+           <p>
+            Als root
+           </p>
+           <div class="highlight-shell notranslate">
+            <div class="highlight">
+             <pre><span></span>apt<span class="w"> </span>install<span class="w"> </span>python3-mapscript
+</pre>
+            </div>
+           </div>
+           <p>
+            Als normaler User
+           </p>
+           <div class="highlight-shell notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="nb">cd</span><span class="w"> </span>komserv2/.venv/lib/python3.9/site-packages/mapscript
+cp<span class="w"> </span>/usr/lib/python3/dist-packages/mapscript/_mapscript.cpython-39-x86_64-linux-gnu.so<span class="w"> </span>_mapscript.so
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="mapfile-generator">
+           <h4>
+            Mapfile Generator
+            <a class="headerlink" href="#mapfile-generator" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <section id="ordnerstruktur">
+            <h5>
+             Ordnerstruktur
+             <a class="headerlink" href="#ordnerstruktur" title="Link to this heading">
+              
+             </a>
+            </h5>
+            <p>
+             Der Mapfile Generator baut sich die initiale Konfigurationsdateien aus Templates auf. Die werden
+in einer eigenen Ordnerstruktur abgelegt.
+            </p>
+            <div class="highlight-shell notranslate">
+             <div class="highlight">
+              <pre><span></span>mkdir<span class="w"> </span>mapserver
+mkdir<span class="w"> </span>mapserver/mapfile_templates
+mkdir<span class="w"> </span>mapserver/templates
+mkdir<span class="w"> </span>mapserver/mapfiles
+</pre>
+             </div>
+            </div>
+           </section>
+           <section id="templates">
+            <h5>
+             Templates
+             <a class="headerlink" href="#templates" title="Link to this heading">
+              
+             </a>
+            </h5>
+            <p>
+             komserv2/xplanung_light/mapserver/mapfile_templates/map_obj.map
+            </p>
+            <div class="highlight-text notranslate">
+             <div class="highlight">
+              <pre><span></span>MAP
+    #NAME       "not needed"
+    STATUS      ON
+    SIZE        450 400
+    EXTENT      7.293677 50.325436 7.303848 50.331546
+    UNITS       METERS
+    IMAGECOLOR  255 255 255
+    #FONTSET     "/data/umn/fonts/fonts.txt"
+    OUTPUTFORMAT
+        NAME            "SHAPEZIP"
+        DRIVER          "OGR/ESRI Shapefile"
+        MIMETYPE        "application/zip"
+        FORMATOPTION    "DSCO:SHAPEFILE=YES"
+        FORMATOPTION    "FORM=zip"
+        FORMATOPTION    "FILENAME=result.zip"
+    END
+    OUTPUTFORMAT
+        NAME            "geojson"
+        DRIVER          "OGR/GEOJSON"
+        MIMETYPE        "application/json; subtype=geojson"
+        FORMATOPTION    "STORAGE=memory"
+        FORMATOPTION    "FORM=simple"
+        FORMATOPTION    "FILENAME=result.geojson"
+        FORMATOPTION    "LCO:COORDINATE_PRECISION=5"
+    END
+    OUTPUTFORMAT
+        NAME            "CSV"
+        DRIVER          "OGR/CSV"
+        MIMETYPE        "text/csv"
+        FORMATOPTION    "LCO:GEOMETRY=AS_WKT"
+        FORMATOPTION    "STORAGE=filesystem"
+        FORMATOPTION    "FORM=simple"
+        FORMATOPTION    "FILENAME=result.csv"
+    END
+    WEB
+        IMAGEPATH   "/tmp/"
+        IMAGEURL    "/tmp/"
+        METADATA
+            "wms_feature_info_mime_type"        "text/html"
+            "ows_name"                          "OWS.0723507001"
+            "ows_title"                         "Kommunale Pl&auml;ne von Aach"
+            "ows_onlineresource"                "http://127.0.0.1:8000/organization/1/ows/"
+            "ows_srs"                           "EPSG:31466 EPSG:31467 EPSG:25832 EPSG:4326 EPSG:3857"
+            "ows_enable_request"                "*"
+            "ows_abstract"                      "Kommunale Pl&auml;ne von Aach ..."
+            "ows_keywordlist"                   ""
+            "ows_addresstype"                   "postal"
+            "ows_contactorganization"           "Gemeinde/Stadt Aach"
+            "ows_contactperson"                 ""
+            "ows_address"                       ""
+            "ows_city"                          ""
+            "ows_stateorprovince"               "DE-RP"
+            "ows_postcode"                      ""
+            "ows_country"                       "DE"
+            "ows_contactvoicetelephone"         ""
+            "ows_contactfacsimiletelephone"     ""
+            "ows_contactelectronicmailaddress"  ""
+            "ows_encoding"                      "UTF-8"
+            "ows_fees"                          "NONE"
+            "wfs_getfeature_formatlist"         "OGRGML,SHAPEZIP,CSV,geojson"
+        END
+    END
+    PROJECTION
+        "init=epsg:4326"
+    END
+    LEGEND
+        STATUS      ON
+        KEYSIZE     12 12
+        IMAGECOLOR  255 255 255
+        LABEL
+            TYPE    TRUETYPE
+            #FONT    "Arial"
+            SIZE    9
+        END
+    END
+END
+</pre>
+             </div>
+            </div>
+            <p>
+             komserv2/xplanung_light/mapserver/mapfile_templates/layer_obj.map
+            </p>
+            <div class="highlight-text notranslate">
+             <div class="highlight">
+              <pre><span></span>    LAYER
+    	STATUS      ON
+        NAME        "BPlan.0723507001.12"
+        METADATA
+            "wms_layer_group"           "/Bebauungspl&auml;ne"
+            "wms_include_items"         "all"
+            "ows_title"                 "testplan ohne rechtsstand"
+            "ows_srs"                   "EPSG:31466 EPSG:31467 EPSG:25832 EPSG:4326 EPSG:3857"
+            "ows_abstract"              "testplan ohne rechtsstand ..."
+            "ows_keywordlist"           ""
+            "ows_extent"                "7.293677 50.325436 7.303848 50.331546"
+            "gml_include_items"         "all"
+            "ows_metadataurl_href"      "https://geodaten.statistik.rlp.de/metadata/bev4_BEV4L1KREIS.xml"
+            "ows_metadataurl_format"    "text/xml"
+            "ows_metadataurl_type"      "TC211"
+        END
+        DUMP TRUE
+        TEMPLATE        "xplanung_light/mapserver/templates/bplan.html"
+        TYPE            POLYGON
+        CONNECTIONTYPE 	OGR
+   	    CONNECTION 	"db.sqlite3"
+   	    DATA 		"xplanung_light_bplan"
+   	    FILTER 		('[id]' = '10')
+   	    PROCESSING 	"CLOSE_CONNECTION=DEFER" # for maximum performance
+        PROJECTION
+            "init=epsg:4326"
+        END
+        CLASSGROUP  "default"
+    END
+</pre>
+             </div>
+            </div>
+            <p>
+             komserv2/xplanung_light/mapserver/mapfile_templates/class_obj.map
+            </p>
+            <div class="highlight-text notranslate">
+             <div class="highlight">
+              <pre><span></span>        CLASS
+			NAME 'Bebauungsplan'
+			GROUP "default"
+ 			#EXPRESSION ([planart] = 1000)
+			STYLE
+				WIDTH 3
+                COLOR 155 155 155
+				OUTLINECOLOR 0 0 255
+			END
+		END
+</pre>
+             </div>
+            </div>
+            <p>
+             Template f&uuml;r die GetFeatureInfo Operation:
+            </p>
+            <p>
+             komserv2/xplanung_light/mapserver/templates/bplan.html
+            </p>
+            <div class="highlight-html notranslate">
+             <div class="highlight">
+              <pre><span></span><span class="cm">&lt;!-- MapServer Template --&gt;</span>
+<span class="cp">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"</span>
+<span class="cp">       "http://www.w3.org/TR/html4/transitional.dtd"&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>BPlan template<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    Name: [name]
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre>
+             </div>
+            </div>
+           </section>
+           <section id="generator-klasse">
+            <h5>
+             Generator Klasse
+             <a class="headerlink" href="#generator-klasse" title="Link to this heading">
+              
+             </a>
+            </h5>
+            <p>
+             Um aus den Templates zur Laufzeit ein Mapfile zu bauen, ben&ouml;tigen wir eine kleine Klasse, die wir im helper-Verzeichnis ablegen.
+            </p>
+            <p>
+             komserv2/xplanung_light/helper/mapfile.py
+            </p>
+            <div class="highlight-python notranslate">
+             <div class="highlight">
+              <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mappyfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdministrativeOrganization</span><span class="p">,</span> <span class="n">BPlan</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.gis.gdal</span><span class="w"> </span><span class="kn">import</span> <span class="n">OGRGeometry</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">uuid</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MapfileGenerator</span><span class="p">():</span>
+
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    https://github.com/geographika/mappyfile</span>
+<span class="sd">    TODOs:</span>
+<span class="sd">    * use database selection from settings.py instead hardcodes db.sqlite3</span>
+<span class="sd">    """</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_mapfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">admin_orga_pk</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">ows_uri</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">metadata_uri</span><span class="p">:</span><span class="nb">str</span><span class="p">):</span>
+        <span class="n">orga</span> <span class="o">=</span> <span class="n">AdministrativeOrganization</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">admin_orga_pk</span><span class="p">)</span>
+        <span class="n">bplaene</span> <span class="o">=</span> <span class="n">BPlan</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">gemeinde</span><span class="o">=</span><span class="n">admin_orga_pk</span><span class="p">)</span>
+        <span class="c1"># open template</span>
+        <span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="nb">map</span> <span class="o">=</span> <span class="n">mappyfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="s2">"../mapserver/mapfile_templates/map_obj.map"</span><span class="p">))</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Anpassen der Metadaten auf Service Level</span>
+<span class="sd">        """</span>
+        <span class="nb">map</span><span class="p">[</span><span class="s2">"web"</span><span class="p">][</span><span class="s2">"metadata"</span><span class="p">][</span><span class="s2">"ows_name"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"OWS."</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">ags</span>
+        <span class="nb">map</span><span class="p">[</span><span class="s2">"web"</span><span class="p">][</span><span class="s2">"metadata"</span><span class="p">][</span><span class="s2">"ows_title"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Kommunale Pl&auml;ne von "</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">name</span>
+        <span class="nb">map</span><span class="p">[</span><span class="s2">"web"</span><span class="p">][</span><span class="s2">"metadata"</span><span class="p">][</span><span class="s2">"ows_onlineresource"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ows_uri</span>
+        <span class="c1"># load layer string from template</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="s2">"../mapserver/mapfile_templates/layer_obj.map"</span><span class="p">))</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">layer_file_string</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">layer_from_template</span> <span class="o">=</span> <span class="n">mappyfile</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">layer_file_string</span><span class="p">)</span>
+        <span class="c1"># load class for layer from template</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_dir</span><span class="p">,</span> <span class="s2">"../mapserver/mapfile_templates/class_obj.map"</span><span class="p">))</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">class_file_string</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">class_from_template</span> <span class="o">=</span> <span class="n">mappyfile</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">class_file_string</span><span class="p">)</span>
+        <span class="n">layer_class</span> <span class="o">=</span> <span class="n">class_from_template</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="nb">map</span><span class="p">[</span><span class="s1">'layers'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">layer_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">bplan</span> <span class="ow">in</span> <span class="n">bplaene</span><span class="p">:</span>
+            <span class="n">layer_count</span> <span class="o">=</span> <span class="n">layer_count</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">layer</span> <span class="o">=</span> <span class="n">layer_from_template</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">bplan</span><span class="o">.</span><span class="n">nummer</span><span class="p">:</span>
+                <span class="n">bplan_nummer</span> <span class="o">=</span> <span class="n">bplan</span><span class="o">.</span><span class="n">nummer</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bplan_nummer</span> <span class="o">=</span> <span class="s2">"lc_"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">layer_count</span><span class="p">)</span>
+                <span class="c1">#dynamic layer names are not so good ;-)</span>
+                <span class="c1">#bplan_nummer = str(uuid.uuid4())</span>
+            <span class="n">layer</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"BPlan."</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">ags</span> <span class="o">+</span> <span class="s2">"."</span> <span class="o">+</span> <span class="n">bplan_nummer</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">layer_from_template</span><span class="p">[</span><span class="s2">"metadata"</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">metadata</span><span class="p">[</span><span class="s2">"ows_title"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Bebauungsplan "</span> <span class="o">+</span> <span class="n">bplan</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">" von "</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">metadata</span><span class="p">[</span><span class="s2">"ows_abstract"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Bebauungsplan "</span> <span class="o">+</span> <span class="n">bplan</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">" von "</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">" ..."</span>
+            <span class="c1">#layer["metadata"]["wms_extent"] = " ".join([str(i) for i in OGRGeometry(str(bplan.geltungsbereich), srs=4326).extent])</span>
+            <span class="n">metadata</span><span class="p">[</span><span class="s2">"ows_extent"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">OGRGeometry</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">bplan</span><span class="o">.</span><span class="n">geltungsbereich</span><span class="p">),</span> <span class="n">srs</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">extent</span><span class="p">])</span>
+            <span class="n">metadata</span><span class="p">[</span><span class="s2">"ows_metadataurl_href"</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata_uri</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"/1000000/"</span><span class="p">,</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">bplan</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/"</span><span class="p">)</span>
+            <span class="n">layer</span><span class="p">[</span><span class="s2">"metadata"</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span>
+            <span class="n">layer</span><span class="p">[</span><span class="s2">"filter"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"( '[id]' = '"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">bplan</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"' )"</span>
+            <span class="n">layer</span><span class="p">[</span><span class="s2">"classes"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1">#print(str(layer_count) + ": " + bplan.geltungsbereich)</span>
+            <span class="c1"># filter planart cause the others are not defined </span>
+            <span class="c1">#if bplan.geltungsbereich and bplan.planart=="1000":</span>
+            <span class="k">if</span> <span class="n">bplan</span><span class="o">.</span><span class="n">geltungsbereich</span><span class="p">:</span>
+                <span class="n">layer</span><span class="p">[</span><span class="s2">"classes"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer_class</span><span class="p">)</span>
+                <span class="nb">map</span><span class="p">[</span><span class="s2">"layers"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mappyfile</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+</pre>
+             </div>
+            </div>
+           </section>
+          </section>
+          <section id="ows-proxy">
+           <h4>
+            OWS Proxy
+            <a class="headerlink" href="#ows-proxy" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            Mit Django bauen wir einen einfachen OWS-Proxy f&uuml;r den Mapserver in Form eines Function-based Views.
+Die Generierung mit mappyfile dauert extrem lange, so dass es besser ist, den mapfile automatisch zu Cachen.
+Hierzu verwenden wir djangos internes Cache Tool.
+           </p>
+           <section id="view">
+            <h5>
+             View
+             <a class="headerlink" href="#view" title="Link to this heading">
+              
+             </a>
+            </h5>
+            <p>
+             komserv2/xplanung_light/views.py
+            </p>
+            <div class="highlight-python notranslate">
+             <div class="highlight">
+              <pre><span></span><span class="c1"># ...</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mapscript</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_qs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.helper.mapfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">MapfileGenerator</span>
+<span class="c1"># for caching mapfiles ;-)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.core.cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
+<span class="c1"># ...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ows</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
+    <span class="n">orga</span> <span class="o">=</span> <span class="n">AdministrativeOrganization</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="n">req</span> <span class="o">=</span>  <span class="n">mapscript</span><span class="o">.</span><span class="n">OWSRequest</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    req.setParameter( 'SERVICE', 'WMS' )</span>
+<span class="sd">    req.setParameter( 'VERSION', '1.1.0' )</span>
+<span class="sd">    req.setParameter( 'REQUEST', 'GetCapabilities' )</span>
+<span class="sd">    """</span>
+    <span class="c1">#print(request.META['QUERY_STRING'])</span>
+    <span class="n">qs</span> <span class="o">=</span> <span class="n">parse_qs</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">META</span><span class="p">[</span><span class="s1">'QUERY_STRING'</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">qs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1">#print(k)</span>
+        <span class="c1">#print(v)</span>
+        <span class="n">req</span><span class="o">.</span><span class="n">setParameter</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s1">','</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="c1">#print(req)</span>
+
+    <span class="c1"># test wfs http://127.0.0.1:8000/organization/1/ows/?REQUEST=GetFeature&amp;VERSION=1.1.0&amp;SERVICE=wfs&amp;typename=BPlan.0723507001.12</span>
+    <span class="c1">## first variant - fast - 0.07 seconds</span>
+    
+    <span class="c1">#map = mapscript.mapObj( '/home/armin/devel/django/komserv2/test.map' )</span>
+    
+    <span class="c1">## alternative approach - read from file into string and then from string with special path - also fast - 0.1 seconds</span>
+    
+    <span class="c1">#with open('/home/armin/devel/django/komserv2/test.map') as file:</span>
+        <span class="c1">#map_file_string = file.read()</span>
+    <span class="c1">#map = mapscript.msLoadMapFromString(map_file_string, '/home/armin/devel/django/komserv2/')</span>
+    
+    <span class="c1">## next alternative - slowest - 1.1 seconds</span>
+    <span class="c1">#mapfile = mappyfile.open("/home/armin/devel/django/komserv2/test.map")</span>
+    <span class="c1">#map = mapscript.msLoadMapFromString(mappyfile.dumps(mapfile), '/home/armin/devel/django/komserv2/')</span>
+
+    <span class="c1">## next alternative - load from dynamically generated mapfile ;-)</span>
+    <span class="n">mapfile_generator</span> <span class="o">=</span> <span class="n">MapfileGenerator</span><span class="p">()</span>
+    <span class="n">metadata_uri</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">build_absolute_uri</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">'bplan-export-iso19139'</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"pk"</span><span class="p">:</span> <span class="mi">1000000</span><span class="p">}))</span>
+    <span class="c1"># test to read mapfile from cache</span>
+    <span class="k">if</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mapfile_"</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">ags</span><span class="p">):</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">touch</span><span class="p">(</span><span class="s2">"mapfile_"</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">ags</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">mapfile</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mapfile_"</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">ags</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mapfile</span> <span class="o">=</span> <span class="n">mapfile_generator</span><span class="o">.</span><span class="n">generate_mapfile</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">build_absolute_uri</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">'ows'</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"pk"</span><span class="p">:</span> <span class="n">pk</span><span class="p">})),</span> <span class="n">metadata_uri</span><span class="p">)</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">"mapfile_"</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">ags</span><span class="p">,</span> <span class="n">mapfile</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="c1">#print(mapfile)</span>
+    <span class="nb">map</span> <span class="o">=</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">msLoadMapFromString</span><span class="p">(</span><span class="n">mapfile</span><span class="p">,</span> <span class="s1">'/home/armin/devel/django/komserv2/'</span><span class="p">)</span>  
+    <span class="n">mapscript</span><span class="o">.</span><span class="n">msIO_installStdoutToBuffer</span><span class="p">()</span>
+    <span class="n">dispatch_status</span> <span class="o">=</span> <span class="nb">map</span><span class="o">.</span><span class="n">OWSDispatch</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dispatch_status</span> <span class="o">!=</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">MS_SUCCESS</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">"An error occurred"</span><span class="p">)</span>
+    
+    <span class="n">content_type</span> <span class="o">=</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">msIO_stripStdoutBufferContentType</span><span class="p">()</span>
+    <span class="n">mapscript</span><span class="o">.</span><span class="n">msIO_stripStdoutBufferContentHeaders</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">msIO_getStdoutBufferBytes</span><span class="p">()</span>
+    <span class="c1"># [('Content-Type', 'application/vnd.ogc.wms_xml; charset=UTF-8'), ('Content-Length', '11385')]</span>
+    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="n">content_type</span><span class="p">),</span>
+                        <span class="p">(</span><span class="s1">'Content-Length'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)))]</span>
+
+    <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">response_headers</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+    <span class="n">http_response</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="n">http_response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">content_type</span>
+    <span class="n">http_response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">'Content-Length'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">http_response</span>
+</pre>
+             </div>
+            </div>
+           </section>
+          </section>
+          <section id="uri">
+           <h4>
+            URI
+            <a class="headerlink" href="#uri" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            Die URL zum OWS-Proxy muss noch in die urls.py - hier wird ein Dienst pro Organisation erstellt.
+           </p>
+           <p>
+            komserv2/xplanung_light/urls.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># ows proxy for organization</span>
+    <span class="c1"># ....</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">"organization/&lt;int:pk&gt;/ows/"</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">ows</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"ows"</span><span class="p">),</span>
+    <span class="c1"># ...</span>
+</pre>
+            </div>
+           </div>
+          </section>
+         </section>
+         <section id="anzeige-der-getcapabilities-urls">
+          <h3>
+           Anzeige der GetCapabilities URLs
+           <a class="headerlink" href="#anzeige-der-getcapabilities-urls" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <section id="uris">
+           <h4>
+            URIs
+            <a class="headerlink" href="#uris" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            Anlegen der Endpunkte f&uuml;r die OGC-Dienste und einer &Uuml;bersichtsseite um die Endpunkte anzuzeigen.
+           </p>
+           <p>
+            komserv2/xplanung_light/urls.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># ...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">AdministrativeOrganizationPublishingListView</span>
+<span class="c1"># ...</span>
+    <span class="c1"># urls for administrativeorganization</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">"organization/publishing/"</span><span class="p">,</span> <span class="n">AdministrativeOrganizationPublishingListView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s2">"organization-publishing-list"</span><span class="p">),</span>
+    <span class="c1"># ows proxy for organization</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">"organization/&lt;int:pk&gt;/ows/"</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">ows</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"ows"</span><span class="p">),</span>
+    <span class="c1"># ...</span>
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="template">
+           <h4>
+            Template
+            <a class="headerlink" href="#template" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            komserv2/xplanung_light/templates/xplanung_light/orga_publishing_list.html
+           </p>
+           <div class="highlight-jinja notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"xplanung_light/layout.html"</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">leaflet_tags</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Liste der Publizierenden Organisationen</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">render_table</span> <span class="nv">from</span> <span class="nv">django_tables2</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;!-- add boostrap form css --&gt;</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">django_bootstrap5</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">render_table</span> <span class="nv">table</span> <span class="cp">%}</span>
+<span class="x">&lt;p&gt;Anzahl: </span><span class="cp">{{</span> <span class="nv">object_list.count</span> <span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="tabelle">
+           <h4>
+            Tabelle
+            <a class="headerlink" href="#tabelle" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            komserv2/xplanung_light/tables.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># ...</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tables</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span><span class="p">,</span> <span class="n">AdministrativeOrganization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="kn">import</span> <span class="n">Column</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django_tables2.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">A</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.utils.html</span><span class="w"> </span><span class="kn">import</span> <span class="n">format_html</span>
+<span class="c1"># ...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AdministrativeOrganizationPublishingTable</span><span class="p">(</span><span class="n">tables</span><span class="o">.</span><span class="n">Table</span><span class="p">):</span>
+    <span class="n">num_bplan</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s2">"Zahl BPl&auml;ne"</span><span class="p">)</span>
+    <span class="n">wms</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">'ows'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'WMS'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">'pk'</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">wfs</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">'ows'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">'WFS'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">'pk'</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+
+    <span class="c1"># https://stackoverflow.com/questions/36698387/how-to-add-get-parameters-to-django-tables2-linkcolumn</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render_wms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">'ows'</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">'pk'</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">id</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">format_html</span><span class="p">(</span><span class="s1">'&lt;a href="</span><span class="si">{}</span><span class="s1">?REQUEST=GetCapabilities&amp;SERVICE=WMS"&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s1">'WMS GetCapabilities'</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">render_wfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">'ows'</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">'pk'</span><span class="p">:</span> <span class="n">record</span><span class="o">.</span><span class="n">id</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">format_html</span><span class="p">(</span><span class="s1">'&lt;a href="</span><span class="si">{}</span><span class="s1">?REQUEST=GetCapabilities&amp;SERVICE=WFS"&gt;</span><span class="si">{}</span><span class="s1">&lt;/a&gt;'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s1">'WFS GetCapabilities'</span><span class="p">)</span>
+
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">AdministrativeOrganization</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s2">"django_tables2/bootstrap5.html"</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">"ags"</span><span class="p">,</span> <span class="s2">"num_bplan"</span><span class="p">,</span> <span class="s2">"wms"</span><span class="p">,</span> <span class="s2">"wfs"</span><span class="p">,</span> <span class="p">)</span>
+</pre>
+            </div>
+           </div>
+          </section>
+          <section id="id1">
+           <h4>
+            View
+            <a class="headerlink" href="#id1" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <p>
+            komserv2/xplanung_light/views.py
+           </p>
+           <div class="highlight-python notranslate">
+            <div class="highlight">
+             <pre><span></span><span class="c1"># ...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.tables</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanTable</span><span class="p">,</span> <span class="n">AdministrativeOrganizationPublishingTable</span>
+<span class="c1"># ...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AdministrativeOrganizationPublishingListView</span><span class="p">(</span><span class="n">SingleTableView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">AdministrativeOrganization</span>
+    <span class="n">table_class</span> <span class="o">=</span> <span class="n">AdministrativeOrganizationPublishingTable</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">'xplanung_light/orga_publishing_list.html'</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">"orga-publishing-list"</span><span class="p">)</span> 
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">qs</span> <span class="o">=</span> <span class="n">AdministrativeOrganization</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">bplan__isnull</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">num_bplan</span><span class="o">=</span><span class="n">Count</span><span class="p">(</span><span class="s1">'bplan'</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">qs</span>
+</pre>
+            </div>
+           </div>
+          </section>
+         </section>
+         <section id="anzeige-des-links-zu-den-publizierenden-organisationen">
+          <h3>
+           Anzeige des Links zu den Publizierenden Organisationen
+           <a class="headerlink" href="#anzeige-des-links-zu-den-publizierenden-organisationen" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           komserv2/xplanung_light/templates/xplanung_light/layout.html
+          </p>
+          <div class="highlight-jinja notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="x">&lt;!-- ... --&gt;</span>
+<span class="x">            &lt;ul class="navbar-nav me-auto mb-2 mb-lg-0"&gt;</span>
+<span class="x">              </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_authenticated</span> <span class="cp">%}</span>
+<span class="x">              &lt;li class="nav-item"&gt;</span>
+<span class="x">                &lt;a class="nav-link" aria-current="page" href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'bplan-list'</span> <span class="cp">%}</span><span class="x">"&gt;Bebauungspl&auml;ne&lt;/a&gt;</span>
+<span class="x">              &lt;/li&gt;</span>
+<span class="x">              &lt;li class="nav-item"&gt;</span>
+<span class="x">                &lt;a class="nav-link" aria-current="page" href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'organization-publishing-list'</span> <span class="cp">%}</span><span class="x">"&gt;Publizierende Organisationen&lt;/a&gt;</span>
+<span class="x">              &lt;/li&gt;</span>
+<span class="x">              </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">              &lt;li class="nav-item"&gt;</span>
+<span class="x">                &lt;a class="nav-link" aria-current="page" href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'about'</span> <span class="cp">%}</span><span class="x">"&gt;&Uuml;ber&lt;/a&gt;</span>
+<span class="x">              &lt;/li&gt;</span>
+<span class="x">              </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">user.is_authenticated</span> <span class="cp">%}</span>
+<span class="x">              &lt;li class="nav-item"&gt;</span>
+<span class="x">                  &lt;a class="nav-link" aria-current="page" href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'admin:index'</span> <span class="cp">%}</span><span class="x">"&gt;Admin Backend&lt;/a&gt;</span>
+<span class="x">              &lt;/li&gt;</span>
+<span class="x">              </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">            &lt;/ul&gt;</span>
+<span class="x">&lt;!-- ... --&gt;            </span>
+</pre>
+           </div>
+          </div>
+         </section>
+         <section id="sortieren-der-bplane-nach-letzte-anderung-desc">
+          <h3>
+           Sortieren der BPl&auml;ne nach letzte &Auml;nderung desc
+           <a class="headerlink" href="#sortieren-der-bplane-nach-letzte-anderung-desc" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           Hier wird das HistoryModel zur Hilfe genommen - thx @jonas ;-)
+          </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1"># ...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Count</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Subquery</span><span class="p">,</span> <span class="n">OuterRef</span>
+<span class="c1"># ...</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">FilterView</span><span class="p">,</span> <span class="n">SingleTableView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+    <span class="n">table_class</span> <span class="o">=</span> <span class="n">BPlanTable</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s1">'xplanung_light/bplan_list.html'</span>
+    <span class="n">success_url</span> <span class="o">=</span> <span class="n">reverse_lazy</span><span class="p">(</span><span class="s2">"bplan-list"</span><span class="p">)</span> 
+    <span class="n">filterset_class</span> <span class="o">=</span> <span class="n">BPlanFilter</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s2">"markers"</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+            <span class="n">serialize</span><span class="p">(</span><span class="s2">"geojson"</span><span class="p">,</span> <span class="n">context</span><span class="p">[</span><span class="s1">'table'</span><span class="p">]</span><span class="o">.</span><span class="n">page</span><span class="o">.</span><span class="n">object_list</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">geometry_field</span><span class="o">=</span><span class="s1">'geltungsbereich'</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">context</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">qs</span> <span class="o">=</span> <span class="n">BPlan</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">'gemeinde'</span><span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">last_changed</span><span class="o">=</span><span class="n">Subquery</span><span class="p">(</span>
+            <span class="n">BPlan</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">OuterRef</span><span class="p">(</span><span class="s2">"pk"</span><span class="p">))</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-history_date'</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">'history_date'</span><span class="p">)[:</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">))</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">'-last_changed'</span><span class="p">)</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_set</span> <span class="o">=</span> <span class="n">BPlanFilter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">qs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_set</span><span class="o">.</span><span class="n">qs</span>
+<span class="c1"># ...</span>
+</pre>
+           </div>
+          </div>
+         </section>
+         <section id="screenshots">
+          <h3>
+           Screenshots
+           <a class="headerlink" href="#screenshots" title="Link to this heading">
+            
+           </a>
+          </h3>
+          <section id="liste-der-bebauungsplane">
+           <h4>
+            <a class="reference external" href="http://127.0.0.1:8000/bplan/">
+             Liste der Bebauungspl&auml;ne
+            </a>
+            <a class="headerlink" href="#liste-der-bebauungsplane" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <a class="bg-primary reference internal image-reference" href="_images/bplan_list_2.png">
+            <img alt="Liste der Bebauungspl&auml;ne" class="bg-primary align-center" src="_images/bplan_list_2.png" style="width: 800px;"/>
+           </a>
+          </section>
+          <section id="liste-der-publizierenden-orgas">
+           <h4>
+            <a class="reference external" href="http://127.0.0.1:8000/organization/publishing/">
+             Liste der publizierenden Orgas
+            </a>
+            <a class="headerlink" href="#liste-der-publizierenden-orgas" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <a class="bg-primary reference internal image-reference" href="_images/wms_list.png">
+            <img alt="Liste der publizierenden Orgas" class="bg-primary align-center" src="_images/wms_list.png" style="width: 800px;"/>
+           </a>
+          </section>
+          <section id="wms-getcapabilities">
+           <h4>
+            <a class="reference external" href="http://127.0.0.1:8000/organization/1/ows/?REQUEST=GetCapabilities&amp;amp;SERVICE=WMS">
+             WMS GetCapabilities
+            </a>
+            <a class="headerlink" href="#wms-getcapabilities" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <a class="bg-primary reference internal image-reference" href="_images/wms_capabilities.png">
+            <img alt="WMS GetCapabilities" class="bg-primary align-center" src="_images/wms_capabilities.png" style="width: 800px;"/>
+           </a>
+          </section>
+          <section id="einbindung-in-client">
+           <h4>
+            Einbindung in Client
+            <a class="headerlink" href="#einbindung-in-client" title="Link to this heading">
+             
+            </a>
+           </h4>
+           <a class="bg-primary reference internal image-reference" href="_images/wms_mapbender.png">
+            <img alt="WMS in Javascript-Client" class="bg-primary align-center" src="_images/wms_mapbender.png" style="width: 800px;"/>
+           </a>
+          </section>
+         </section>
         </section>
        </div>
       </section>
