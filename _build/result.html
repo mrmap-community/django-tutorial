@@ -1,22 +1,22 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="de" data-content_root="./">
+<html class="writer-html5" lang="de" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zusammenfassung &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5a7626eb"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=79cc9f76"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
@@ -134,18 +134,17 @@
            <div itemprop="articleBody">
              
   <section id="zusammenfassung">
-<h1>Zusammenfassung<a class="headerlink" href="#zusammenfassung" title="Link to this heading"></a></h1>
+<h1>Zusammenfassung<a class="headerlink" href="#zusammenfassung" title="Permalink to this heading"></a></h1>
 <p>Wir haben innerhalb kürzester Zeit eine sehr einfache Verwaltungssoftware für Bebauungspläne erstellt.
 Die exportierbaren GML-Dateien lassen sich mit Hilfe des Validators prüfen und sind valide.
 Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.</p>
-<a class="bg-primary reference internal image-reference" href="_images/bplan_list_1.png"><img alt="Liste der Bebauungspläne" class="bg-primary align-center" src="_images/bplan_list_1.png" style="width: 800px;" />
-</a>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_list_1.png"><img alt="Liste der Bebauungspläne" class="bg-primary align-center" src="_images/bplan_list_1.png" style="width: 800px;" /></a>
 </section>
 <section id="metadatenexport">
-<h1>Metadatenexport<a class="headerlink" href="#metadatenexport" title="Link to this heading"></a></h1>
+<h1>Metadatenexport<a class="headerlink" href="#metadatenexport" title="Permalink to this heading"></a></h1>
 <p>Um zeigen zu können, wie schnell man das System anpassen kann, werden wir schnell noch ISO19193-konforme Metadaten generieren.</p>
 <section id="neuer-endpunkt">
-<h2>Neuer Endpunkt<a class="headerlink" href="#neuer-endpunkt" title="Link to this heading"></a></h2>
+<h2>Neuer Endpunkt<a class="headerlink" href="#neuer-endpunkt" title="Permalink to this heading"></a></h2>
 <p>Den View für XPlan GML können wir einfach beibehalten und später etwas anpassen ;-)</p>
 <p>komserv2/xplanung_light/urls.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
@@ -157,7 +156,7 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.</
 </div>
 </section>
 <section id="anpassung-des-views">
-<h2>Anpassung des Views<a class="headerlink" href="#anpassung-des-views" title="Link to this heading"></a></h2>
+<h2>Anpassung des Views<a class="headerlink" href="#anpassung-des-views" title="Permalink to this heading"></a></h2>
 <p>Wir brauchen die Geometrien jetzt auch im EPSG:4326 - dazu schreiben wir auch eine kleine Funktion zum Qualifizieren des GMLs aus der DB.</p>
 <p>komserv2/xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
@@ -240,7 +239,7 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.</
 </div>
 </section>
 <section id="erstellen-des-xml-templates">
-<h2>Erstellen des XML-Templates<a class="headerlink" href="#erstellen-des-xml-templates" title="Link to this heading"></a></h2>
+<h2>Erstellen des XML-Templates<a class="headerlink" href="#erstellen-des-xml-templates" title="Permalink to this heading"></a></h2>
 <p>komserv2/xplanung_light/templates/xplanung_light/bplan_template_iso19139.xml</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="x">&lt;gmd:MD_Metadata xmlns:gmd=&quot;http://www.isotc211.org/2005/gmd&quot; xmlns:gmx=&quot;http://www.isotc211.org/2005/gmx&quot; xmlns:gco=&quot;http://www.isotc211.org/2005/gco&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:gml=&quot;http://www.opengis.net/gml&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xsi:schemaLocation=&quot;http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd&quot;&gt;</span>
@@ -768,7 +767,7 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.</
 </div>
 </section>
 <section id="anpassung-der-tabelle">
-<h2>Anpassung der Tabelle<a class="headerlink" href="#anpassung-der-tabelle" title="Link to this heading"></a></h2>
+<h2>Anpassung der Tabelle<a class="headerlink" href="#anpassung-der-tabelle" title="Permalink to this heading"></a></h2>
 <p>komserv2/xplanung_light/tables.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tables</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span>
@@ -803,12 +802,12 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.</
 </section>
 </section>
 <section id="ergebnis-des-iso-metadaten-exports">
-<h1>Ergebnis des ISO-Metadaten Exports<a class="headerlink" href="#ergebnis-des-iso-metadaten-exports" title="Link to this heading"></a></h1>
+<h1>Ergebnis des ISO-Metadaten Exports<a class="headerlink" href="#ergebnis-des-iso-metadaten-exports" title="Permalink to this heading"></a></h1>
 <p>Die Bebauungsplantabelle hat jetzt eine Spalte mit dem jeweiligen Link zu einem konformen <strong>ISO-19139 dataset Metadatensatz</strong>.
 Den können wir später verwenden um die Serverkomponenten damit anzureichen - <strong>GDI very easy  ;-)</strong> .</p>
 </section>
 <section id="todos">
-<h1>TODOs<a class="headerlink" href="#todos" title="Link to this heading"></a></h1>
+<h1>TODOs<a class="headerlink" href="#todos" title="Permalink to this heading"></a></h1>
 <p>Um die Software zur Produktionsreife zu bringen, müssen noch ein paar Dinge entwickelt werden.</p>
 <ul class="simple">
 <li><p>Ersetzen des Felds <strong>geltungsbereich</strong> durch eine m2m Relation zu einem neuen Modell <strong>bereich</strong></p></li>

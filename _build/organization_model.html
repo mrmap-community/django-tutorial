@@ -1,22 +1,22 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="de" data-content_root="./">
+<html class="writer-html5" lang="de" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Organisationsmodell &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5a7626eb"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=79cc9f76"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
@@ -133,9 +133,9 @@
            <div itemprop="articleBody">
              
   <section id="organisationsmodell">
-<h1>Organisationsmodell<a class="headerlink" href="#organisationsmodell" title="Link to this heading"></a></h1>
+<h1>Organisationsmodell<a class="headerlink" href="#organisationsmodell" title="Permalink to this heading"></a></h1>
 <section id="einleitung">
-<h2>Einleitung<a class="headerlink" href="#einleitung" title="Link to this heading"></a></h2>
+<h2>Einleitung<a class="headerlink" href="#einleitung" title="Permalink to this heading"></a></h2>
 <p>Das initiale Modell für verantwortliche Organisationen soll die Gebietskörperschaften des Landes abbilden. Diese sind grundsätzlich hierarchisch geliedert und verfügen über bundesweit einheitlich definierte Schlüssel (AGS). Verantwortlich für die Bereitstellung der Struktur der Gebietskörperschaften ist in Rheinland-Pfalz das Statistische Landesamt. Dieses publiziert das s.g. <a class="reference external" href="https://www.statistik.rlp.de/fileadmin/statistik.rlp.de/Dokumente_und_Bilder/3_Produkte/3_Verzeichnisse/A1132_202201_ur_G.pdf"><strong>Amtliche Verzeichnis der Gemeinden und Gemeindeteile</strong></a> in Form einer PDF-Datei. Leider lässt sich das nicht ohne weiteres automatisiert verarbeiten, es gibt jedoch auch ein <a class="reference external" href="https://www.statistik.rlp.de/fileadmin/statistik.rlp.de/Dokumente_und_Bilder/3_Produkte/3_Verzeichnisse/Kommunalverwaltungen_01.01_2025.xlsm"><strong>Verzeichnis der Kommunalverwaltungen, Oberbürgermeister, Landräte und Bürgermeister</strong></a>. Dieses wird als xslm Mappe publiziert und enthält über verschiedene Tabellen verteilt die für unseren Zweck benötigte information.</p>
 <p>Wir benötigen sowohl Kontaktinformationen, als auch Adressen und Zuständigkeitsbereiche. Die Zuständigkeitsbereiche werden vom Landesamt für Vermessung und Geobasisinformation über eine OGC-WFS Schnittstelle publiziert und enthalten auch die jeweiligen einheitlichen AGS. Damit lassen sie sich automatisiert mit den Organisationen verknüpfen.
 Um das Modell nicht unnötig kompliziwert zu machen, speichern wir alle Informationen zunächst in einem einfachen flachen Modell.
@@ -143,7 +143,7 @@ In Django werden Modelle pro App in einer Datei models.py abgelegt. In unserem F
 Die Integration von django-simple-history ist sehr einfach und erfolgt durch das Attribut <strong>history = HistoricalRecords()</strong>.</p>
 </section>
 <section id="modelldefinition">
-<h2>Modelldefinition<a class="headerlink" href="#modelldefinition" title="Link to this heading"></a></h2>
+<h2>Modelldefinition<a class="headerlink" href="#modelldefinition" title="Permalink to this heading"></a></h2>
 <p>xplanung_light/models.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
@@ -216,7 +216,7 @@ python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
 </div>
 </section>
 <section id="datenimport">
-<h2>Datenimport<a class="headerlink" href="#datenimport" title="Link to this heading"></a></h2>
+<h2>Datenimport<a class="headerlink" href="#datenimport" title="Permalink to this heading"></a></h2>
 <p>Da die benötigten Daten für die Organisationen als xslm und in Form von Webservices bereitstehen, benötigen wir zwei weitere python-Bibliotheken.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>openpyxl
 python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>requests

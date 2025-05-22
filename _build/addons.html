@@ -1,22 +1,22 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="de" data-content_root="./">
+<html class="writer-html5" lang="de" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zusätzliche Funktionen &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5a7626eb"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=79cc9f76"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
@@ -101,6 +101,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Zusätzliche Funktionen</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#import-von-xplan-gml-files">Import von XPlan-GML Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vorbereitung">Vorbereitung</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#formular-und-validator">Formular und Validator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#importfunktion">Importfunktion</a></li>
 </ul>
@@ -114,6 +115,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#ows-proxy">OWS Proxy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#erweiterung-des-organisationsmodells-um-attribut-ags">Erweiterung des Organisationsmodells um Attribut <strong>ags</strong></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#view">View</a></li>
 </ul>
 </li>
@@ -165,11 +167,33 @@
            <div itemprop="articleBody">
              
   <section id="zusatzliche-funktionen">
-<h1>Zusätzliche Funktionen<a class="headerlink" href="#zusatzliche-funktionen" title="Link to this heading"></a></h1>
+<h1>Zusätzliche Funktionen<a class="headerlink" href="#zusatzliche-funktionen" title="Permalink to this heading"></a></h1>
 <section id="import-von-xplan-gml-files">
-<h2>Import von XPlan-GML Files<a class="headerlink" href="#import-von-xplan-gml-files" title="Link to this heading"></a></h2>
+<h2>Import von XPlan-GML Files<a class="headerlink" href="#import-von-xplan-gml-files" title="Permalink to this heading"></a></h2>
+<section id="vorbereitung">
+<h3>Vorbereitung<a class="headerlink" href="#vorbereitung" title="Permalink to this heading"></a></h3>
+<p>Wir nutzen ab hier crispy-forms um die Formulare zu optimieren.</p>
+<p>Installation der packages</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>crispy-forms
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>crispy-bootstrap5
+</pre></div>
+</div>
+<p>Aktivierung in komserv/settings.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># ...</span>
+    <span class="s1">&#39;crispy_forms&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;crispy_bootstrap5&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="c1">#...</span>
+<span class="n">CRISPY_ALLOWED_TEMPLATE_PACKS</span> <span class="o">=</span> <span class="s2">&quot;bootstrap5&quot;</span>
+<span class="n">CRISPY_TEMPLATE_PACK</span> <span class="o">=</span> <span class="s2">&quot;bootstrap5&quot;</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+</section>
 <section id="formular-und-validator">
-<h3>Formular und Validator<a class="headerlink" href="#formular-und-validator" title="Link to this heading"></a></h3>
+<h3>Formular und Validator<a class="headerlink" href="#formular-und-validator" title="Permalink to this heading"></a></h3>
 <p>Für den Import von GML-Dateien bauen wir uns eine spezielles Formular. Dazu schreiben wir eine neue Form-Klasse.
 Die Klasse wird nicht von einem Model abgeleitet und hat einen eigenen Validator, der in der validators.py abgelegt ist.
 Der Validator prüft zunächst, ob es sich um eine unterstützte XPlan-GML-Datei handelt. Ausserdem werden die Plichtfelder gecheckt, sowie
@@ -177,6 +201,9 @@ der AGS. Der muss einer im System vorhandenen Organisation zugeordnet werden kö
 <p>komserv2/xplanung_light/forms.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.validators</span><span class="w"> </span><span class="kn">import</span> <span class="n">xplan_content_validator</span>
+<span class="c1"># ...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">crispy_forms.helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">FormHelper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">crispy_forms.layout</span><span class="w"> </span><span class="kn">import</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">Fieldset</span><span class="p">,</span> <span class="n">Submit</span>
 <span class="c1"># ...</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">BPlanImportForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
@@ -284,7 +311,7 @@ der AGS. Der muss einer im System vorhandenen Organisation zugeordnet werden kö
 </div>
 </section>
 <section id="importfunktion">
-<h3>Importfunktion<a class="headerlink" href="#importfunktion" title="Link to this heading"></a></h3>
+<h3>Importfunktion<a class="headerlink" href="#importfunktion" title="Permalink to this heading"></a></h3>
 <p>Für die Importfunktion wird ein Verzeichnis <strong>helper</strong> angelegt.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>komserv2/xplanung_light/helper
 </pre></div>
@@ -428,6 +455,7 @@ python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.helper.xplanung</span><span class="w"> </span><span class="kn">import</span> <span class="n">XPlanung</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">messages</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegistrationForm</span><span class="p">,</span> <span class="n">BPlanImportForm</span>
 <span class="c1"># ...</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">bplan_import</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
@@ -489,9 +517,9 @@ python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
 </section>
 </section>
 <section id="integration-mapserver">
-<h2>Integration Mapserver<a class="headerlink" href="#integration-mapserver" title="Link to this heading"></a></h2>
+<h2>Integration Mapserver<a class="headerlink" href="#integration-mapserver" title="Permalink to this heading"></a></h2>
 <section id="installation-der-benotigten-libraries">
-<h3>Installation der benötigten Libraries<a class="headerlink" href="#installation-der-benotigten-libraries" title="Link to this heading"></a></h3>
+<h3>Installation der benötigten Libraries<a class="headerlink" href="#installation-der-benotigten-libraries" title="Permalink to this heading"></a></h3>
 <p>Zur Bereitstellung der Planungsdaten über WMS- und WFS-Schnittstellen benötigen wir eine Kartenserverkomponente.
 Aus Gründen der Einfachheit werden wir hier den <strong>UMN-Mapserver</strong> einsetzen. Die Serverkomponente benötigt Konfigurationsdateien,
 die jeweils pro bereitstellender Organisation generiert werden. Die Konfigurationsdatein können entweder statisch abgelegt, oder zur Laufzeit
@@ -518,9 +546,9 @@ cp<span class="w"> </span>/usr/lib/python3/dist-packages/mapscript/_mapscript.cp
 </div>
 </section>
 <section id="mapfile-generator">
-<h3>Mapfile Generator<a class="headerlink" href="#mapfile-generator" title="Link to this heading"></a></h3>
+<h3>Mapfile Generator<a class="headerlink" href="#mapfile-generator" title="Permalink to this heading"></a></h3>
 <section id="ordnerstruktur">
-<h4>Ordnerstruktur<a class="headerlink" href="#ordnerstruktur" title="Link to this heading"></a></h4>
+<h4>Ordnerstruktur<a class="headerlink" href="#ordnerstruktur" title="Permalink to this heading"></a></h4>
 <p>Der Mapfile Generator baut sich die initiale Konfigurationsdateien aus Templates auf. Die werden
 in einer eigenen Ordnerstruktur abgelegt.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>mapserver
@@ -531,7 +559,7 @@ mkdir<span class="w"> </span>mapserver/mapfiles
 </div>
 </section>
 <section id="templates">
-<h4>Templates<a class="headerlink" href="#templates" title="Link to this heading"></a></h4>
+<h4>Templates<a class="headerlink" href="#templates" title="Permalink to this heading"></a></h4>
 <p>komserv2/xplanung_light/mapserver/mapfile_templates/map_obj.map</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MAP
     #NAME       &quot;not needed&quot;
@@ -673,7 +701,7 @@ END
 </div>
 </section>
 <section id="generator-klasse">
-<h4>Generator Klasse<a class="headerlink" href="#generator-klasse" title="Link to this heading"></a></h4>
+<h4>Generator Klasse<a class="headerlink" href="#generator-klasse" title="Permalink to this heading"></a></h4>
 <p>Um aus den Templates zur Laufzeit ein Mapfile zu bauen, benötigen wir eine kleine Klasse, die wir im helper-Verzeichnis ablegen.</p>
 <p>komserv2/xplanung_light/helper/mapfile.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mappyfile</span>
@@ -742,19 +770,37 @@ END
 </section>
 </section>
 <section id="ows-proxy">
-<h3>OWS Proxy<a class="headerlink" href="#ows-proxy" title="Link to this heading"></a></h3>
+<h3>OWS Proxy<a class="headerlink" href="#ows-proxy" title="Permalink to this heading"></a></h3>
 <p>Mit Django bauen wir einen einfachen OWS-Proxy für den Mapserver in Form eines Function-based Views.
 Die Generierung mit mappyfile dauert extrem lange, so dass es besser ist, den mapfile automatisch zu Cachen.
 Hierzu verwenden wir djangos internes Cache Tool.</p>
+<section id="erweiterung-des-organisationsmodells-um-attribut-ags">
+<h4>Erweiterung des Organisationsmodells um Attribut <strong>ags</strong><a class="headerlink" href="#erweiterung-des-organisationsmodells-um-attribut-ags" title="Permalink to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
+<span class="c1"># administrative organizations</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AdministrativeOrganization</span><span class="p">(</span><span class="n">GenericMetadata</span><span class="p">):</span>
+
+    <span class="c1"># ...</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ls</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ks</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">vs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gs</span>
+<span class="c1"># ...</span>
+
+</pre></div>
+</div>
+</section>
 <section id="view">
-<h4>View<a class="headerlink" href="#view" title="Link to this heading"></a></h4>
+<h4>View<a class="headerlink" href="#view" title="Permalink to this heading"></a></h4>
 <p>komserv2/xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HttpResponse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">mapscript</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_qs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.helper.mapfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">MapfileGenerator</span>
 <span class="c1"># for caching mapfiles ;-)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.core.cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.conf</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
 <span class="c1"># ...</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">ows</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">:</span><span class="nb">int</span><span class="p">):</span>
@@ -799,12 +845,15 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
         <span class="n">mapfile</span> <span class="o">=</span> <span class="n">mapfile_generator</span><span class="o">.</span><span class="n">generate_mapfile</span><span class="p">(</span><span class="n">pk</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">build_absolute_uri</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;ows&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pk&quot;</span><span class="p">:</span> <span class="n">pk</span><span class="p">})),</span> <span class="n">metadata_uri</span><span class="p">)</span>
         <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;mapfile_&quot;</span> <span class="o">+</span> <span class="n">orga</span><span class="o">.</span><span class="n">ags</span><span class="p">,</span> <span class="n">mapfile</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     <span class="c1">#print(mapfile)</span>
-    <span class="nb">map</span> <span class="o">=</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">msLoadMapFromString</span><span class="p">(</span><span class="n">mapfile</span><span class="p">,</span> <span class="s1">&#39;/home/armin/devel/django/komserv2/&#39;</span><span class="p">)</span>  
+    <span class="nb">map</span> <span class="o">=</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">msLoadMapFromString</span><span class="p">(</span><span class="n">mapfile</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">BASE_DIR</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span> 
     <span class="n">mapscript</span><span class="o">.</span><span class="n">msIO_installStdoutToBuffer</span><span class="p">()</span>
     <span class="n">dispatch_status</span> <span class="o">=</span> <span class="nb">map</span><span class="o">.</span><span class="n">OWSDispatch</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">dispatch_status</span> <span class="o">!=</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">MS_SUCCESS</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;An error occurred&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dispatch_status</span> <span class="o">==</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">MS_DONE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;No valid OWS Request!&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dispatch_status</span> <span class="o">==</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">MS_FAILURE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;No valid OWS Request not successfully processed!&quot;</span><span class="p">)</span>
     
     <span class="n">content_type</span> <span class="o">=</span> <span class="n">mapscript</span><span class="o">.</span><span class="n">msIO_stripStdoutBufferContentType</span><span class="p">()</span>
     <span class="n">mapscript</span><span class="o">.</span><span class="n">msIO_stripStdoutBufferContentHeaders</span><span class="p">()</span>
@@ -824,7 +873,7 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
 </section>
 </section>
 <section id="uri">
-<h3>URI<a class="headerlink" href="#uri" title="Link to this heading"></a></h3>
+<h3>URI<a class="headerlink" href="#uri" title="Permalink to this heading"></a></h3>
 <p>Die URL zum OWS-Proxy muss noch in die urls.py - hier wird ein Dienst pro Organisation erstellt.</p>
 <p>komserv2/xplanung_light/urls.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ows proxy for organization</span>
@@ -836,9 +885,9 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
 </section>
 </section>
 <section id="anzeige-der-getcapabilities-urls">
-<h2>Anzeige der GetCapabilities URLs<a class="headerlink" href="#anzeige-der-getcapabilities-urls" title="Link to this heading"></a></h2>
+<h2>Anzeige der GetCapabilities URLs<a class="headerlink" href="#anzeige-der-getcapabilities-urls" title="Permalink to this heading"></a></h2>
 <section id="uris">
-<h3>URIs<a class="headerlink" href="#uris" title="Link to this heading"></a></h3>
+<h3>URIs<a class="headerlink" href="#uris" title="Permalink to this heading"></a></h3>
 <p>Anlegen der Endpunkte für die OGC-Dienste und einer Übersichtsseite um die Endpunkte anzuzeigen.</p>
 <p>komserv2/xplanung_light/urls.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
@@ -853,7 +902,7 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
 </div>
 </section>
 <section id="template">
-<h3>Template<a class="headerlink" href="#template" title="Link to this heading"></a></h3>
+<h3>Template<a class="headerlink" href="#template" title="Permalink to this heading"></a></h3>
 <p>komserv2/xplanung_light/templates/xplanung_light/orga_publishing_list.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">load</span> <span class="nv">leaflet_tags</span> <span class="cp">%}</span>
@@ -871,7 +920,7 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
 </div>
 </section>
 <section id="tabelle">
-<h3>Tabelle<a class="headerlink" href="#tabelle" title="Link to this heading"></a></h3>
+<h3>Tabelle<a class="headerlink" href="#tabelle" title="Permalink to this heading"></a></h3>
 <p>komserv2/xplanung_light/tables.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">django_tables2</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tables</span>
@@ -907,10 +956,11 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
 </div>
 </section>
 <section id="id1">
-<h3>View<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<h3>View<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <p>komserv2/xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.tables</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanTable</span><span class="p">,</span> <span class="n">AdministrativeOrganizationPublishingTable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Count</span>
 <span class="c1"># ...</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">AdministrativeOrganizationPublishingListView</span><span class="p">(</span><span class="n">SingleTableView</span><span class="p">):</span>
@@ -927,7 +977,7 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
 </section>
 </section>
 <section id="anzeige-des-links-zu-den-publizierenden-organisationen">
-<h2>Anzeige des Links zu den Publizierenden Organisationen<a class="headerlink" href="#anzeige-des-links-zu-den-publizierenden-organisationen" title="Link to this heading"></a></h2>
+<h2>Anzeige des Links zu den Publizierenden Organisationen<a class="headerlink" href="#anzeige-des-links-zu-den-publizierenden-organisationen" title="Permalink to this heading"></a></h2>
 <p>komserv2/xplanung_light/templates/xplanung_light/layout.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!-- ... --&gt;</span>
 <span class="x">            &lt;ul class=&quot;navbar-nav me-auto mb-2 mb-lg-0&quot;&gt;</span>
@@ -953,7 +1003,7 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
 </div>
 </section>
 <section id="sortieren-der-bplane-nach-letzte-anderung-desc">
-<h2>Sortieren der BPläne nach letzte Änderung desc<a class="headerlink" href="#sortieren-der-bplane-nach-letzte-anderung-desc" title="Link to this heading"></a></h2>
+<h2>Sortieren der BPläne nach letzte Änderung desc<a class="headerlink" href="#sortieren-der-bplane-nach-letzte-anderung-desc" title="Permalink to this heading"></a></h2>
 <p>Hier wird das HistoryModel zur Hilfe genommen - thx &#64;jonas ;-)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Count</span>
@@ -984,26 +1034,22 @@ Hierzu verwenden wir djangos internes Cache Tool.</p>
 </div>
 </section>
 <section id="screenshots">
-<h2>Screenshots<a class="headerlink" href="#screenshots" title="Link to this heading"></a></h2>
+<h2>Screenshots<a class="headerlink" href="#screenshots" title="Permalink to this heading"></a></h2>
 <section id="liste-der-bebauungsplane">
-<h3><a class="reference external" href="http://127.0.0.1:8000/bplan/">Liste der Bebauungspläne</a><a class="headerlink" href="#liste-der-bebauungsplane" title="Link to this heading"></a></h3>
-<a class="bg-primary reference internal image-reference" href="_images/bplan_list_2.png"><img alt="Liste der Bebauungspläne" class="bg-primary align-center" src="_images/bplan_list_2.png" style="width: 800px;" />
-</a>
+<h3><a class="reference external" href="http://127.0.0.1:8000/bplan/">Liste der Bebauungspläne</a><a class="headerlink" href="#liste-der-bebauungsplane" title="Permalink to this heading"></a></h3>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_list_2.png"><img alt="Liste der Bebauungspläne" class="bg-primary align-center" src="_images/bplan_list_2.png" style="width: 800px;" /></a>
 </section>
 <section id="liste-der-publizierenden-orgas">
-<h3><a class="reference external" href="http://127.0.0.1:8000/organization/publishing/">Liste der publizierenden Orgas</a><a class="headerlink" href="#liste-der-publizierenden-orgas" title="Link to this heading"></a></h3>
-<a class="bg-primary reference internal image-reference" href="_images/wms_list.png"><img alt="Liste der publizierenden Orgas" class="bg-primary align-center" src="_images/wms_list.png" style="width: 800px;" />
-</a>
+<h3><a class="reference external" href="http://127.0.0.1:8000/organization/publishing/">Liste der publizierenden Orgas</a><a class="headerlink" href="#liste-der-publizierenden-orgas" title="Permalink to this heading"></a></h3>
+<a class="bg-primary reference internal image-reference" href="_images/wms_list.png"><img alt="Liste der publizierenden Orgas" class="bg-primary align-center" src="_images/wms_list.png" style="width: 800px;" /></a>
 </section>
 <section id="wms-getcapabilities">
-<h3><a class="reference external" href="http://127.0.0.1:8000/organization/1/ows/?REQUEST=GetCapabilities&amp;amp;SERVICE=WMS">WMS GetCapabilities</a><a class="headerlink" href="#wms-getcapabilities" title="Link to this heading"></a></h3>
-<a class="bg-primary reference internal image-reference" href="_images/wms_capabilities.png"><img alt="WMS GetCapabilities" class="bg-primary align-center" src="_images/wms_capabilities.png" style="width: 800px;" />
-</a>
+<h3><a class="reference external" href="http://127.0.0.1:8000/organization/1/ows/?REQUEST=GetCapabilities&amp;amp;SERVICE=WMS">WMS GetCapabilities</a><a class="headerlink" href="#wms-getcapabilities" title="Permalink to this heading"></a></h3>
+<a class="bg-primary reference internal image-reference" href="_images/wms_capabilities.png"><img alt="WMS GetCapabilities" class="bg-primary align-center" src="_images/wms_capabilities.png" style="width: 800px;" /></a>
 </section>
 <section id="einbindung-in-client">
-<h3>Einbindung in Client<a class="headerlink" href="#einbindung-in-client" title="Link to this heading"></a></h3>
-<a class="bg-primary reference internal image-reference" href="_images/wms_mapbender.png"><img alt="WMS in Javascript-Client" class="bg-primary align-center" src="_images/wms_mapbender.png" style="width: 800px;" />
-</a>
+<h3>Einbindung in Client<a class="headerlink" href="#einbindung-in-client" title="Permalink to this heading"></a></h3>
+<a class="bg-primary reference internal image-reference" href="_images/wms_mapbender.png"><img alt="WMS in Javascript-Client" class="bg-primary align-center" src="_images/wms_mapbender.png" style="width: 800px;" /></a>
 </section>
 </section>
 </section>

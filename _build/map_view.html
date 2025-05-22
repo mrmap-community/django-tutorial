@@ -1,22 +1,22 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="de" data-content_root="./">
+<html class="writer-html5" lang="de" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kartenansicht &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5a7626eb"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=79cc9f76"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
@@ -134,7 +134,7 @@
            <div itemprop="articleBody">
              
   <section id="kartenansicht">
-<h1>Kartenansicht<a class="headerlink" href="#kartenansicht" title="Link to this heading"></a></h1>
+<h1>Kartenansicht<a class="headerlink" href="#kartenansicht" title="Permalink to this heading"></a></h1>
 <p>Bei der Liste der Bebauungspläne macht es Sinn sich die Lage der Pläne auch auf einer dynamischen Übersichtskarte anzeigen zu lassen. Hierzu kann django-leaflet genutzt werden.
 Im ersten Schritt muss man aber die Geodaten mit in den View übernehmen. Theoretisch wäre es ausreichend das Geometrie Feld <strong>geltungsbereich</strong> zu nutzen. Wenn man aber etwas Interaktion haben will, z.B. eine Selektierbarkeit einzelner Objekte im Viewer, dann ist es besser, ein gesamtes Geometrieobjekt mit ausgewählten Attributen zu verwenden.
 Hierzu überschreiben wir den die get_context_data Funktion der ListView um eine Serialisierung der Geoemtrien der aktuellen Seite und nennen sie <strong>markers</strong></p>
@@ -299,9 +299,9 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </div>
 </section>
 <section id="suche">
-<h1>Suche<a class="headerlink" href="#suche" title="Link to this heading"></a></h1>
+<h1>Suche<a class="headerlink" href="#suche" title="Permalink to this heading"></a></h1>
 <section id="installation-django-filter">
-<h2>Installation django-filter<a class="headerlink" href="#installation-django-filter" title="Link to this heading"></a></h2>
+<h2>Installation django-filter<a class="headerlink" href="#installation-django-filter" title="Permalink to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="nb">filter</span>
 </pre></div>
 </div>
@@ -317,7 +317,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </div>
 </section>
 <section id="erstellen-einer-filter-klasse">
-<h2>Erstellen einer Filter Klasse<a class="headerlink" href="#erstellen-einer-filter-klasse" title="Link to this heading"></a></h2>
+<h2>Erstellen einer Filter Klasse<a class="headerlink" href="#erstellen-einer-filter-klasse" title="Permalink to this heading"></a></h2>
 <p>komserv/xplanung_light/filter.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django_filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterSet</span><span class="p">,</span> <span class="n">CharFilter</span><span class="p">,</span> <span class="n">ModelChoiceFilter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span><span class="p">,</span> <span class="n">AdministrativeOrganization</span>
@@ -351,7 +351,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </div>
 </section>
 <section id="anpassen-des-views">
-<h2>Anpassen des Views<a class="headerlink" href="#anpassen-des-views" title="Link to this heading"></a></h2>
+<h2>Anpassen des Views<a class="headerlink" href="#anpassen-des-views" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Import der Klassen</p></li>
 <li><p>Erben von FilterView</p></li>
@@ -388,7 +388,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </div>
 </section>
 <section id="anzeige-der-filterfunktionen-im-template">
-<h2>Anzeige der Filterfunktionen im template<a class="headerlink" href="#anzeige-der-filterfunktionen-im-template" title="Link to this heading"></a></h2>
+<h2>Anzeige der Filterfunktionen im template<a class="headerlink" href="#anzeige-der-filterfunktionen-im-template" title="Permalink to this heading"></a></h2>
 <p>templates/xplanung_light/bplan_list.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!-- ... --&gt;</span>
 <span class="cp">{%</span> <span class="k">leaflet_map</span> <span class="s2">&quot;bplan_list_map&quot;</span> <span class="nv">callback</span><span class="o">=</span><span class="s2">&quot;window.map_init_basic&quot;</span> <span class="cp">%}</span>

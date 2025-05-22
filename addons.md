@@ -2,6 +2,30 @@
 
 ## Import von XPlan-GML Files
 
+### Vorbereitung
+
+Wir nutzen ab hier crispy-forms um die Formulare zu optimieren. 
+
+Installation der packages
+```shell
+python3 -m pip install crispy-forms
+python3 -m pip install crispy-bootstrap5
+```
+
+Aktivierung in komserv/settings.py
+```python
+#...
+INSTALLED_APPS = [
+    # ...
+    'crispy_forms',
+    'crispy_bootstrap5',
+]
+#...
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+#...
+```
+
 ### Formular und Validator
 
 Für den Import von GML-Dateien bauen wir uns eine spezielles Formular. Dazu schreiben wir eine neue Form-Klasse.
@@ -14,6 +38,9 @@ komserv2/xplanung_light/forms.py
 ```python
 # ...
 from xplanung_light.validators import xplan_content_validator
+# ...
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Submit
 # ...
 
 class BPlanImportForm(forms.Form):
@@ -275,6 +302,7 @@ komserv2/xplanung_light/views.py
 # ...
 from xplanung_light.helper.xplanung import XPlanung
 from django.contrib import messages
+from xplanung_light.forms import RegistrationForm, BPlanImportForm
 # ...
 def bplan_import(request):
     if request.method == "POST":
@@ -603,16 +631,34 @@ Mit Django bauen wir einen einfachen OWS-Proxy für den Mapserver in Form eines 
 Die Generierung mit mappyfile dauert extrem lange, so dass es besser ist, den mapfile automatisch zu Cachen.
 Hierzu verwenden wir djangos internes Cache Tool.
 
+#### Erweiterung des Organisationsmodells um Attribut **ags**
+
+```python
+# ...
+# administrative organizations
+class AdministrativeOrganization(GenericMetadata):
+
+    # ...
+    
+    @property
+    def ags(self):
+        return self.ls + self.ks + self.vs + self.gs
+# ...
+
+```
+
 #### View
 
 komserv2/xplanung_light/views.py
 ```python
 # ...
+from django.http import HttpResponse
 import mapscript
 from urllib.parse import parse_qs
 from xplanung_light.helper.mapfile import MapfileGenerator
 # for caching mapfiles ;-)
 from django.core.cache import cache
+from django.conf import settings
 # ...
 
 def ows(request, pk:int):
@@ -657,12 +703,15 @@ def ows(request, pk:int):
         mapfile = mapfile_generator.generate_mapfile(pk, request.build_absolute_uri(reverse('ows', kwargs={"pk": pk})), metadata_uri)
         cache.set("mapfile_" + orga.ags, mapfile, 10)
     #print(mapfile)
-    map = mapscript.msLoadMapFromString(mapfile, '/home/armin/devel/django/komserv2/')  
+    map = mapscript.msLoadMapFromString(mapfile, str(settings.BASE_DIR) + "/") 
     mapscript.msIO_installStdoutToBuffer()
     dispatch_status = map.OWSDispatch(req)
 
     if dispatch_status != mapscript.MS_SUCCESS:
-        return HttpResponse("An error occurred")
+        if dispatch_status == mapscript.MS_DONE:
+            return HttpResponse("No valid OWS Request!")
+        if dispatch_status == mapscript.MS_FAILURE:
+            return HttpResponse("No valid OWS Request not successfully processed!")
     
     content_type = mapscript.msIO_stripStdoutBufferContentType()
     mapscript.msIO_stripStdoutBufferContentHeaders()
@@ -769,6 +818,7 @@ komserv2/xplanung_light/views.py
 ```python
 # ...
 from xplanung_light.tables import BPlanTable, AdministrativeOrganizationPublishingTable
+from django.db.models import Count
 # ...
 
 class AdministrativeOrganizationPublishingListView(SingleTableView):

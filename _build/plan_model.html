@@ -1,22 +1,22 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="de" data-content_root="./">
+<html class="writer-html5" lang="de" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Planmodell &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5a7626eb"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=79cc9f76"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
@@ -145,14 +145,14 @@
            <div itemprop="articleBody">
              
   <section id="planmodell">
-<h1>Planmodell<a class="headerlink" href="#planmodell" title="Link to this heading"></a></h1>
+<h1>Planmodell<a class="headerlink" href="#planmodell" title="Permalink to this heading"></a></h1>
 <section id="einleitung">
-<h2>Einleitung<a class="headerlink" href="#einleitung" title="Link to this heading"></a></h2>
+<h2>Einleitung<a class="headerlink" href="#einleitung" title="Permalink to this heading"></a></h2>
 <p>Das Modell zur Verwaltung von kommunalen Plänen orientiert sich am deutschen Standard <a class="reference external" href="https://xleitstelle.de/xplanung"><strong>XPlanung</strong></a> und am <a class="reference external" href="https://www.geoportal.rlp.de/metadata/Leitfaden_kommunale_Plaene_GDI_RP.pdf"><strong>Leitfaden für die Bereitstellung kommunaler Pläne und Satzungen im Rahmen der Geodateninfrastruktur Rheinland-Pfalz (GDI-RP)</strong></a>. Dieser Leitfaden wurde ab 2008 auf Basis von XPlanung 2.0 entwickelt. Neben den Vorgaben des Datenaustauschstandards wurden dabei auch Anforderungen aus der kommunalen Praxis übernommen und eine standardisierte Bereitstellung vorgegeben. Der Standard wurde mit den kommunalen Spitzenverbänden des Landes abgestimmt und wird vom Lenkungsausschuss für Geodateninfrastruktur Rheinland-Pfalz herausgegeben.</p>
 <p>In einer ersten Version des Modells wird nur eine minimale Zahl von Attributen definiert. Für den proof of concept (POC)  ist das zunächst ausreichend. Das abstrakte Grundmodell heißt XPlan und vererbt seine Attribute auf das konkrete Modell BPlan. Der Geltungsbereich ist als Geometry-Field modelliert und kann damit auch Multipolygone aufnehmen.</p>
 </section>
 <section id="modelldefinition">
-<h2>Modelldefinition<a class="headerlink" href="#modelldefinition" title="Link to this heading"></a></h2>
+<h2>Modelldefinition<a class="headerlink" href="#modelldefinition" title="Permalink to this heading"></a></h2>
 <p>xplanung_light/models.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">https://xleitstelle.de/releases/objektartenkatalog_6_0</span>
@@ -256,9 +256,9 @@
 </div>
 </section>
 <section id="verwaltungsviews">
-<h2>Verwaltungsviews<a class="headerlink" href="#verwaltungsviews" title="Link to this heading"></a></h2>
+<h2>Verwaltungsviews<a class="headerlink" href="#verwaltungsviews" title="Permalink to this heading"></a></h2>
 <section id="vorarbeiten">
-<h3>Vorarbeiten<a class="headerlink" href="#vorarbeiten" title="Link to this heading"></a></h3>
+<h3>Vorarbeiten<a class="headerlink" href="#vorarbeiten" title="Permalink to this heading"></a></h3>
 <p>Um eine komfortable Verwaltung von Geometrien zu ermöglichen, bietet es sich an das Django Leaflet package (<a class="reference external" href="https://django-leaflet.readthedocs.io/en/latest/"><strong>django-leaflet</strong></a>) einzusetzen. Standardmäßig ist bei django noch eine älterer OpenLayers-Client (2.13) integriert.</p>
 <p>Installation des packages</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-leaflet
@@ -281,7 +281,7 @@
 </div>
 </section>
 <section id="urls">
-<h3>Urls<a class="headerlink" href="#urls" title="Link to this heading"></a></h3>
+<h3>Urls<a class="headerlink" href="#urls" title="Permalink to this heading"></a></h3>
 <p>xplanung_light/urls.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanCreateView</span><span class="p">,</span> <span class="n">BPlanUpdateView</span><span class="p">,</span> <span class="n">BPlanDeleteView</span><span class="p">,</span> <span class="n">BPlanListView</span>
@@ -296,7 +296,7 @@
 </div>
 </section>
 <section id="views">
-<h3>Views<a class="headerlink" href="#views" title="Link to this heading"></a></h3>
+<h3>Views<a class="headerlink" href="#views" title="Permalink to this heading"></a></h3>
 <p>Nutzung von einfachen ClassBasedGenericViews</p>
 <p>xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
@@ -331,10 +331,10 @@
 </div>
 </section>
 <section id="templates">
-<h3>Templates<a class="headerlink" href="#templates" title="Link to this heading"></a></h3>
+<h3>Templates<a class="headerlink" href="#templates" title="Permalink to this heading"></a></h3>
 <p>xplanung_light/templates/xplanung_light/*</p>
 <section id="list">
-<h4>List<a class="headerlink" href="#list" title="Link to this heading"></a></h4>
+<h4>List<a class="headerlink" href="#list" title="Permalink to this heading"></a></h4>
 <p>xplanung_light/templates/xplanung_light/bplan_list.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
@@ -347,7 +347,7 @@
 </div>
 </section>
 <section id="confirm-delete">
-<h4>Confirm Delete<a class="headerlink" href="#confirm-delete" title="Link to this heading"></a></h4>
+<h4>Confirm Delete<a class="headerlink" href="#confirm-delete" title="Permalink to this heading"></a></h4>
 <p>xplanung_light/templates/xplanung_light/bplan_confirm_delete.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;form method=&quot;post&quot;&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
 <span class="x">    &lt;p&gt;Wollen sie das Objekt wirklich löschen? &quot;</span><span class="cp">{{</span> <span class="nv">object</span> <span class="cp">}}</span><span class="x">&quot;?&lt;/p&gt;</span>
@@ -358,7 +358,7 @@
 </div>
 </section>
 <section id="create">
-<h4>Create<a class="headerlink" href="#create" title="Link to this heading"></a></h4>
+<h4>Create<a class="headerlink" href="#create" title="Permalink to this heading"></a></h4>
 <p>xplanung_light/templates/xplanung_light/bplan_form.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
@@ -374,7 +374,7 @@
 </div>
 </section>
 <section id="update">
-<h4>Update<a class="headerlink" href="#update" title="Link to this heading"></a></h4>
+<h4>Update<a class="headerlink" href="#update" title="Permalink to this heading"></a></h4>
 <p>xplanung_light/templates/xplanung_light/bplan_form_update.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
 <span class="x">    Bebauungsplan editieren</span>

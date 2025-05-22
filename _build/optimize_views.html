@@ -1,22 +1,22 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="de" data-content_root="./">
+<html class="writer-html5" lang="de" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Geometrie Editor &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5a7626eb"></script>
-      <script src="_static/doctools.js?v=9a2dae69"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=79cc9f76"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
     <link rel="search" title="Suche" href="search.html" />
@@ -131,9 +131,9 @@
            <div itemprop="articleBody">
              
   <section id="geometrie-editor">
-<h1>Geometrie Editor<a class="headerlink" href="#geometrie-editor" title="Link to this heading"></a></h1>
+<h1>Geometrie Editor<a class="headerlink" href="#geometrie-editor" title="Permalink to this heading"></a></h1>
 <section id="aktivieren-des-leaflet-clients-in-den-views">
-<h2>Aktivieren des Leaflet-Clients in den Views<a class="headerlink" href="#aktivieren-des-leaflet-clients-in-den-views" title="Link to this heading"></a></h2>
+<h2>Aktivieren des Leaflet-Clients in den Views<a class="headerlink" href="#aktivieren-des-leaflet-clients-in-den-views" title="Permalink to this heading"></a></h2>
 <p>Leaflet Integration im Basis-Template xplanung_light/templates/xplanung_light/layout.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="c">{# ... #}</span>
 <span class="c">{# load leaflet specific parts #}</span>
@@ -173,7 +173,7 @@
 </section>
 </section>
 <section id="tabellenanzeige">
-<h1>Tabellenanzeige<a class="headerlink" href="#tabellenanzeige" title="Link to this heading"></a></h1>
+<h1>Tabellenanzeige<a class="headerlink" href="#tabellenanzeige" title="Permalink to this heading"></a></h1>
 <p>Um mit geringem Aufwand eine einfach zu pflegende Tabellenanzeige zu erhalten, bietet sich das package <a class="reference external" href="https://django-tables2.readthedocs.io/en/latest/"><strong>django-tables2</strong></a> an.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-tables2
 </pre></div>
@@ -225,7 +225,7 @@
 </div>
 </section>
 <section id="anpassung-templates">
-<h1>Anpassung Templates<a class="headerlink" href="#anpassung-templates" title="Link to this heading"></a></h1>
+<h1>Anpassung Templates<a class="headerlink" href="#anpassung-templates" title="Permalink to this heading"></a></h1>
 <p>Anpassung der Liste - Hinzufügen eines Create Buttons - xplanung_light/templates/xplanung_light/bplan_list.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="c">{# .... #}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
