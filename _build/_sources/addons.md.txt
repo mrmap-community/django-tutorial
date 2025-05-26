@@ -380,7 +380,7 @@ Für die Mapserver Integration benötigen wir zwei zusätzliche python Pakete:
 Installation in venv:
 ```shell
 python3 -m pip install mapscript==7.6.0
-python3 -m pip install mapppyfile
+python3 -m pip install mappyfile
 ```
 
 Aufgrund eines Fehlers wird die C-lib nicht in die venv kopiert - wir müssen das also per Hand nachziehen
