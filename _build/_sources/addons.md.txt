@@ -401,7 +401,7 @@ cp /usr/lib/python3/dist-packages/mapscript/_mapscript.cpython-39-x86_64-linux-g
 #### Ordnerstruktur
 
 Der Mapfile Generator baut sich die initiale Konfigurationsdateien aus Templates auf. Die werden 
-in einer eigenen Ordnerstruktur abgelegt.
+in einer eigenen Ordnerstruktur unterhalb von komserv2/xplanung_light/ abgelegt.
 
 ```shell
 mkdir mapserver

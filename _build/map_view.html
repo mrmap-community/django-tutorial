@@ -364,6 +364,7 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanFilter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django_filters.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterView</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.core.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
 <span class="c1"># ...</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">FilterView</span><span class="p">,</span> <span class="n">SingleTableView</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>

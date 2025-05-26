@@ -239,6 +239,7 @@ komserv/xplanung_light/views.py
 import json
 from .filter import BPlanFilter
 from django_filters.views import FilterView
+from django.core.serializers import serialize
 # ...
 class BPlanListView(FilterView, SingleTableView):
     model = BPlan
