@@ -53,6 +53,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul>
@@ -75,11 +76,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -152,6 +155,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -205,6 +209,7 @@
 <li class="toctree-l2"><a class="reference internal" href="plan_model.html#einleitung">Einleitung</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plan_model.html#modelldefinition">Modelldefinition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plan_model.html#verwaltungsviews">Verwaltungsviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plan_model.html#erfassung-eines-bplans-im-admin-backend">Erfassung eines BPlans im Admin-Backend</a></li>
 </ul>
 </li>
 </ul>
@@ -214,10 +219,12 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="optimize_views.html#aktivieren-des-leaflet-clients-in-den-views">Aktivieren des Leaflet-Clients in den Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimize_views.html#erfassung-eines-bplans-im-frontend">Erfassung eines BPlans im Frontend</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -225,6 +232,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -235,6 +243,8 @@
 <li class="toctree-l2"><a class="reference internal" href="export_xml_1.html#url-fur-export">URL für Export</a></li>
 <li class="toctree-l2"><a class="reference internal" href="export_xml_1.html#link-in-table-view">Link in Table View</a></li>
 <li class="toctree-l2"><a class="reference internal" href="export_xml_1.html#xml-template">XML Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export_xml_1.html#neue-spalte-fur-export-in-tabelle">Neue Spalte für Export in Tabelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export_xml_1.html#xml-export">XML Export</a></li>
 </ul>
 </li>
 </ul>
@@ -242,12 +252,17 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="map_view.html#konfiguration">Konfiguration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="map_view.html#kartenanzeige-im-client">Kartenanzeige im Client</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="map_view.html#installation-django-filter">Installation django-filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="map_view.html#erstellen-einer-filter-klasse">Erstellen einer Filter Klasse</a></li>
 <li class="toctree-l2"><a class="reference internal" href="map_view.html#anpassen-des-views">Anpassen des Views</a></li>
-<li class="toctree-l2"><a class="reference internal" href="map_view.html#anzeige-der-filterfunktionen-im-template">Anzeige der Filterfunktionen im template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="map_view.html#konfiguration-der-filterfunktionen-im-template">Konfiguration der Filterfunktionen im template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="map_view.html#darstellung-der-filter">Darstellung der Filter</a></li>
 </ul>
 </li>
 </ul>
@@ -263,7 +278,11 @@
 <li class="toctree-l2"><a class="reference internal" href="result.html#anpassung-der-tabelle">Anpassung der Tabelle</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="result.html#ergebnis-des-iso-metadaten-exports">Ergebnis des ISO-Metadaten Exports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#ergebnis-des-iso-metadaten-exports">Ergebnis des ISO-Metadaten Exports</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="result.html#neue-spalte-fur-export-in-tabelle">Neue Spalte für Export in Tabelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="result.html#iso19139-export">ISO19139 Export</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
 </ul>
 </div>

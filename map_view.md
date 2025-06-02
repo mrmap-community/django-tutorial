@@ -1,5 +1,7 @@
 # Kartenansicht
 
+## Konfiguration
+
 Bei der Liste der Bebauungspläne macht es Sinn sich die Lage der Pläne auch auf einer dynamischen Übersichtskarte anzeigen zu lassen. Hierzu kann django-leaflet genutzt werden. 
 Im ersten Schritt muss man aber die Geodaten mit in den View übernehmen. Theoretisch wäre es ausreichend das Geometrie Feld **geltungsbereich** zu nutzen. Wenn man aber etwas Interaktion haben will, z.B. eine Selektierbarkeit einzelner Objekte im Viewer, dann ist es besser, ein gesamtes Geometrieobjekt mit ausgewählten Attributen zu verwenden. 
 Hierzu überschreiben wir den die get_context_data Funktion der ListView um eine Serialisierung der Geoemtrien der aktuellen Seite und nennen sie **markers**
@@ -7,8 +9,9 @@ Hierzu überschreiben wir den die get_context_data Funktion der ListView um eine
 xplanung_light/views.py
 ```python
 from django.core.serializers import serialize
+import json
 # ...
-class BPlanListView(FilterView, SingleTableView):
+class BPlanListView(SingleTableView):
 # ...
 def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -171,6 +174,17 @@ komserv/xplanung_light/static/xplanung_light/site.css
 #bplan_list_map { height: 180px; }
 ```
 
+## Kartenanzeige im Client
+
+[http://127.0.0.1:8000/bplan/](http://127.0.0.1:8000/bplan/)
+
+```{image} img/bplan_list_leaflet.png
+:alt: Kartenanzeige im Client
+:class: bg-primary
+:width: 800px
+:align: center
+```
+
 # Suche
 
 ## Installation django-filter
@@ -236,10 +250,8 @@ class BPlanFilter(FilterSet):
 komserv/xplanung_light/views.py
 ```python
 # ...
-import json
 from .filter import BPlanFilter
 from django_filters.views import FilterView
-from django.core.serializers import serialize
 # ...
 class BPlanListView(FilterView, SingleTableView):
     model = BPlan
@@ -261,7 +273,7 @@ class BPlanListView(FilterView, SingleTableView):
         return self.filter_set.qs
 # ...
 ```
-## Anzeige der Filterfunktionen im template
+## Konfiguration der Filterfunktionen im template
 
 templates/xplanung_light/bplan_list.html
 ```jinja
@@ -276,4 +288,15 @@ Filter
 </form>
 <p><a href="{% url 'bplan-create' %}">BPlan anlegen</a></p>
 <!-- ... -->
+```
+
+## Darstellung der Filter
+
+[http://127.0.0.1:8000/bplan/](http://127.0.0.1:8000/bplan/)
+
+```{image} img/bplan_list_filter.png
+:alt: Darstellung der Filter
+:class: bg-primary
+:width: 800px
+:align: center
 ```

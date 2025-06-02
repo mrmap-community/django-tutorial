@@ -142,6 +142,11 @@
         Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)
        </a>
       </li>
+      <li class="toctree-l1">
+       <a class="reference internal" href="#frontend-testen">
+        Frontend testen
+       </a>
+      </li>
      </ul>
      <p class="caption" role="heading">
       <span class="caption-text">
@@ -313,6 +318,11 @@
           Verwaltungsviews
          </a>
         </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#erfassung-eines-bplans-im-admin-backend">
+          Erfassung eines BPlans im Admin-Backend
+         </a>
+        </li>
        </ul>
       </li>
      </ul>
@@ -332,6 +342,11 @@
           Aktivieren des Leaflet-Clients in den Views
          </a>
         </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#erfassung-eines-bplans-im-frontend">
+          Erfassung eines BPlans im Frontend
+         </a>
+        </li>
        </ul>
       </li>
       <li class="toctree-l1">
@@ -342,6 +357,11 @@
       <li class="toctree-l1">
        <a class="reference internal" href="#anpassung-templates">
         Anpassung Templates
+       </a>
+      </li>
+      <li class="toctree-l1">
+       <a class="reference internal" href="#liste-der-plane-im-frontend">
+        Liste der Pl&auml;ne im Frontend
        </a>
       </li>
      </ul>
@@ -359,6 +379,11 @@
       <li class="toctree-l1">
        <a class="reference internal" href="#wms-layer-hinzufugen">
         WMS Layer hinzuf&uuml;gen
+       </a>
+      </li>
+      <li class="toctree-l1">
+       <a class="reference internal" href="#darstellung-wms-in-client">
+        Darstellung WMS in Client
        </a>
       </li>
      </ul>
@@ -393,6 +418,16 @@
           XML Template
          </a>
         </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#neue-spalte-fur-export-in-tabelle">
+          Neue Spalte f&uuml;r Export in Tabelle
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#xml-export">
+          XML Export
+         </a>
+        </li>
        </ul>
       </li>
      </ul>
@@ -406,6 +441,18 @@
        <a class="reference internal" href="#kartenansicht">
         Kartenansicht
        </a>
+       <ul>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#konfiguration">
+          Konfiguration
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#kartenanzeige-im-client">
+          Kartenanzeige im Client
+         </a>
+        </li>
+       </ul>
       </li>
       <li class="toctree-l1">
        <a class="reference internal" href="#suche">
@@ -428,8 +475,13 @@
          </a>
         </li>
         <li class="toctree-l2">
-         <a class="reference internal" href="#anzeige-der-filterfunktionen-im-template">
-          Anzeige der Filterfunktionen im template
+         <a class="reference internal" href="#konfiguration-der-filterfunktionen-im-template">
+          Konfiguration der Filterfunktionen im template
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#darstellung-der-filter">
+          Darstellung der Filter
          </a>
         </li>
        </ul>
@@ -477,6 +529,18 @@
        <a class="reference internal" href="#ergebnis-des-iso-metadaten-exports">
         Ergebnis des ISO-Metadaten Exports
        </a>
+       <ul>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#neue-spalte-fur-export-in-tabelle">
+          Neue Spalte f&uuml;r Export in Tabelle
+         </a>
+        </li>
+        <li class="toctree-l2">
+         <a class="reference internal" href="#iso19139-export">
+          ISO19139 Export
+         </a>
+        </li>
+       </ul>
       </li>
       <li class="toctree-l1">
        <a class="reference internal" href="#todos">
@@ -1136,9 +1200,22 @@ Django Boilerplate Code anlegen
 </pre>
           </div>
          </div>
+        </section>
+        <section id="frontend-testen">
+         <h2>
+          Frontend testen
+          <a class="headerlink" href="#frontend-testen" title="Permalink to this heading">
+           
+          </a>
+         </h2>
          <p>
-          http://127.0.0.1:8000
+          <a class="reference external" href="http://127.0.0.1:8000">
+           http://127.0.0.1:8000
+          </a>
          </p>
+         <a class="bg-primary reference internal image-reference" href="_images/initial_django_project.png">
+          <img alt="Liste der publizierenden Orgas" class="bg-primary align-center" src="_images/initial_django_project.png" style="width: 800px;"/>
+         </a>
         </section>
        </div>
        <div class="toctree-wrapper compound">
@@ -1293,11 +1370,13 @@ mkdir<span class="w"> </span>xplanung_light
            dev-Server beenden (je nach Umgebung) und neu starten - jetzt am besten in VSCODE &uuml;ber F5 - Run-&gt;Start Debugging
           </p>
           <p>
-           http://127.0.0.1:8000/
+           <a class="reference external" href="http://127.0.0.1:8000/admin/">
+            http://127.0.0.1:8000/admin/
+           </a>
           </p>
-          <p>
-           http://127.0.0.1:8000/admin/
-          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/initial_django_admin.png">
+           <img alt="Liste der publizierenden Orgas" class="bg-primary align-center" src="_images/initial_django_admin.png" style="width: 800px;"/>
+          </a>
          </section>
          <section id="aktivieren-der-debugtoolbar">
           <h3>
@@ -1365,6 +1444,17 @@ mkdir<span class="w"> </span>xplanung_light
 </pre>
            </div>
           </div>
+          <p>
+           Mit Debug Toolbar
+          </p>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/admin/">
+            http://127.0.0.1:8000/admin/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/initial_django_admin_debug.png">
+           <img alt="Liste der publizierenden Orgas" class="bg-primary align-center" src="_images/initial_django_admin_debug.png" style="width: 800px;"/>
+          </a>
          </section>
         </section>
         <span id="document-first_templates">
@@ -1623,9 +1713,6 @@ mkdir<span class="w"> </span>xplanung_light
            <div class="highlight-jinja notranslate">
             <div class="highlight">
              <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"../xplanung_light/layout.html"</span> <span class="cp">%}</span>
-<span class="cp">{%</span> <span class="k">load</span> <span class="nv">bootstrap4</span> <span class="cp">%}</span>
-<span class="cp">{%</span> <span class="k">bootstrap_css</span> <span class="cp">%}</span>
-<span class="cp">{%</span> <span class="k">bootstrap_javascript</span> <span class="nv">jquery</span><span class="o">=</span><span class="s1">'full'</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 <span class="x">&lt;h2&gt;Registrieren&lt;/h2&gt;</span>
 <span class="x">    &lt;form method="post"&gt;</span>
@@ -1803,6 +1890,17 @@ mkdir<span class="w"> </span>xplanung_light
 </pre>
            </div>
           </div>
+          <p>
+           Aussehen nach Anmeldung des admin im Frontend
+          </p>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/">
+            http://127.0.0.1:8000/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/standardfunktionen_1.png">
+           <img alt="Standardfunktionen" class="bg-primary align-center" src="_images/standardfunktionen_1.png" style="width: 800px;"/>
+          </a>
          </section>
         </section>
        </div>
@@ -1923,6 +2021,48 @@ mkdir<span class="w"> </span>xplanung_light
 </pre>
           </div>
          </div>
+         <p>
+          xplanung_light/templates/registration/register.html
+         </p>
+         <div class="highlight-jinja notranslate">
+          <div class="highlight">
+           <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"../xplanung_light/layout.html"</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">django_bootstrap5</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">bootstrap_css</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">bootstrap_javascript</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;h2&gt;Registrieren&lt;/h2&gt;</span>
+<span class="x">    &lt;form method="post"&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">bootstrap_form</span> <span class="nv">form</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">bootstrap_button</span> <span class="nv">button_type</span><span class="o">=</span><span class="s2">"submit"</span> <span class="nv">content</span><span class="o">=</span><span class="s2">"Registrieren"</span> <span class="cp">%}</span>
+<span class="x">    &lt;/form&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre>
+          </div>
+         </div>
+         <p>
+          Frontend mit bootstrap5
+         </p>
+         <p>
+          <a class="reference external" href="http://127.0.0.1:8000/">
+           http://127.0.0.1:8000/
+          </a>
+         </p>
+         <a class="bg-primary reference internal image-reference" href="_images/bootstrap_startseite.png">
+          <img alt="Frontend mit bootstrap5" class="bg-primary align-center" src="_images/bootstrap_startseite.png" style="width: 800px;"/>
+         </a>
+         <p>
+          Registrierungsformular mit bootstrap5
+         </p>
+         <p>
+          <a class="reference external" href="http://127.0.0.1:8000/register/">
+           http://127.0.0.1:8000/register/
+          </a>
+         </p>
+         <a class="bg-primary reference internal image-reference" href="_images/bootstrap_registrierungsformular.png">
+          <img alt="Registrierungsformular mit bootstrap5" class="bg-primary align-center" src="_images/bootstrap_registrierungsformular.png" style="width: 800px;"/>
+         </a>
         </section>
        </div>
        <div class="toctree-wrapper compound">
@@ -2475,7 +2615,8 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
     <span class="c1">#externeReferenz, [0..*], XP_SpezExterneReferenz</span>
     <span class="c1">#texte [0..*], XP_TextAbschnitt</span>
     <span class="c1">#begruendungsTexte [0..*], XP_BegruendungAbschnitt</span>
-    
+    <span class="n">history</span> <span class="o">=</span> <span class="n">HistoricalRecords</span><span class="p">(</span><span class="n">inherit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
     <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
         <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -2785,6 +2926,22 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
            </section>
           </section>
          </section>
+         <section id="erfassung-eines-bplans-im-admin-backend">
+          <h3>
+           Erfassung eines BPlans im Admin-Backend
+           <a class="headerlink" href="#erfassung-eines-bplans-im-admin-backend" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/admin/xplanung_light/bplan/add/">
+            http://127.0.0.1:8000/admin/xplanung_light/bplan/add/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/bplan_editor_in_admin.png">
+           <img alt="Erfassung eines BPlans im Admin-Backend" class="bg-primary align-center" src="_images/bplan_editor_in_admin.png" style="width: 800px;"/>
+          </a>
+         </section>
         </section>
        </div>
        <div class="toctree-wrapper compound">
@@ -2850,6 +3007,22 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
 </pre>
            </div>
           </div>
+         </section>
+         <section id="erfassung-eines-bplans-im-frontend">
+          <h3>
+           Erfassung eines BPlans im Frontend
+           <a class="headerlink" href="#erfassung-eines-bplans-im-frontend" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/bplan/create/">
+            http://127.0.0.1:8000/bplan/create/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/bplan_create_view_leaflet.png">
+           <img alt="Erfassung eines BPlans im Frontend" class="bg-primary align-center" src="_images/bplan_create_view_leaflet.png" style="width: 800px;"/>
+          </a>
          </section>
         </section>
         <section id="tabellenanzeige">
@@ -2950,8 +3123,12 @@ python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </s
          <div class="highlight-jinja notranslate">
           <div class="highlight">
            <pre><span></span><span class="c">{# .... #}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">render_table</span> <span class="nv">from</span> <span class="nv">django_tables2</span> <span class="cp">%}</span>
+<span class="x">&lt;!-- add boostrap form css --&gt;</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">django_bootstrap5</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 <span class="x">&lt;p&gt;&lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'bplan-create'</span> <span class="cp">%}</span><span class="x">"&gt;BPlan anlegen&lt;/a&gt;&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">render_table</span> <span class="nv">table</span> <span class="cp">%}</span>
 <span class="c">{# .... #}</span>
 </pre>
           </div>
@@ -2983,6 +3160,22 @@ python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
 </pre>
           </div>
          </div>
+        </section>
+        <section id="liste-der-plane-im-frontend">
+         <h2>
+          Liste der Pl&auml;ne im Frontend
+          <a class="headerlink" href="#liste-der-plane-im-frontend" title="Permalink to this heading">
+           
+          </a>
+         </h2>
+         <p>
+          <a class="reference external" href="http://127.0.0.1:8000/bplan/">
+           http://127.0.0.1:8000/bplan/
+          </a>
+         </p>
+         <a class="bg-primary reference internal image-reference" href="_images/bplan_list_tables2.png">
+          <img alt="Liste der Pl&auml;ne im Frontend" class="bg-primary align-center" src="_images/bplan_list_tables2.png" style="width: 800px;"/>
+         </a>
         </section>
        </div>
        <div class="toctree-wrapper compound">
@@ -3047,6 +3240,7 @@ Siehe auch
 <span class="x">            var wmsLayer = L.tileLayer.wms('https://geo5.service24.rlp.de/wms/liegenschaften_rp.fcgi?', {</span>
 <span class="x">                layers: 'Flurstueck',</span>
 <span class="x">                format: 'image/png',</span>
+<span class="x">                maxZoom: 20,</span>
 <span class="x">                transparent: true,</span>
 <span class="x">            }).addTo(map);</span>
 <span class="x">            // and many more</span>
@@ -3061,6 +3255,55 @@ Siehe auch
 </pre>
           </div>
          </div>
+         <p>
+          xplanung_light/templates/xplanung_light/bplan_form_update.html
+         </p>
+         <div class="highlight-jinja notranslate">
+          <div class="highlight">
+           <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"xplanung_light/layout.html"</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Bebauungsplan editieren</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;script type="text/javascript"&gt;</span>
+<span class="x">    window.addEventListener("map:init", function(e) {</span>
+<span class="x">            var detail = e.detail;</span>
+<span class="x">            var map = detail.map;</span>
+<span class="x">            /* Transparent overlay layers */</span>
+<span class="x">            var wmsLayer = L.tileLayer.wms('https://geo5.service24.rlp.de/wms/liegenschaften_rp.fcgi?', {</span>
+<span class="x">                layers: 'Flurstueck',</span>
+<span class="x">                format: 'image/png',</span>
+<span class="x">                maxZoom: 20,</span>
+<span class="x">                transparent: true,</span>
+<span class="x">            }).addTo(map);</span>
+<span class="x">            // and many more</span>
+<span class="x">        }, false</span>
+<span class="x">    ); //end of window.addEventListener</span>
+<span class="x">&lt;/script&gt;</span>
+<span class="x">    &lt;form method="post" class="geocoding-form"&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span>
+<span class="x">        &lt;input type="submit" value="Aktualisieren"&gt;</span>
+<span class="x">    &lt;/form&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre>
+          </div>
+         </div>
+        </section>
+        <section id="darstellung-wms-in-client">
+         <h2>
+          Darstellung WMS in Client
+          <a class="headerlink" href="#darstellung-wms-in-client" title="Permalink to this heading">
+           
+          </a>
+         </h2>
+         <p>
+          <a class="reference external" href="http://127.0.0.1:8000/admin/xplanung_light/bplan/add/">
+           http://127.0.0.1:8000/admin/xplanung_light/bplan/add/
+          </a>
+         </p>
+         <a class="bg-primary reference internal image-reference" href="_images/leaflet_wms_view.png">
+          <img alt="Darstellung WMS in Client" class="bg-primary align-center" src="_images/leaflet_wms_view.png" style="width: 800px;"/>
+         </a>
         </section>
        </div>
        <div class="toctree-wrapper compound">
@@ -3315,6 +3558,38 @@ des querysets mit einer annotation l&ouml;sen. Zus&auml;tzlich zu den Polygonen 
            </div>
           </div>
          </section>
+         <section id="neue-spalte-fur-export-in-tabelle">
+          <h3>
+           Neue Spalte f&uuml;r Export in Tabelle
+           <a class="headerlink" href="#neue-spalte-fur-export-in-tabelle" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/bplan/">
+            http://127.0.0.1:8000/bplan/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/bplan_list_tables2_xml_export.png">
+           <img alt="Neue Spalte f&uuml;r Export in Tabelle" class="bg-primary align-center" src="_images/bplan_list_tables2_xml_export.png" style="width: 800px;"/>
+          </a>
+         </section>
+         <section id="xml-export">
+          <h3>
+           XML Export
+           <a class="headerlink" href="#xml-export" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/bplan/1/xplan/">
+            http://127.0.0.1:8000/bplan/1/xplan/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/xplan_export_1.png">
+           <img alt="XML Export" class="bg-primary align-center" src="_images/xplan_export_1.png" style="width: 800px;"/>
+          </a>
+         </section>
         </section>
        </div>
        <div class="toctree-wrapper compound">
@@ -3327,26 +3602,34 @@ des querysets mit einer annotation l&ouml;sen. Zus&auml;tzlich zu den Polygonen 
            
           </a>
          </h2>
-         <p>
-          Bei der Liste der Bebauungspl&auml;ne macht es Sinn sich die Lage der Pl&auml;ne auch auf einer dynamischen &Uuml;bersichtskarte anzeigen zu lassen. Hierzu kann django-leaflet genutzt werden.
+         <section id="konfiguration">
+          <h3>
+           Konfiguration
+           <a class="headerlink" href="#konfiguration" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           Bei der Liste der Bebauungspl&auml;ne macht es Sinn sich die Lage der Pl&auml;ne auch auf einer dynamischen &Uuml;bersichtskarte anzeigen zu lassen. Hierzu kann django-leaflet genutzt werden.
 Im ersten Schritt muss man aber die Geodaten mit in den View &uuml;bernehmen. Theoretisch w&auml;re es ausreichend das Geometrie Feld
-          <strong>
-           geltungsbereich
-          </strong>
-          zu nutzen. Wenn man aber etwas Interaktion haben will, z.B. eine Selektierbarkeit einzelner Objekte im Viewer, dann ist es besser, ein gesamtes Geometrieobjekt mit ausgew&auml;hlten Attributen zu verwenden.
+           <strong>
+            geltungsbereich
+           </strong>
+           zu nutzen. Wenn man aber etwas Interaktion haben will, z.B. eine Selektierbarkeit einzelner Objekte im Viewer, dann ist es besser, ein gesamtes Geometrieobjekt mit ausgew&auml;hlten Attributen zu verwenden.
 Hierzu &uuml;berschreiben wir den die get_context_data Funktion der ListView um eine Serialisierung der Geoemtrien der aktuellen Seite und nennen sie
-          <strong>
-           markers
-          </strong>
-         </p>
-         <p>
-          xplanung_light/views.py
-         </p>
-         <div class="highlight-python notranslate">
-          <div class="highlight">
-           <pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
+           <strong>
+            markers
+           </strong>
+          </p>
+          <p>
+           xplanung_light/views.py
+          </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="c1"># ...</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">FilterView</span><span class="p">,</span> <span class="n">SingleTableView</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">SingleTableView</span><span class="p">):</span>
 <span class="c1"># ...</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -3355,34 +3638,34 @@ Hierzu &uuml;berschreiben wir den die get_context_data Funktion der ListView um 
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">context</span>
 </pre>
+           </div>
           </div>
-         </div>
-         <p>
-          komserv2/settings.py
-         </p>
-         <div class="highlight-python notranslate">
-          <div class="highlight">
-           <pre><span></span><span class="c1"># ...</span>
+          <p>
+           komserv2/settings.py
+          </p>
+          <div class="highlight-python notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="c1"># ...</span>
 <span class="n">SERIALIZATION_MODULES</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">"geojson"</span><span class="p">:</span> <span class="s2">"django.contrib.gis.serializers.geojson"</span><span class="p">,</span> 
 <span class="p">}</span>
 <span class="c1"># ...</span>
 </pre>
+           </div>
           </div>
-         </div>
-         <p>
-          Die Marker wollen wir in einem LeafletViewer darstellen. Hierzu m&uuml;ssen wir das Template bearbeiten. Aber zun&auml;chst brauchen wir noch die js-lib
-          <strong>
-           turf
-          </strong>
-          , die geometrische Operationen zur Verf&uuml;gung stellt.
-         </p>
-         <p>
-          komserv/xplanung_light/templates/layout.html
-         </p>
-         <div class="highlight-jinja notranslate">
-          <div class="highlight">
-           <pre><span></span><span class="x">&lt;!-- ... --&gt;</span>
+          <p>
+           Die Marker wollen wir in einem LeafletViewer darstellen. Hierzu m&uuml;ssen wir das Template bearbeiten. Aber zun&auml;chst brauchen wir noch die js-lib
+           <strong>
+            turf
+           </strong>
+           , die geometrische Operationen zur Verf&uuml;gung stellt.
+          </p>
+          <p>
+           komserv/xplanung_light/templates/layout.html
+          </p>
+          <div class="highlight-jinja notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="x">&lt;!-- ... --&gt;</span>
 <span class="x">&lt;head&gt;</span>
 <span class="x">  &lt;!-- ... --&gt;</span>
 <span class="x">  &lt;script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"&gt;&lt;/script&gt;</span>
@@ -3390,14 +3673,14 @@ Hierzu &uuml;berschreiben wir den die get_context_data Funktion der ListView um 
 <span class="x">&lt;/head&gt;</span>
 <span class="x">&lt;!-- ... --&gt;</span>
 </pre>
+           </div>
           </div>
-         </div>
-         <p>
-          komserv/xplanung_light/templates/xplanung_light/bplan_list.html
-         </p>
-         <div class="highlight-jinja notranslate">
-          <div class="highlight">
-           <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"xplanung_light/layout.html"</span> <span class="cp">%}</span>
+          <p>
+           komserv/xplanung_light/templates/xplanung_light/bplan_list.html
+          </p>
+          <div class="highlight-jinja notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"xplanung_light/layout.html"</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">load</span> <span class="nv">leaflet_tags</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
 <span class="x">    Liste der Bebauungspl&auml;ne</span>
@@ -3414,44 +3697,44 @@ Hierzu &uuml;berschreiben wir den die get_context_data Funktion der ListView um 
 <span class="x">&lt;p&gt;Anzahl: </span><span class="cp">{{</span> <span class="nv">object_list.count</span> <span class="cp">}}</span><span class="x">&lt;/p&gt;</span>
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre>
+           </div>
           </div>
-         </div>
-         <p>
-          In dem Javascript f&uuml;r den Leaflet-Client steckt jetzt etwas mehr Logik.
-         </p>
-         <ul class="simple">
-          <li>
-           <p>
-            Die marker werden in die das HTML-Element mit der id
-            <strong>
-             markers-data
-            </strong>
-            &uuml;betragen
-           </p>
-          </li>
-          <li>
-           <p>
-            Leaflet parsed das Json und baut daraus features
-           </p>
-          </li>
-          <li>
-           <p>
-            Die Features werden anhand von Attributen unterschiedlich gef&auml;rbt
-           </p>
-          </li>
-          <li>
-           <p>
-            Es gibt ein click-Event, dass die Polygone abfragt und ein PopUp erzeugt
-           </p>
-          </li>
-         </ul>
-         <p>
-          Javascript im Script-Tag des templates
+          <p>
+           In dem Javascript f&uuml;r den Leaflet-Client steckt jetzt etwas mehr Logik.
+          </p>
+          <ul class="simple">
+           <li>
+            <p>
+             Die marker werden in die das HTML-Element mit der id
+             <strong>
+              markers-data
+             </strong>
+             &uuml;betragen
+            </p>
+           </li>
+           <li>
+            <p>
+             Leaflet parsed das Json und baut daraus features
+            </p>
+           </li>
+           <li>
+            <p>
+             Die Features werden anhand von Attributen unterschiedlich gef&auml;rbt
+            </p>
+           </li>
+           <li>
+            <p>
+             Es gibt ein click-Event, dass die Polygone abfragt und ein PopUp erzeugt
+            </p>
+           </li>
+          </ul>
+          <p>
+           Javascript im Script-Tag des templates
 komserv/xplanung_light/templates/xplanung_light/bplan_list.html
-         </p>
-         <div class="highlight-javascript notranslate">
-          <div class="highlight">
-           <pre><span></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">mapGlobal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+          </p>
+          <div class="highlight-javascript notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">mapGlobal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="nx">map_init_basic</span><span class="w"> </span><span class="p">(</span><span class="nx">map</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">mapGlobal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">map</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">//https://stackoverflow.com/questions/43007019/leaflet-event-how-to-propagate-to-overlapping-layers</span>
@@ -3544,20 +3827,37 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html
 <span class="w">        </span><span class="p">});</span>
 <span class="w">    </span><span class="p">}</span>
 </pre>
+           </div>
           </div>
-         </div>
-         <p>
-          Anpassung der H&ouml;he im css-File
-         </p>
-         <p>
-          komserv/xplanung_light/static/xplanung_light/site.css
-         </p>
-         <div class="highlight-css notranslate">
-          <div class="highlight">
-           <pre><span></span><span class="p">#</span><span class="nn">bplan_list_map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+          <p>
+           Anpassung der H&ouml;he im css-File
+          </p>
+          <p>
+           komserv/xplanung_light/static/xplanung_light/site.css
+          </p>
+          <div class="highlight-css notranslate">
+           <div class="highlight">
+            <pre><span></span><span class="p">#</span><span class="nn">bplan_list_map</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </pre>
+           </div>
           </div>
-         </div>
+         </section>
+         <section id="kartenanzeige-im-client">
+          <h3>
+           Kartenanzeige im Client
+           <a class="headerlink" href="#kartenanzeige-im-client" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/bplan/">
+            http://127.0.0.1:8000/bplan/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/bplan_list_leaflet.png">
+           <img alt="Kartenanzeige im Client" class="bg-primary align-center" src="_images/bplan_list_leaflet.png" style="width: 800px;"/>
+          </a>
+         </section>
         </section>
         <section id="suche">
          <h2>
@@ -3682,10 +3982,8 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html
           <div class="highlight-python notranslate">
            <div class="highlight">
             <pre><span></span><span class="c1"># ...</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanFilter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django_filters.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterView</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">django.core.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
 <span class="c1"># ...</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">FilterView</span><span class="p">,</span> <span class="n">SingleTableView</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
@@ -3710,10 +4008,10 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html
            </div>
           </div>
          </section>
-         <section id="anzeige-der-filterfunktionen-im-template">
+         <section id="konfiguration-der-filterfunktionen-im-template">
           <h3>
-           Anzeige der Filterfunktionen im template
-           <a class="headerlink" href="#anzeige-der-filterfunktionen-im-template" title="Permalink to this heading">
+           Konfiguration der Filterfunktionen im template
+           <a class="headerlink" href="#konfiguration-der-filterfunktionen-im-template" title="Permalink to this heading">
             
            </a>
           </h3>
@@ -3736,6 +4034,22 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html
 </pre>
            </div>
           </div>
+         </section>
+         <section id="darstellung-der-filter">
+          <h3>
+           Darstellung der Filter
+           <a class="headerlink" href="#darstellung-der-filter" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/bplan/">
+            http://127.0.0.1:8000/bplan/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/bplan_list_filter.png">
+           <img alt="Darstellung der Filter" class="bg-primary align-center" src="_images/bplan_list_filter.png" style="width: 800px;"/>
+          </a>
          </section>
         </section>
        </div>
@@ -4489,6 +4803,38 @@ Den k&ouml;nnen wir sp&auml;ter verwenden um die Serverkomponenten damit anzurei
           </strong>
           .
          </p>
+         <section id="neue-spalte-fur-export-in-tabelle">
+          <h3>
+           Neue Spalte f&uuml;r Export in Tabelle
+           <a class="headerlink" href="#neue-spalte-fur-export-in-tabelle" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/bplan/">
+            http://127.0.0.1:8000/bplan/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/bplan_list_tables2_iso_export.png">
+           <img alt="Neue Spalte f&uuml;r Export in Tabelle" class="bg-primary align-center" src="_images/bplan_list_tables2_iso_export.png" style="width: 800px;"/>
+          </a>
+         </section>
+         <section id="iso19139-export">
+          <h3>
+           ISO19139 Export
+           <a class="headerlink" href="#iso19139-export" title="Permalink to this heading">
+            
+           </a>
+          </h3>
+          <p>
+           <a class="reference external" href="http://127.0.0.1:8000/bplan/1/iso19139/">
+            http://127.0.0.1:8000/bplan/1/iso19139/
+           </a>
+          </p>
+          <a class="bg-primary reference internal image-reference" href="_images/iso19139_export_1.png">
+           <img alt="ISO19139 Export" class="bg-primary align-center" src="_images/iso19139_export_1.png" style="width: 800px;"/>
+          </a>
+         </section>
         </section>
         <section id="todos">
          <h2>
@@ -4586,7 +4932,7 @@ Den k&ouml;nnen wir sp&auml;ter verwenden um die Serverkomponenten damit anzurei
            </p>
            <div class="highlight-shell notranslate">
             <div class="highlight">
-             <pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>crispy-forms
+             <pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-crispy-forms
 python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>crispy-bootstrap5
 </pre>
             </div>
@@ -4752,28 +5098,35 @@ der AGS. Der muss einer im System vorhandenen Organisation zugeordnet werden k&o
              
             </a>
            </h4>
-           <p>
-            F&uuml;r die Importfunktion wird ein Verzeichnis
-            <strong>
-             helper
-            </strong>
-            angelegt.
-           </p>
-           <div class="highlight-shell notranslate">
-            <div class="highlight">
-             <pre><span></span>mkdir<span class="w"> </span>komserv2/xplanung_light/helper
+           <section id="konfiguration">
+            <h5>
+             Konfiguration
+             <a class="headerlink" href="#konfiguration" title="Permalink to this heading">
+              
+             </a>
+            </h5>
+            <p>
+             F&uuml;r die Importfunktion wird ein Verzeichnis
+             <strong>
+              helper
+             </strong>
+             angelegt.
+            </p>
+            <div class="highlight-shell notranslate">
+             <div class="highlight">
+              <pre><span></span>mkdir<span class="w"> </span>komserv2/xplanung_light/helper
 </pre>
+             </div>
             </div>
-           </div>
-           <p>
-            Dort erstellen wir eine Datei xplanung.py
-           </p>
-           <p>
-            komserv2/xplanung_light/helper/xplanung.py
-           </p>
-           <div class="highlight-python notranslate">
-            <div class="highlight">
-             <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+            <p>
+             Dort erstellen wir eine Datei xplanung.py
+            </p>
+            <p>
+             komserv2/xplanung_light/helper/xplanung.py
+            </p>
+            <div class="highlight-python notranslate">
+             <div class="highlight">
+              <pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django</span><span class="w"> </span><span class="kn">import</span> <span class="n">forms</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.gis.geos</span><span class="w"> </span><span class="kn">import</span> <span class="n">GEOSGeometry</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlan</span><span class="p">,</span> <span class="n">AdministrativeOrganization</span>
@@ -4859,74 +5212,17 @@ der AGS. Der muss einer im System vorhandenen Organisation zugeordnet werden k&o
             <span class="k">raise</span> <span class="n">forms</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s2">"Fehler beim Abspeichern des BPlan-Objekts"</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
 </pre>
+             </div>
             </div>
-           </div>
-           <p>
-            Um die Pl&auml;ne historisieren zu k&ouml;nnen, erweitern wir das XPlan Modell um die Historisierungsfunktion des
-simple-history packages
-           </p>
-           <p>
-            komserv2/xplanung_light/models.py
-           </p>
-           <div class="highlight-python notranslate">
-            <div class="highlight">
-             <pre><span></span><span class="c1"># ...</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">XPlan</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="c1">#name [1]</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">'Name des Plans'</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">'Offizieller Name des raumbezogenen Plans'</span><span class="p">)</span>
-    <span class="c1">#nummer [0..1]</span>
-    <span class="n">nummer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">"Nummer des Plans."</span><span class="p">)</span>
-    <span class="c1">#internalId [0..1]</span>
-    <span class="c1">#beschreibung [0..1]</span>
-    <span class="c1">#kommentar [0..1]</span>
-    <span class="c1">#technHerstellDatum [0..1], Date</span>
-    <span class="c1">#genehmigungsDatum [0..1], Date</span>
-    <span class="c1">#untergangsDatum [0..1], Date</span>
-    <span class="c1">#aendertPlan [0..*], XP_VerbundenerPlan</span>
-    <span class="c1">#wurdeGeaendertVonPlan [0..*], XP_VerbundenerPlan</span>
-    <span class="c1">#aendertPlanBereich [0..*], Referenz, Testphase</span>
-    <span class="c1">#wurdeGeaendertVonPlanBereich [0..*], Referenz, Testphase</span>
-    <span class="c1">#erstellungsMassstab [0..1], Integer</span>
-    <span class="c1">#bezugshoehe [0..1], Length</span>
-    <span class="c1">#hoehenbezug [0..1]</span>
-    <span class="c1">#technischerPlanersteller, [0..1]</span>
-    <span class="c1">#raeumlicherGeltungsbereich [1], GM_Object</span>
-    <span class="n">geltungsbereich</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GeometryField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">'Grenze des r&auml;umlichen Geltungsbereiches des Plans.'</span><span class="p">)</span>
-    <span class="c1">#verfahrensMerkmale [0..*], XP_VerfahrensMerkmal</span>
-    <span class="c1">#hatGenerAttribut [0..*], XP_GenerAttribut</span>
-    <span class="c1">#externeReferenz, [0..*], XP_SpezExterneReferenz</span>
-    <span class="c1">#texte [0..*], XP_TextAbschnitt</span>
-    <span class="c1">#begruendungsTexte [0..*], XP_BegruendungAbschnitt</span>
-    <span class="c1">#history = HistoricalRecords(related_name="histories", inherit=True)</span>
-    <span class="n">history</span> <span class="o">=</span> <span class="n">HistoricalRecords</span><span class="p">(</span><span class="n">inherit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="c1"># ...</span>
-
-</pre>
-            </div>
-           </div>
-           <p>
-            Da damit eine &Auml;nderung des Datenmodells einhergeht, m&uuml;ssen wir eine Migration durchf&uuml;hren.
-           </p>
-           <div class="highlight-shell notranslate">
-            <div class="highlight">
-             <pre><span></span>python3<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
-python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
-</pre>
-            </div>
-           </div>
-           <p>
-            Es fehlt noch die View - diesmal &uuml;ber eine Function-based view umgesetzt, das html-Template und der zugeh&ouml;rige Eintrag in der urls.py
-           </p>
-           <p>
-            komserv2/xplanung_light/views.py
-           </p>
-           <div class="highlight-python notranslate">
-            <div class="highlight">
-             <pre><span></span><span class="c1"># ...</span>
+            <p>
+             Es fehlt noch die View - diesmal &uuml;ber eine Function-based view umgesetzt, das html-Template und der zugeh&ouml;rige Eintrag in der urls.py
+            </p>
+            <p>
+             komserv2/xplanung_light/views.py
+            </p>
+            <div class="highlight-python notranslate">
+             <div class="highlight">
+              <pre><span></span><span class="c1"># ...</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.helper.xplanung</span><span class="w"> </span><span class="kn">import</span> <span class="n">XPlanung</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">messages</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">xplanung_light.forms</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegistrationForm</span><span class="p">,</span> <span class="n">BPlanImportForm</span>
@@ -4967,14 +5263,14 @@ python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">"xplanung_light/bplan_import.html"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"form"</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span>
 <span class="c1"># ...</span>
 </pre>
+             </div>
             </div>
-           </div>
-           <p>
-            komserv2/xplanung_light/templates/xplanung_light/bplan_import.html
-           </p>
-           <div class="highlight-jinja notranslate">
-            <div class="highlight">
-             <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"xplanung_light/layout.html"</span> <span class="cp">%}</span>
+            <p>
+             komserv2/xplanung_light/templates/xplanung_light/bplan_import.html
+            </p>
+            <div class="highlight-jinja notranslate">
+             <div class="highlight">
+              <pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">"xplanung_light/layout.html"</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">load</span> <span class="nv">crispy_forms_tags</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
 <span class="x">    Bebauungsplan importieren</span>
@@ -4986,19 +5282,67 @@ python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
 <span class="x">&lt;/form&gt;</span>
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre>
+             </div>
             </div>
-           </div>
-           <p>
-            komserv2/xplanung_light/urls.py
-           </p>
-           <div class="highlight-python notranslate">
-            <div class="highlight">
-             <pre><span></span><span class="c1"># ...</span>
+            <p>
+             komserv2/xplanung_light/urls.py
+            </p>
+            <div class="highlight-python notranslate">
+             <div class="highlight">
+              <pre><span></span><span class="c1"># ...</span>
 <span class="n">path</span><span class="p">(</span><span class="s2">"bplan/import/"</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">bplan_import</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"bplan-import"</span><span class="p">),</span>
 <span class="c1"># ...</span>
 </pre>
+             </div>
             </div>
-           </div>
+            <p>
+             komserv2/xplanung_light/templates/xplanung_light/bplan_list.html
+            </p>
+            <div class="highlight-jinja notranslate">
+             <div class="highlight">
+              <pre><span></span><span class="x">&lt;!-- Neuer Link f&uuml;r den Import --&gt;</span>
+<span class="x">&lt;p&gt;&lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'bplan-create'</span> <span class="cp">%}</span><span class="x">"&gt;BPlan anlegen&lt;/a&gt;&lt;a href="</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">'bplan-import'</span> <span class="cp">%}</span><span class="x">"&gt;BPlan importieren&lt;/a&gt;&lt;/p&gt;</span>
+<span class="x">&lt;!--  --&gt;</span>
+</pre>
+             </div>
+            </div>
+           </section>
+           <section id="import-eines-zuvor-exportierten-xplan-gmls">
+            <h5>
+             Import eines zuvor exportierten XPlan-GMLs
+             <a class="headerlink" href="#import-eines-zuvor-exportierten-xplan-gmls" title="Permalink to this heading">
+              
+             </a>
+            </h5>
+            <p>
+             Die Bebauungspl&auml;ne m&uuml;ssen irgendwie anhand ihrer Attribute identifiziert werden. Da es nur sehr wenige Pflichtfelder gibt, pr&uuml;fen wir zun&auml;chst einfach
+ob ein Bebauungsplan mit dem gleichen Namen aus der abgegebenen Kommune schon existiert! Wenn also Namen und AGS der Gemeinde identisch sind, handelt es sich um denselben Plan.
+            </p>
+            <p>
+             <a class="reference external" href="http://127.0.0.1:8000/bplan/import/">
+              http://127.0.0.1:8000/bplan/import/
+             </a>
+            </p>
+            <a class="bg-primary reference internal image-reference" href="_images/bplan_import_existing.png">
+             <img alt="Import eines zuvor exportierten XPlan-GMLs" class="bg-primary align-center" src="_images/bplan_import_existing.png" style="width: 800px;"/>
+            </a>
+            <p>
+             Wenn explizit
+             <strong>
+              &uuml;berschreiben
+             </strong>
+             selektiert wurde, wird der vorhandene Plan aktualisiert.
+            </p>
+            <a class="bg-primary reference internal image-reference" href="_images/bplan_overwrite_existing.png">
+             <img alt="Import eines zuvor exportierten XPlan-GMLs mit &Uuml;berschreiben" class="bg-primary align-center" src="_images/bplan_overwrite_existing.png" style="width: 800px;"/>
+            </a>
+            <p>
+             Im sqlite-Client sieht man wie sich das auf die History auswirkt
+            </p>
+            <a class="bg-primary reference internal image-reference" href="_images/bplan_history_sqldb.png">
+             <img alt="History Tabelle im sqlite-Client" class="bg-primary align-center" src="_images/bplan_history_sqldb.png" style="width: 800px;"/>
+            </a>
+           </section>
           </section>
          </section>
          <section id="integration-mapserver">

@@ -54,6 +54,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul>
@@ -75,15 +76,18 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Geometrie Editor</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#aktivieren-des-leaflet-clients-in-den-views">Aktivieren des Leaflet-Clients in den Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#erfassung-eines-bplans-im-frontend">Erfassung eines BPlans im Frontend</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -171,6 +175,11 @@
 </pre></div>
 </div>
 </section>
+<section id="erfassung-eines-bplans-im-frontend">
+<h2>Erfassung eines BPlans im Frontend<a class="headerlink" href="#erfassung-eines-bplans-im-frontend" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/create/">http://127.0.0.1:8000/bplan/create/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_create_view_leaflet.png"><img alt="Erfassung eines BPlans im Frontend" class="bg-primary align-center" src="_images/bplan_create_view_leaflet.png" style="width: 800px;" /></a>
+</section>
 </section>
 <section id="tabellenanzeige">
 <h1>Tabellenanzeige<a class="headerlink" href="#tabellenanzeige" title="Permalink to this heading"></a></h1>
@@ -228,8 +237,12 @@
 <h1>Anpassung Templates<a class="headerlink" href="#anpassung-templates" title="Permalink to this heading"></a></h1>
 <p>Anpassung der Liste - Hinzufügen eines Create Buttons - xplanung_light/templates/xplanung_light/bplan_list.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="c">{# .... #}</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">render_table</span> <span class="nv">from</span> <span class="nv">django_tables2</span> <span class="cp">%}</span>
+<span class="x">&lt;!-- add boostrap form css --&gt;</span>
+<span class="cp">{%</span> <span class="k">load</span> <span class="nv">django_bootstrap5</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 <span class="x">&lt;p&gt;&lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;bplan-create&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;BPlan anlegen&lt;/a&gt;&lt;/p&gt;</span>
+<span class="cp">{%</span> <span class="k">render_table</span> <span class="nv">table</span> <span class="cp">%}</span>
 <span class="c">{# .... #}</span>
 </pre></div>
 </div>
@@ -250,6 +263,11 @@
 python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
 </pre></div>
 </div>
+</section>
+<section id="liste-der-plane-im-frontend">
+<h1>Liste der Pläne im Frontend<a class="headerlink" href="#liste-der-plane-im-frontend" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/">http://127.0.0.1:8000/bplan/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_list_tables2.png"><img alt="Liste der Pläne im Frontend" class="bg-primary align-center" src="_images/bplan_list_tables2.png" style="width: 800px;" /></a>
 </section>
 
 

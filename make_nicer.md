@@ -90,4 +90,40 @@ Anpassen des Basis-Templates xplanung_light/templates/xplanung_light/layout.html
 </html>
 ```
 
+xplanung_light/templates/registration/register.html
+```jinja
+{% extends "../xplanung_light/layout.html" %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+<h2>Registrieren</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" content="Registrieren" %}
+    </form>
+{% endblock %}
+```
 
+Frontend mit bootstrap5
+
+[http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+```{image} img/bootstrap_startseite.png
+:alt: Frontend mit bootstrap5
+:class: bg-primary
+:width: 800px
+:align: center
+```
+
+Registrierungsformular mit bootstrap5
+
+[http://127.0.0.1:8000/register/](http://127.0.0.1:8000/register/)
+
+```{image} img/bootstrap_registrierungsformular.png
+:alt: Registrierungsformular mit bootstrap5
+:class: bg-primary
+:width: 800px
+:align: center
+```

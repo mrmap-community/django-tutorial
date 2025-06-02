@@ -54,6 +54,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul class="current">
@@ -88,11 +89,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -201,9 +204,6 @@
 </div>
 <p>xplanung_light/templates/registration/register.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;../xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
-<span class="cp">{%</span> <span class="k">load</span> <span class="nv">bootstrap4</span> <span class="cp">%}</span>
-<span class="cp">{%</span> <span class="k">bootstrap_css</span> <span class="cp">%}</span>
-<span class="cp">{%</span> <span class="k">bootstrap_javascript</span> <span class="nv">jquery</span><span class="o">=</span><span class="s1">&#39;full&#39;</span> <span class="cp">%}</span>
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
 <span class="x">&lt;h2&gt;Registrieren&lt;/h2&gt;</span>
 <span class="x">    &lt;form method=&quot;post&quot;&gt;</span>
@@ -316,6 +316,9 @@
 <span class="x">&lt;!-- ... --&gt;</span>
 </pre></div>
 </div>
+<p>Aussehen nach Anmeldung des admin im Frontend</p>
+<p><a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/standardfunktionen_1.png"><img alt="Standardfunktionen" class="bg-primary align-center" src="_images/standardfunktionen_1.png" style="width: 800px;" /></a>
 </section>
 </section>
 

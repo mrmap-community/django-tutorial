@@ -39,7 +39,8 @@ class XPlan(models.Model):
     #externeReferenz, [0..*], XP_SpezExterneReferenz
     #texte [0..*], XP_TextAbschnitt
     #begruendungsTexte [0..*], XP_BegruendungAbschnitt
-    
+    history = HistoricalRecords(inherit=True)
+
     class Meta:
         abstract = True
 
@@ -246,4 +247,15 @@ xplanung_light/templates/xplanung_light/bplan_form_update.html
         <input type="submit" value="Aktualisieren">
     </form>
 {% endblock %}
+```
+
+## Erfassung eines BPlans im Admin-Backend
+
+[http://127.0.0.1:8000/admin/xplanung_light/bplan/add/](http://127.0.0.1:8000/admin/xplanung_light/bplan/add/)
+
+```{image} img/bplan_editor_in_admin.png
+:alt: Erfassung eines BPlans im Admin-Backend
+:class: bg-primary
+:width: 800px
+:align: center
 ```

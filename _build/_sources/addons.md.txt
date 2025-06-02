@@ -8,7 +8,7 @@ Wir nutzen ab hier crispy-forms um die Formulare zu optimieren.
 
 Installation der packages
 ```shell
-python3 -m pip install crispy-forms
+python3 -m pip install django-crispy-forms
 python3 -m pip install crispy-bootstrap5
 ```
 
@@ -149,6 +149,8 @@ def xplan_content_validator(xplan_file):
 
 ### Importfunktion
 
+#### Konfiguration
+
 Für die Importfunktion wird ein Verzeichnis **helper** angelegt.
 
 ```shell
@@ -246,55 +248,6 @@ class XPlanung():
         return True
 ```
 
-Um die Pläne historisieren zu können, erweitern wir das XPlan Modell um die Historisierungsfunktion des 
-simple-history packages
-
-komserv2/xplanung_light/models.py
-```python
-# ...
-class XPlan(models.Model):
-    #name [1]
-    name = models.CharField(null=False, blank=False, max_length=2048, verbose_name='Name des Plans', help_text='Offizieller Name des raumbezogenen Plans')
-    #nummer [0..1]
-    nummer = models.CharField(max_length=5, verbose_name="Nummer des Plans.")
-    #internalId [0..1]
-    #beschreibung [0..1]
-    #kommentar [0..1]
-    #technHerstellDatum [0..1], Date
-    #genehmigungsDatum [0..1], Date
-    #untergangsDatum [0..1], Date
-    #aendertPlan [0..*], XP_VerbundenerPlan
-    #wurdeGeaendertVonPlan [0..*], XP_VerbundenerPlan
-    #aendertPlanBereich [0..*], Referenz, Testphase
-    #wurdeGeaendertVonPlanBereich [0..*], Referenz, Testphase
-    #erstellungsMassstab [0..1], Integer
-    #bezugshoehe [0..1], Length
-    #hoehenbezug [0..1]
-    #technischerPlanersteller, [0..1]
-    #raeumlicherGeltungsbereich [1], GM_Object
-    geltungsbereich = models.GeometryField(null=False, blank=False, verbose_name='Grenze des räumlichen Geltungsbereiches des Plans.')
-    #verfahrensMerkmale [0..*], XP_VerfahrensMerkmal
-    #hatGenerAttribut [0..*], XP_GenerAttribut
-    #externeReferenz, [0..*], XP_SpezExterneReferenz
-    #texte [0..*], XP_TextAbschnitt
-    #begruendungsTexte [0..*], XP_BegruendungAbschnitt
-    #history = HistoricalRecords(related_name="histories", inherit=True)
-    history = HistoricalRecords(inherit=True)
-
-    class Meta:
-        abstract = True
-
-# ...
-
-```
-
-Da damit eine Änderung des Datenmodells einhergeht, müssen wir eine Migration durchführen.
-
-```shell
-python3 manage.py makemigrations
-python3 manage.py migrate
-```
-
 Es fehlt noch die View - diesmal über eine Function-based view umgesetzt, das html-Template und der zugehörige Eintrag in der urls.py
 
 komserv2/xplanung_light/views.py
@@ -361,6 +314,45 @@ komserv2/xplanung_light/urls.py
 # ...
 path("bplan/import/", views.bplan_import, name="bplan-import"),
 # ...
+```
+
+komserv2/xplanung_light/templates/xplanung_light/bplan_list.html
+```jinja
+<!-- Neuer Link für den Import -->
+<p><a href="{% url 'bplan-create' %}">BPlan anlegen</a><a href="{% url 'bplan-import' %}">BPlan importieren</a></p>
+<!--  -->
+```
+
+#### Import eines zuvor exportierten XPlan-GMLs
+
+Die Bebauungspläne müssen irgendwie anhand ihrer Attribute identifiziert werden. Da es nur sehr wenige Pflichtfelder gibt, prüfen wir zunächst einfach
+ob ein Bebauungsplan mit dem gleichen Namen aus der abgegebenen Kommune schon existiert! Wenn also Namen und AGS der Gemeinde identisch sind, handelt es sich um denselben Plan.
+
+[http://127.0.0.1:8000/bplan/import/](http://127.0.0.1:8000/bplan/import/)
+
+```{image} img/bplan_import_existing.png
+:alt: Import eines zuvor exportierten XPlan-GMLs
+:class: bg-primary
+:width: 800px
+:align: center
+```
+
+Wenn explizit **überschreiben** selektiert wurde, wird der vorhandene Plan aktualisiert.
+
+```{image} img/bplan_overwrite_existing.png
+:alt: Import eines zuvor exportierten XPlan-GMLs mit Überschreiben
+:class: bg-primary
+:width: 800px
+:align: center
+```
+
+Im sqlite-Client sieht man wie sich das auf die History auswirkt
+
+```{image} img/bplan_history_sqldb.png
+:alt: History Tabelle im sqlite-Client
+:class: bg-primary
+:width: 800px
+:align: center
 ```
 
 ## Integration Mapserver

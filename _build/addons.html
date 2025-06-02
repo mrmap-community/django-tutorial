@@ -53,6 +53,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul>
@@ -75,11 +76,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -103,7 +106,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#import-von-xplan-gml-files">Import von XPlan-GML Files</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#vorbereitung">Vorbereitung</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#formular-und-validator">Formular und Validator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#importfunktion">Importfunktion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importfunktion">Importfunktion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#konfiguration">Konfiguration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#import-eines-zuvor-exportierten-xplan-gmls">Import eines zuvor exportierten XPlan-GMLs</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#integration-mapserver">Integration Mapserver</a><ul>
@@ -174,7 +181,7 @@
 <h3>Vorbereitung<a class="headerlink" href="#vorbereitung" title="Permalink to this heading"></a></h3>
 <p>Wir nutzen ab hier crispy-forms um die Formulare zu optimieren.</p>
 <p>Installation der packages</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>crispy-forms
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>django-crispy-forms
 python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>crispy-bootstrap5
 </pre></div>
 </div>
@@ -312,6 +319,8 @@ der AGS. Der muss einer im System vorhandenen Organisation zugeordnet werden kö
 </section>
 <section id="importfunktion">
 <h3>Importfunktion<a class="headerlink" href="#importfunktion" title="Permalink to this heading"></a></h3>
+<section id="konfiguration">
+<h4>Konfiguration<a class="headerlink" href="#konfiguration" title="Permalink to this heading"></a></h4>
 <p>Für die Importfunktion wird ein Verzeichnis <strong>helper</strong> angelegt.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>komserv2/xplanung_light/helper
 </pre></div>
@@ -405,51 +414,6 @@ der AGS. Der muss einer im System vorhandenen Organisation zugeordnet werden kö
         <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<p>Um die Pläne historisieren zu können, erweitern wir das XPlan Modell um die Historisierungsfunktion des
-simple-history packages</p>
-<p>komserv2/xplanung_light/models.py</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">XPlan</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="c1">#name [1]</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Name des Plans&#39;</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s1">&#39;Offizieller Name des raumbezogenen Plans&#39;</span><span class="p">)</span>
-    <span class="c1">#nummer [0..1]</span>
-    <span class="n">nummer</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s2">&quot;Nummer des Plans.&quot;</span><span class="p">)</span>
-    <span class="c1">#internalId [0..1]</span>
-    <span class="c1">#beschreibung [0..1]</span>
-    <span class="c1">#kommentar [0..1]</span>
-    <span class="c1">#technHerstellDatum [0..1], Date</span>
-    <span class="c1">#genehmigungsDatum [0..1], Date</span>
-    <span class="c1">#untergangsDatum [0..1], Date</span>
-    <span class="c1">#aendertPlan [0..*], XP_VerbundenerPlan</span>
-    <span class="c1">#wurdeGeaendertVonPlan [0..*], XP_VerbundenerPlan</span>
-    <span class="c1">#aendertPlanBereich [0..*], Referenz, Testphase</span>
-    <span class="c1">#wurdeGeaendertVonPlanBereich [0..*], Referenz, Testphase</span>
-    <span class="c1">#erstellungsMassstab [0..1], Integer</span>
-    <span class="c1">#bezugshoehe [0..1], Length</span>
-    <span class="c1">#hoehenbezug [0..1]</span>
-    <span class="c1">#technischerPlanersteller, [0..1]</span>
-    <span class="c1">#raeumlicherGeltungsbereich [1], GM_Object</span>
-    <span class="n">geltungsbereich</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GeometryField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose_name</span><span class="o">=</span><span class="s1">&#39;Grenze des räumlichen Geltungsbereiches des Plans.&#39;</span><span class="p">)</span>
-    <span class="c1">#verfahrensMerkmale [0..*], XP_VerfahrensMerkmal</span>
-    <span class="c1">#hatGenerAttribut [0..*], XP_GenerAttribut</span>
-    <span class="c1">#externeReferenz, [0..*], XP_SpezExterneReferenz</span>
-    <span class="c1">#texte [0..*], XP_TextAbschnitt</span>
-    <span class="c1">#begruendungsTexte [0..*], XP_BegruendungAbschnitt</span>
-    <span class="c1">#history = HistoricalRecords(related_name=&quot;histories&quot;, inherit=True)</span>
-    <span class="n">history</span> <span class="o">=</span> <span class="n">HistoricalRecords</span><span class="p">(</span><span class="n">inherit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
-        <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="c1"># ...</span>
-
-</pre></div>
-</div>
-<p>Da damit eine Änderung des Datenmodells einhergeht, müssen wir eine Migration durchführen.</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
-python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
-</pre></div>
-</div>
 <p>Es fehlt noch die View - diesmal über eine Function-based view umgesetzt, das html-Template und der zugehörige Eintrag in der urls.py</p>
 <p>komserv2/xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
@@ -514,6 +478,24 @@ python3<span class="w"> </span>manage.py<span class="w"> </span>migrate
 <span class="c1"># ...</span>
 </pre></div>
 </div>
+<p>komserv2/xplanung_light/templates/xplanung_light/bplan_list.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!-- Neuer Link für den Import --&gt;</span>
+<span class="x">&lt;p&gt;&lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;bplan-create&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;BPlan anlegen&lt;/a&gt;&lt;a href=&quot;</span><span class="cp">{%</span> <span class="k">url</span> <span class="s1">&#39;bplan-import&#39;</span> <span class="cp">%}</span><span class="x">&quot;&gt;BPlan importieren&lt;/a&gt;&lt;/p&gt;</span>
+<span class="x">&lt;!--  --&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="import-eines-zuvor-exportierten-xplan-gmls">
+<h4>Import eines zuvor exportierten XPlan-GMLs<a class="headerlink" href="#import-eines-zuvor-exportierten-xplan-gmls" title="Permalink to this heading"></a></h4>
+<p>Die Bebauungspläne müssen irgendwie anhand ihrer Attribute identifiziert werden. Da es nur sehr wenige Pflichtfelder gibt, prüfen wir zunächst einfach
+ob ein Bebauungsplan mit dem gleichen Namen aus der abgegebenen Kommune schon existiert! Wenn also Namen und AGS der Gemeinde identisch sind, handelt es sich um denselben Plan.</p>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/import/">http://127.0.0.1:8000/bplan/import/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_import_existing.png"><img alt="Import eines zuvor exportierten XPlan-GMLs" class="bg-primary align-center" src="_images/bplan_import_existing.png" style="width: 800px;" /></a>
+<p>Wenn explizit <strong>überschreiben</strong> selektiert wurde, wird der vorhandene Plan aktualisiert.</p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_overwrite_existing.png"><img alt="Import eines zuvor exportierten XPlan-GMLs mit Überschreiben" class="bg-primary align-center" src="_images/bplan_overwrite_existing.png" style="width: 800px;" /></a>
+<p>Im sqlite-Client sieht man wie sich das auf die History auswirkt</p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_history_sqldb.png"><img alt="History Tabelle im sqlite-Client" class="bg-primary align-center" src="_images/bplan_history_sqldb.png" style="width: 800px;" /></a>
+</section>
 </section>
 </section>
 <section id="integration-mapserver">

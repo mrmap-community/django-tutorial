@@ -87,9 +87,14 @@ python3 manage.py createsuperuser --username=admin --email=admin@example.com
 
 dev-Server beenden (je nach Umgebung) und neu starten - jetzt am besten in VSCODE über F5 - Run->Start Debugging
 
-http://127.0.0.1:8000/
+[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
 
-http://127.0.0.1:8000/admin/
+```{image} img/initial_django_admin.png
+:alt: Liste der publizierenden Orgas
+:class: bg-primary
+:width: 800px
+:align: center
+```
 
 ## Aktivieren der Debugtoolbar
 
@@ -134,4 +139,15 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from debug_toolbar.toolbar import debug_toolbar_urls
 #...
 urlpatterns += staticfiles_urlpatterns() + debug_toolbar_urls()
+```
+
+Mit Debug Toolbar
+
+[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+
+```{image} img/initial_django_admin_debug.png
+:alt: Liste der publizierenden Orgas
+:class: bg-primary
+:width: 800px
+:align: center
 ```

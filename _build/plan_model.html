@@ -54,6 +54,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul>
@@ -85,6 +86,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#erfassung-eines-bplans-im-admin-backend">Erfassung eines BPlans im Admin-Backend</a></li>
 </ul>
 </li>
 </ul>
@@ -93,11 +95,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -183,7 +187,8 @@
     <span class="c1">#externeReferenz, [0..*], XP_SpezExterneReferenz</span>
     <span class="c1">#texte [0..*], XP_TextAbschnitt</span>
     <span class="c1">#begruendungsTexte [0..*], XP_BegruendungAbschnitt</span>
-    
+    <span class="n">history</span> <span class="o">=</span> <span class="n">HistoricalRecords</span><span class="p">(</span><span class="n">inherit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
     <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
         <span class="n">abstract</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -389,6 +394,11 @@
 </div>
 </section>
 </section>
+</section>
+<section id="erfassung-eines-bplans-im-admin-backend">
+<h2>Erfassung eines BPlans im Admin-Backend<a class="headerlink" href="#erfassung-eines-bplans-im-admin-backend" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/admin/xplanung_light/bplan/add/">http://127.0.0.1:8000/admin/xplanung_light/bplan/add/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_editor_in_admin.png"><img alt="Erfassung eines BPlans im Admin-Backend" class="bg-primary align-center" src="_images/bplan_editor_in_admin.png" style="width: 800px;" /></a>
 </section>
 </section>
 

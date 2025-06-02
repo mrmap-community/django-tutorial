@@ -62,9 +62,6 @@ xplanung_light/templates/registration/login.html
 xplanung_light/templates/registration/register.html
 ```jinja
 {% extends "../xplanung_light/layout.html" %}
-{% load bootstrap4 %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
 {% block content %}
 <h2>Registrieren</h2>
     <form method="post">
@@ -173,4 +170,15 @@ Dokumentation auf xplanung_light/templates/xplanung_light/home.html
     <li>...</li>
 </ul>
 <!-- ... -->
+```
+
+Aussehen nach Anmeldung des admin im Frontend
+
+[http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+```{image} img/standardfunktionen_1.png
+:alt: Standardfunktionen
+:class: bg-primary
+:width: 800px
+:align: center
 ```

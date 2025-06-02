@@ -192,3 +192,25 @@ komserv2/xplanung_light/templates/xplanung_light/bplan_template_xplanung_raster_
   </gml:featureMember>
 </xplan:XPlanAuszug>
 ```
+
+## Neue Spalte für Export in Tabelle
+
+[http://127.0.0.1:8000/bplan/](http://127.0.0.1:8000/bplan/)
+
+```{image} img/bplan_list_tables2_xml_export.png
+:alt: Neue Spalte für Export in Tabelle
+:class: bg-primary
+:width: 800px
+:align: center
+```
+
+## XML Export 
+
+[http://127.0.0.1:8000/bplan/1/xplan/](http://127.0.0.1:8000/bplan/1/xplan/)
+
+```{image} img/xplan_export_1.png
+:alt: XML Export
+:class: bg-primary
+:width: 800px
+:align: center
+```

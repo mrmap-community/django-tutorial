@@ -680,6 +680,28 @@ class BPlanTable(tables.Table):
 Die Bebauungsplantabelle hat jetzt eine Spalte mit dem jeweiligen Link zu einem konformen **ISO-19139 dataset Metadatensatz**.
 Den können wir später verwenden um die Serverkomponenten damit anzureichen - **GDI very easy  ;-)** .
 
+## Neue Spalte für Export in Tabelle
+
+[http://127.0.0.1:8000/bplan/](http://127.0.0.1:8000/bplan/)
+
+```{image} img/bplan_list_tables2_iso_export.png
+:alt: Neue Spalte für Export in Tabelle
+:class: bg-primary
+:width: 800px
+:align: center
+```
+
+## ISO19139 Export 
+
+[http://127.0.0.1:8000/bplan/1/iso19139/](http://127.0.0.1:8000/bplan/1/iso19139/)
+
+```{image} img/iso19139_export_1.png
+:alt: ISO19139 Export
+:class: bg-primary
+:width: 800px
+:align: center
+```
+
 # TODOs
 
 Um die Software zur Produktionsreife zu bringen, müssen noch ein paar Dinge entwickelt werden. 

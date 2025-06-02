@@ -54,6 +54,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul>
@@ -76,11 +77,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -162,6 +165,7 @@ Siehe auch <a class="reference external" href="https://stackoverflow.com/questio
 <span class="x">            var wmsLayer = L.tileLayer.wms(&#39;https://geo5.service24.rlp.de/wms/liegenschaften_rp.fcgi?&#39;, {</span>
 <span class="x">                layers: &#39;Flurstueck&#39;,</span>
 <span class="x">                format: &#39;image/png&#39;,</span>
+<span class="x">                maxZoom: 20,</span>
 <span class="x">                transparent: true,</span>
 <span class="x">            }).addTo(map);</span>
 <span class="x">            // and many more</span>
@@ -175,6 +179,39 @@ Siehe auch <a class="reference external" href="https://stackoverflow.com/questio
 <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 </pre></div>
 </div>
+<p>xplanung_light/templates/xplanung_light/bplan_form_update.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Bebauungsplan editieren</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;script type=&quot;text/javascript&quot;&gt;</span>
+<span class="x">    window.addEventListener(&quot;map:init&quot;, function(e) {</span>
+<span class="x">            var detail = e.detail;</span>
+<span class="x">            var map = detail.map;</span>
+<span class="x">            /* Transparent overlay layers */</span>
+<span class="x">            var wmsLayer = L.tileLayer.wms(&#39;https://geo5.service24.rlp.de/wms/liegenschaften_rp.fcgi?&#39;, {</span>
+<span class="x">                layers: &#39;Flurstueck&#39;,</span>
+<span class="x">                format: &#39;image/png&#39;,</span>
+<span class="x">                maxZoom: 20,</span>
+<span class="x">                transparent: true,</span>
+<span class="x">            }).addTo(map);</span>
+<span class="x">            // and many more</span>
+<span class="x">        }, false</span>
+<span class="x">    ); //end of window.addEventListener</span>
+<span class="x">&lt;/script&gt;</span>
+<span class="x">    &lt;form method=&quot;post&quot; class=&quot;geocoding-form&quot;&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span>
+<span class="x">        &lt;input type=&quot;submit&quot; value=&quot;Aktualisieren&quot;&gt;</span>
+<span class="x">    &lt;/form&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="darstellung-wms-in-client">
+<h1>Darstellung WMS in Client<a class="headerlink" href="#darstellung-wms-in-client" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="http://127.0.0.1:8000/admin/xplanung_light/bplan/add/">http://127.0.0.1:8000/admin/xplanung_light/bplan/add/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/leaflet_wms_view.png"><img alt="Darstellung WMS in Client" class="bg-primary align-center" src="_images/leaflet_wms_view.png" style="width: 800px;" /></a>
 </section>
 
 

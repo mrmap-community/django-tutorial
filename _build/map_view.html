@@ -54,6 +54,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul>
@@ -76,11 +77,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -88,12 +91,17 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Kartenansicht</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Kartenansicht</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#konfiguration">Konfiguration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kartenanzeige-im-client">Kartenanzeige im Client</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="#suche">Suche</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation-django-filter">Installation django-filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#erstellen-einer-filter-klasse">Erstellen einer Filter Klasse</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#anpassen-des-views">Anpassen des Views</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#anzeige-der-filterfunktionen-im-template">Anzeige der Filterfunktionen im template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#konfiguration-der-filterfunktionen-im-template">Konfiguration der Filterfunktionen im template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#darstellung-der-filter">Darstellung der Filter</a></li>
 </ul>
 </li>
 </ul>
@@ -135,13 +143,16 @@
              
   <section id="kartenansicht">
 <h1>Kartenansicht<a class="headerlink" href="#kartenansicht" title="Permalink to this heading"></a></h1>
+<section id="konfiguration">
+<h2>Konfiguration<a class="headerlink" href="#konfiguration" title="Permalink to this heading"></a></h2>
 <p>Bei der Liste der Bebauungspläne macht es Sinn sich die Lage der Pläne auch auf einer dynamischen Übersichtskarte anzeigen zu lassen. Hierzu kann django-leaflet genutzt werden.
 Im ersten Schritt muss man aber die Geodaten mit in den View übernehmen. Theoretisch wäre es ausreichend das Geometrie Feld <strong>geltungsbereich</strong> zu nutzen. Wenn man aber etwas Interaktion haben will, z.B. eine Selektierbarkeit einzelner Objekte im Viewer, dann ist es besser, ein gesamtes Geometrieobjekt mit ausgewählten Attributen zu verwenden.
 Hierzu überschreiben wir den die get_context_data Funktion der ListView um eine Serialisierung der Geoemtrien der aktuellen Seite und nennen sie <strong>markers</strong></p>
 <p>xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="c1"># ...</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">FilterView</span><span class="p">,</span> <span class="n">SingleTableView</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">SingleTableView</span><span class="p">):</span>
 <span class="c1"># ...</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -298,6 +309,12 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </pre></div>
 </div>
 </section>
+<section id="kartenanzeige-im-client">
+<h2>Kartenanzeige im Client<a class="headerlink" href="#kartenanzeige-im-client" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/">http://127.0.0.1:8000/bplan/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_list_leaflet.png"><img alt="Kartenanzeige im Client" class="bg-primary align-center" src="_images/bplan_list_leaflet.png" style="width: 800px;" /></a>
+</section>
+</section>
 <section id="suche">
 <h1>Suche<a class="headerlink" href="#suche" title="Permalink to this heading"></a></h1>
 <section id="installation-django-filter">
@@ -361,10 +378,8 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </ul>
 <p>komserv/xplanung_light/views.py</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ...</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.filter</span><span class="w"> </span><span class="kn">import</span> <span class="n">BPlanFilter</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django_filters.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterView</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">django.core.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
 <span class="c1"># ...</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BPlanListView</span><span class="p">(</span><span class="n">FilterView</span><span class="p">,</span> <span class="n">SingleTableView</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
@@ -388,8 +403,8 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 </pre></div>
 </div>
 </section>
-<section id="anzeige-der-filterfunktionen-im-template">
-<h2>Anzeige der Filterfunktionen im template<a class="headerlink" href="#anzeige-der-filterfunktionen-im-template" title="Permalink to this heading"></a></h2>
+<section id="konfiguration-der-filterfunktionen-im-template">
+<h2>Konfiguration der Filterfunktionen im template<a class="headerlink" href="#konfiguration-der-filterfunktionen-im-template" title="Permalink to this heading"></a></h2>
 <p>templates/xplanung_light/bplan_list.html</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;!-- ... --&gt;</span>
 <span class="cp">{%</span> <span class="k">leaflet_map</span> <span class="s2">&quot;bplan_list_map&quot;</span> <span class="nv">callback</span><span class="o">=</span><span class="s2">&quot;window.map_init_basic&quot;</span> <span class="cp">%}</span>
@@ -404,6 +419,11 @@ komserv/xplanung_light/templates/xplanung_light/bplan_list.html</p>
 <span class="x">&lt;!-- ... --&gt;</span>
 </pre></div>
 </div>
+</section>
+<section id="darstellung-der-filter">
+<h2>Darstellung der Filter<a class="headerlink" href="#darstellung-der-filter" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/">http://127.0.0.1:8000/bplan/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_list_filter.png"><img alt="Darstellung der Filter" class="bg-primary align-center" src="_images/bplan_list_filter.png" style="width: 800px;" /></a>
 </section>
 </section>
 

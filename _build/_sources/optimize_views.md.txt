@@ -40,6 +40,17 @@ class BPlanUpdateView(UpdateView):
         return form
 ```
 
+## Erfassung eines BPlans im Frontend
+
+[http://127.0.0.1:8000/bplan/create/](http://127.0.0.1:8000/bplan/create/)
+
+```{image} img/bplan_create_view_leaflet.png
+:alt: Erfassung eines BPlans im Frontend
+:class: bg-primary
+:width: 800px
+:align: center
+```
+
 # Tabellenanzeige
 
 Um mit geringem Aufwand eine einfach zu pflegende Tabellenanzeige zu erhalten, bietet sich das package [**django-tables2**](https://django-tables2.readthedocs.io/en/latest/) an.
@@ -102,8 +113,12 @@ class BPlanListView(SingleTableView):
 Anpassung der Liste - Hinzufügen eines Create Buttons - xplanung_light/templates/xplanung_light/bplan_list.html
 ```jinja
 {# .... #}
+{% load render_table from django_tables2 %}
+<!-- add boostrap form css -->
+{% load django_bootstrap5 %}
 {% block content %}
 <p><a href="{% url 'bplan-create' %}">BPlan anlegen</a></p>
+{% render_table table %}
 {# .... #}
 ```
 
@@ -124,4 +139,15 @@ Datenmodelle migrieren
 ```shell
 python3 manage.py makemigrations
 python3 manage.py migrate
+```
+
+# Liste der Pläne im Frontend
+
+[http://127.0.0.1:8000/bplan/](http://127.0.0.1:8000/bplan/)
+
+```{image} img/bplan_list_tables2.png
+:alt: Liste der Pläne im Frontend
+:class: bg-primary
+:width: 800px
+:align: center
 ```

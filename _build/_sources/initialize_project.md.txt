@@ -20,4 +20,14 @@ Starten des Django-Servers auf lokalem Port 8000
 ```shell
 python manage.py runserver
 ```
-http://127.0.0.1:8000
+
+# Frontend testen
+
+[http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+```{image} img/initial_django_project.png
+:alt: Liste der publizierenden Orgas
+:class: bg-primary
+:width: 800px
+:align: center
+```

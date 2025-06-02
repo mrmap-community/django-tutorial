@@ -54,6 +54,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul class="current">
@@ -81,11 +82,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -213,8 +216,8 @@ mkdir<span class="w"> </span>xplanung_light
 <section id="ausprobieren-der-admin-oberflache-und-der-startseite">
 <h2>Ausprobieren der Admin Oberfläche und der Startseite<a class="headerlink" href="#ausprobieren-der-admin-oberflache-und-der-startseite" title="Permalink to this heading"></a></h2>
 <p>dev-Server beenden (je nach Umgebung) und neu starten - jetzt am besten in VSCODE über F5 - Run-&gt;Start Debugging</p>
-<p>http://127.0.0.1:8000/</p>
-<p>http://127.0.0.1:8000/admin/</p>
+<p><a class="reference external" href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/initial_django_admin.png"><img alt="Liste der publizierenden Orgas" class="bg-primary align-center" src="_images/initial_django_admin.png" style="width: 800px;" /></a>
 </section>
 <section id="aktivieren-der-debugtoolbar">
 <h2>Aktivieren der Debugtoolbar<a class="headerlink" href="#aktivieren-der-debugtoolbar" title="Permalink to this heading"></a></h2>
@@ -254,6 +257,9 @@ mkdir<span class="w"> </span>xplanung_light
 <span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">staticfiles_urlpatterns</span><span class="p">()</span> <span class="o">+</span> <span class="n">debug_toolbar_urls</span><span class="p">()</span>
 </pre></div>
 </div>
+<p>Mit Debug Toolbar</p>
+<p><a class="reference external" href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/initial_django_admin_debug.png"><img alt="Liste der publizierenden Orgas" class="bg-primary align-center" src="_images/initial_django_admin_debug.png" style="width: 800px;" /></a>
 </section>
 </section>
 

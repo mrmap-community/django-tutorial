@@ -54,6 +54,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul>
@@ -76,11 +77,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul>
@@ -101,7 +104,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#anpassung-der-tabelle">Anpassung der Tabelle</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#ergebnis-des-iso-metadaten-exports">Ergebnis des ISO-Metadaten Exports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#ergebnis-des-iso-metadaten-exports">Ergebnis des ISO-Metadaten Exports</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#neue-spalte-fur-export-in-tabelle">Neue Spalte für Export in Tabelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iso19139-export">ISO19139 Export</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="#todos">TODOs</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Addons</span></p>
@@ -805,6 +812,16 @@ Einen praktischen Nutzwert hat die Software in diesem Stadium aber noch nicht.</
 <h1>Ergebnis des ISO-Metadaten Exports<a class="headerlink" href="#ergebnis-des-iso-metadaten-exports" title="Permalink to this heading"></a></h1>
 <p>Die Bebauungsplantabelle hat jetzt eine Spalte mit dem jeweiligen Link zu einem konformen <strong>ISO-19139 dataset Metadatensatz</strong>.
 Den können wir später verwenden um die Serverkomponenten damit anzureichen - <strong>GDI very easy  ;-)</strong> .</p>
+<section id="neue-spalte-fur-export-in-tabelle">
+<h2>Neue Spalte für Export in Tabelle<a class="headerlink" href="#neue-spalte-fur-export-in-tabelle" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/">http://127.0.0.1:8000/bplan/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_list_tables2_iso_export.png"><img alt="Neue Spalte für Export in Tabelle" class="bg-primary align-center" src="_images/bplan_list_tables2_iso_export.png" style="width: 800px;" /></a>
+</section>
+<section id="iso19139-export">
+<h2>ISO19139 Export<a class="headerlink" href="#iso19139-export" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/1/iso19139/">http://127.0.0.1:8000/bplan/1/iso19139/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/iso19139_export_1.png"><img alt="ISO19139 Export" class="bg-primary align-center" src="_images/iso19139_export_1.png" style="width: 800px;" /></a>
+</section>
 </section>
 <section id="todos">
 <h1>TODOs<a class="headerlink" href="#todos" title="Permalink to this heading"></a></h1>

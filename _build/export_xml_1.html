@@ -54,6 +54,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
 <ul>
@@ -76,11 +77,13 @@
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
 <ul class="current">
@@ -89,6 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#url-fur-export">URL für Export</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#link-in-table-view">Link in Table View</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#xml-template">XML Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#neue-spalte-fur-export-in-tabelle">Neue Spalte für Export in Tabelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xml-export">XML Export</a></li>
 </ul>
 </li>
 </ul>
@@ -319,6 +324,16 @@ des querysets mit einer annotation lösen. Zusätzlich zu den Polygonen brauchen
 <span class="x">&lt;/xplan:XPlanAuszug&gt;</span>
 </pre></div>
 </div>
+</section>
+<section id="neue-spalte-fur-export-in-tabelle">
+<h2>Neue Spalte für Export in Tabelle<a class="headerlink" href="#neue-spalte-fur-export-in-tabelle" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/">http://127.0.0.1:8000/bplan/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_list_tables2_xml_export.png"><img alt="Neue Spalte für Export in Tabelle" class="bg-primary align-center" src="_images/bplan_list_tables2_xml_export.png" style="width: 800px;" /></a>
+</section>
+<section id="xml-export">
+<h2>XML Export<a class="headerlink" href="#xml-export" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/1/xplan/">http://127.0.0.1:8000/bplan/1/xplan/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/xplan_export_1.png"><img alt="XML Export" class="bg-primary align-center" src="_images/xplan_export_1.png" style="width: 800px;" /></a>
 </section>
 </section>
 
