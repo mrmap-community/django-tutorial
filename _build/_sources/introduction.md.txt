@@ -19,7 +19,16 @@ Verwendete Django packages:
 * django-leaflet
 * django-tables2
 * django-debug-toolbar
-* django-filters
+* django-filter
+* django-crispy-forms
+* crispy-bootstrap5
+
+Weitere python libs:
+
+* requests
+* openpyxl
+* mappyfile
+* mapscript==7.6.0
 
 # Weitere Informationen
 
