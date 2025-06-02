@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Einführung &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=9bf55d28"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Installation der Python Umgebung" href="installation.html" />
+    <link rel="prev" title="GeoDjango Tutorial" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#beispielimplementierungen">Beispielimplementierungen</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#beispiel-hosting-bw-komm-one-wfs-abgabe-bplan-in-rasterform">Beispiel Hosting BW Komm.ONE - WFS Abgabe BPlan in Rasterform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#netgis-mannheim">Netgis Mannheim</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_model.html">Organisationsmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plan_model.html">Planmodell</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="export_xml_1.html">XPlanung GML Export</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#metadatenexport">Metadatenexport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#ergebnis-des-iso-metadaten-exports">Ergebnis des ISO-Metadaten Exports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Addons</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="addons.html">Zusätzliche Funktionen</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Einführung</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/introduction.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="einfuhrung">
+<h1>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading"></a></h1>
+<p>Das Tutorial soll an einem konkreten Beispiel zeigen, wie man mit Django in relativ kurzer Zeit eine einfache Anwendung zur Verwaltung von Geodaten erstellen kann. Als Beispiel werden hier kommunale Bauleitpläne genommen.</p>
+<p>Die Anwendung verfügt über folgende Funktionen/Eigenschaften:</p>
+<ul class="simple">
+<li><p>Nutzung der Django-Standardbenutzerverwaltung für Registrierung und Authentifizierung</p></li>
+<li><p>Import der rheinland-pfälzischen Gebietskörperschaften mit deren geometrischen Abgrenzungen</p></li>
+<li><p>Historisierung der Gebietskörperschaften</p></li>
+<li><p>Erstellen, Editieren, Löschen von Bebauungsplänen mit Referenzen auf die Gebietskörperschaften</p></li>
+<li><p>Editieren multipolygonaler Abgrenzungen von Geltungsbereichen der Bebauungspläne</p></li>
+<li><p>Layout mit bootstrap5 optimiert (responsive)</p></li>
+<li><p>Export von konformen XPlan-GML Dateien</p></li>
+</ul>
+<p>Verwendete Django packages:</p>
+<ul class="simple">
+<li><p>django-bootstrap5</p></li>
+<li><p>django-simple-history</p></li>
+<li><p>django-leaflet</p></li>
+<li><p>django-tables2</p></li>
+<li><p>django-debug-toolbar</p></li>
+<li><p>django-filter</p></li>
+<li><p>django-crispy-forms</p></li>
+<li><p>crispy-bootstrap5</p></li>
+</ul>
+<p>Weitere python libs:</p>
+<ul class="simple">
+<li><p>requests</p></li>
+<li><p>openpyxl</p></li>
+<li><p>mappyfile</p></li>
+<li><p>mapscript==7.6.0</p></li>
+</ul>
+</section>
+<section id="weitere-informationen">
+<h1>Weitere Informationen<a class="headerlink" href="#weitere-informationen" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.djangoproject.com/">django</a></p></li>
+<li><p><a class="reference external" href="https://xleitstelle.de/releases/objektartenkatalog_6_0">xplanung</a></p></li>
+<li><p><a class="reference external" href="https://www.statistik.rlp.de/publikationen/verzeichnisse-und-adressarien">Gebietskörperschaften RLP</a></p></li>
+<li><p><a class="reference external" href="https://www.geoportal.rlp.de/mediawiki/images/c/c7/Leitfaden_Bereitstellung_komm_Plaene.pdf">Leitfaden kommunale Pläne GDI-RP</a></p></li>
+<li><p><a class="reference external" href="https://gitlab.opencode.de/xleitstelle/xplanung/testdaten">Testdaten xleitstelle</a></p></li>
+<li><p><a class="reference external" href="https://gitlab.opencode.de/diplanung/ozgxplanung/-/tree/xplanbox-7.1.3/xplan-tests/xplan-tests-resources/src/main/resources/de/latlon/xplan/xplan60?ref_type=tags">Beispiel Dateien XPlanung 6.0</a></p></li>
+<li><p><a class="reference external" href="https://github.com/kreis-viersen/xplan-reader/">QGIS XPlan-Reader</a></p></li>
+<li><p><a class="reference external" href="https://github.com/kreis-viersen/xplan-umring">QGIS XPlan-Umring</a></p></li>
+<li><p><a class="reference external" href="https://www.xplanungsplattform.de/xplan-validator/">Validator - alt</a></p></li>
+<li><p><a class="reference external" href="https://xleitstelle.de/validator">Validator - neu</a></p></li>
+</ul>
+</section>
+<section id="beispielimplementierungen">
+<h1>Beispielimplementierungen<a class="headerlink" href="#beispielimplementierungen" title="Link to this heading"></a></h1>
+<section id="beispiel-hosting-bw-komm-one-wfs-abgabe-bplan-in-rasterform">
+<h2>Beispiel Hosting BW <a class="reference external" href="https://www.komm.one/wer-wir-sind">Komm.ONE</a> - WFS Abgabe BPlan in Rasterform<a class="headerlink" href="#beispiel-hosting-bw-komm-one-wfs-abgabe-bplan-in-rasterform" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Link</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Erläuterung</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://geodienste.komm.one/ows/services/org.641.1b95f33f-e4f3-4898-bcba-8319409933fc_wfs/org.641.db827e93-33f7-4b4e-97ce-9772690d4b6b?SERVICE=WFS&amp;amp;Request=GetCapabilities">Eigenschaftsabfrage</a></p></td>
+<td><p>GetCapabilities</p></td>
+<td><p>keine</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://geodienste.komm.one/ows/services/org.641.1b95f33f-e4f3-4898-bcba-8319409933fc_wfs/org.641.db827e93-33f7-4b4e-97ce-9772690d4b6b?VERSION=2.0.0&amp;amp;SERVICE=WFS&amp;amp;typename=BP_Plan&amp;amp;Request=GetFeature">BP_Plan</a></p></td>
+<td><p>GetFeature</p></td>
+<td><p>keine</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://geodienste.komm.one/ows/services/org.641.1b95f33f-e4f3-4898-bcba-8319409933fc_wfs/org.641.db827e93-33f7-4b4e-97ce-9772690d4b6b?VERSION=2.0.0&amp;amp;SERVICE=WFS&amp;amp;typename=XP_Rasterdarstellung&amp;amp;Request=GetFeature">XP_Rasterdarstellung</a></p></td>
+<td><p>GetFeature</p></td>
+<td><p>keine</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://geodienste.komm.one/ows/services/org.641.1b95f33f-e4f3-4898-bcba-8319409933fc_wfs/org.641.db827e93-33f7-4b4e-97ce-9772690d4b6b?SERVICE=WFS&amp;amp;VERSION=2.0.0&amp;amp;typename=BP_Bereich&amp;amp;Request=GetFeature">BP_Bereich</a></p></td>
+<td><p>GetFeature</p></td>
+<td><p>keine</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="netgis-mannheim">
+<h2>Netgis Mannheim<a class="headerlink" href="#netgis-mannheim" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://service.gis-mannheim.de/mannheim/mod_plan_bw/">Übersicht</a></p></li>
+<li><p><a class="reference external" href="https://service.gis-mannheim.de/mannheim/mod_plan_bw/get_xplan_gml.php?gmlid=GML_ef9a23ca-9613-d9b0-ac3e-2ff516bee276">Einzelner Plan</a></p></li>
+</ul>
+</section>
+</section>
+<section id="leitfaden">
+<h1>Leitfäden<a class="headerlink" href="#leitfaden" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.stmb.bayern.de/assets/stmi/miniwebs/digitale_planung/xplanung_by_leitfaden_a4_pre.pdf">Bayern 10/2024</a></p></li>
+<li><p><a class="reference external" href="https://www.geoportal-bw.de/documents/d/guest/leitfaden_bauleitplan_v3-1">Baden-Württemberg 12/2022</a></p>
+<ul>
+<li><p><a class="reference external" href="https://www.geoportal-bw.de/documents/d/guest/anlage1_v3_1_221215">Anlage</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://lbv.brandenburg.de/download/Raumbeobachtung/Pflichtenheft_2022.pdf">Brandenburg 05/2022</a></p></li>
+<li><p><a class="reference external" href="https://www.geoportal.rlp.de/mediawiki/images/c/c7/Leitfaden_Bereitstellung_komm_Plaene.pdf">Rheinland-Pfalz 10/2017</a></p></li>
+<li><p><a class="reference external" href="https://mid.sachsen-anhalt.de/fileadmin/Bibliothek/Politik_und_Verwaltung/MLV/MID/Ministerium/Publikationen/XPlanung-Leitfaden-Sachsen-Anhalt.pdf">Sachsen-Anhalt 03/2024</a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="GeoDjango Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation der Python Umgebung" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

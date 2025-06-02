@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zentrale Konfiguration &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=9bf55d28"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="XPlanung GML Export" href="export_xml_1.html" />
+    <link rel="prev" title="Geometrie Editor" href="optimize_views.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#beispielimplementierungen">Beispielimplementierungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_model.html">Organisationsmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plan_model.html">Planmodell</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="export_xml_1.html">XPlanung GML Export</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#metadatenexport">Metadatenexport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#ergebnis-des-iso-metadaten-exports">Ergebnis des ISO-Metadaten Exports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Addons</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="addons.html">Zusätzliche Funktionen</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Zentrale Konfiguration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/leaflet_conf.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zentrale-konfiguration">
+<h1>Zentrale Konfiguration<a class="headerlink" href="#zentrale-konfiguration" title="Link to this heading"></a></h1>
+<p>komserv/settings.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="n">LEAFLET_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># conf here</span>
+    <span class="s1">&#39;SPATIAL_EXTENT&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">49.0</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">,</span> <span class="mi">52</span><span class="p">),</span>
+    <span class="s1">&#39;DEFAULT_CENTER&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">),</span>
+    <span class="s1">&#39;DEFAULT_ZOOM&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s1">&#39;MIN_ZOOM&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;MAX_ZOOM&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s1">&#39;DEFAULT_PRECISION&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+</section>
+<section id="wms-layer-hinzufugen">
+<h1>WMS Layer hinzufügen<a class="headerlink" href="#wms-layer-hinzufugen" title="Link to this heading"></a></h1>
+<p>Muss im im jeweiligen Template erfolgen, da die zentrale Leaflet Konfiguration nur zusätzliche Tiled Layer erlaubt.
+Siehe auch <a class="reference external" href="https://stackoverflow.com/questions/66938889/how-to-add-leaflet-extensions-marker-basemap-geocoder-to-django-leaflet">https://stackoverflow.com/questions/66938889/how-to-add-leaflet-extensions-marker-basemap-geocoder-to-django-leaflet</a></p>
+<p>xplanung_light/templates/xplanung_light/bplan_form.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Bebauungsplan anlegen</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;script type=&quot;text/javascript&quot;&gt;</span>
+<span class="x">    window.addEventListener(&quot;map:init&quot;, function(e) {</span>
+<span class="x">            var detail = e.detail;</span>
+<span class="x">            var map = detail.map;</span>
+<span class="x">            /* Transparent overlay layers */</span>
+<span class="x">            var wmsLayer = L.tileLayer.wms(&#39;https://geo5.service24.rlp.de/wms/liegenschaften_rp.fcgi?&#39;, {</span>
+<span class="x">                layers: &#39;Flurstueck&#39;,</span>
+<span class="x">                format: &#39;image/png&#39;,</span>
+<span class="x">                maxZoom: 20,</span>
+<span class="x">                transparent: true,</span>
+<span class="x">            }).addTo(map);</span>
+<span class="x">            // and many more</span>
+<span class="x">        }, false</span>
+<span class="x">    ); //end of window.addEventListener</span>
+<span class="x">&lt;/script&gt;</span>
+<span class="x">    &lt;form method=&quot;post&quot; class=&quot;geocoding-form&quot;&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span>
+<span class="x">        &lt;input type=&quot;submit&quot; value=&quot;Speichern&quot;&gt;</span>
+<span class="x">    &lt;/form&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+<p>xplanung_light/templates/xplanung_light/bplan_form_update.html</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;xplanung_light/layout.html&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span>
+<span class="x">    Bebauungsplan editieren</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="x">&lt;script type=&quot;text/javascript&quot;&gt;</span>
+<span class="x">    window.addEventListener(&quot;map:init&quot;, function(e) {</span>
+<span class="x">            var detail = e.detail;</span>
+<span class="x">            var map = detail.map;</span>
+<span class="x">            /* Transparent overlay layers */</span>
+<span class="x">            var wmsLayer = L.tileLayer.wms(&#39;https://geo5.service24.rlp.de/wms/liegenschaften_rp.fcgi?&#39;, {</span>
+<span class="x">                layers: &#39;Flurstueck&#39;,</span>
+<span class="x">                format: &#39;image/png&#39;,</span>
+<span class="x">                maxZoom: 20,</span>
+<span class="x">                transparent: true,</span>
+<span class="x">            }).addTo(map);</span>
+<span class="x">            // and many more</span>
+<span class="x">        }, false</span>
+<span class="x">    ); //end of window.addEventListener</span>
+<span class="x">&lt;/script&gt;</span>
+<span class="x">    &lt;form method=&quot;post&quot; class=&quot;geocoding-form&quot;&gt;</span><span class="cp">{%</span> <span class="k">csrf_token</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span>
+<span class="x">        &lt;input type=&quot;submit&quot; value=&quot;Aktualisieren&quot;&gt;</span>
+<span class="x">    &lt;/form&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+</div>
+</section>
+<section id="darstellung-wms-in-client">
+<h1>Darstellung WMS in Client<a class="headerlink" href="#darstellung-wms-in-client" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="http://127.0.0.1:8000/admin/xplanung_light/bplan/add/">http://127.0.0.1:8000/admin/xplanung_light/bplan/add/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/leaflet_wms_view.png"><img alt="Darstellung WMS in Client" class="bg-primary align-center" src="_images/leaflet_wms_view.png" style="width: 800px;" />
+</a>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="optimize_views.html" class="btn btn-neutral float-left" title="Geometrie Editor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="export_xml_1.html" class="btn btn-neutral float-right" title="XPlanung GML Export" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

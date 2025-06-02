@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="de" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XPlanung GML Export &mdash; GeoDjango Tutorial 0.1 Dokumentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5a7626eb"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=9bf55d28"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Kartenansicht" href="map_view.html" />
+    <link rel="prev" title="Zentrale Konfiguration" href="leaflet_conf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GeoDjango Tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Dokumentation durchsuchen" aria-label="Dokumentation durchsuchen" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Einführung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Einführung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#weitere-informationen">Weitere Informationen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#beispielimplementierungen">Beispielimplementierungen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#leitfaden">Leitfäden</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Vorarbeiten</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation der Python Umgebung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html">Django Projekt initialisieren (Standard-Terminal oder VSCODE-Terminal)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialize_project.html#frontend-testen">Frontend testen</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rahmen für Anwendung</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="first_steps.html">Erste Schritte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_templates.html">Erstellung erster Versionen der Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="add_login_register.html">Nutzung von Standardfunktionen des auth packages für Anmeldung und Registrierung</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Responsive Design</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="make_nicer.html">Integration von bootstrap5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Datenmodelle</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="model_prerequisites.html">Vorbereitung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organization_model.html">Organisationsmodell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plan_model.html">Planmodell</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Optimieren der Views</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html">Geometrie Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#tabellenanzeige">Tabellenanzeige</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#anpassung-templates">Anpassung Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimize_views.html#liste-der-plane-im-frontend">Liste der Pläne im Frontend</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Leaflet Konfiguration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html">Zentrale Konfiguration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#wms-layer-hinzufugen">WMS Layer hinzufügen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="leaflet_conf.html#darstellung-wms-in-client">Darstellung WMS in Client</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Export XPlanung</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">XPlanung GML Export</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#export-xml-view">Export XML View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#url-fur-export">URL für Export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#link-in-table-view">Link in Table View</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xml-template">XML Template</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#neue-spalte-fur-export-in-tabelle">Neue Spalte für Export in Tabelle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xml-export">XML Export</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Kartenansicht und Filter</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html">Kartenansicht</a></li>
+<li class="toctree-l1"><a class="reference internal" href="map_view.html#suche">Suche</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Ergebnis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="result.html">Zusammenfassung</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#metadatenexport">Metadatenexport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#ergebnis-des-iso-metadaten-exports">Ergebnis des ISO-Metadaten Exports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="result.html#todos">TODOs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Addons</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="addons.html">Zusätzliche Funktionen</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GeoDjango Tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">XPlanung GML Export</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/export_xml_1.md.txt" rel="nofollow"> Quelltext anzeigen</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="xplanung-gml-export">
+<h1>XPlanung GML Export<a class="headerlink" href="#xplanung-gml-export" title="Link to this heading"></a></h1>
+<p>Für den interoperablen Datenaustausch müssen die Bebauungsplaninformationen in XPlan-GML exportiert werden können.
+In Django lassen sich hierfür einfache XML-Templates verwenden. Diese werden zur Laufzeit mit den Daten aus der DB gefüllt.
+Das Prinzip ist das gleiche wie bei den HTML-Templates.</p>
+<section id="export-xml-view">
+<h2>Export XML View<a class="headerlink" href="#export-xml-view" title="Link to this heading"></a></h2>
+<p>Für den Export brauchen wir einen View. Da immer nur ein einzelner Bebauungsplan exportiert wird, kann man als Grundlage den Standard Detail View nutzen.</p>
+<p>xplanung_light/views.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">DetailView</span>
+<span class="c1">#...</span>
+<span class="k">class</span> <span class="nc">BPlanDetailView</span><span class="p">(</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+<p>Dieser vererbt seine Struktur an den neuen Export View. Für ein konformes XPlan-GML sind einige Vorarbeiten nötig. Wir brauchen die Geometrien
+für den räumlichen Geltungsbereich im EPSG:25832 und im Format GML3. Das kann man relativ einfach mit einer Erweiterung
+des querysets mit einer annotation lösen. Zusätzlich zu den Polygonen brauchen wir noch den Extent der Geometrien. Dieser läßt sich aktuell nicht über eine annotation abfragen, sondern muss zur Laufzeit berechnet werden. Dazu nutzen wir die über Geodjango zur Verfügung stehende GDAL Implementierung. Da wir auch das GML3 noch ändern müssen (Ergänzungen von gml_id Attributen), brauchen wir noch die etree-Bibliothek zum Parsen und Schreiben von XML.</p>
+<p>xplanung_light/views.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span> <span class="nn">django.contrib.gis.db.models.functions</span> <span class="kn">import</span> <span class="n">AsGML</span><span class="p">,</span> <span class="n">Transform</span>
+<span class="kn">from</span> <span class="nn">django.contrib.gis.gdal</span> <span class="kn">import</span> <span class="n">CoordTransform</span><span class="p">,</span> <span class="n">SpatialReference</span>
+<span class="kn">from</span> <span class="nn">django.contrib.gis.gdal</span> <span class="kn">import</span> <span class="n">OGRGeometry</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="c1">#...</span>
+<span class="k">class</span> <span class="nc">BPlanDetailXmlRasterView</span><span class="p">(</span><span class="n">BPlanDetailView</span><span class="p">):</span>  
+
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Erweiterung der auszulesenden Objekte um eine transformierte Geomtrie im Format GML 3</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_queryset</span><span class="p">()</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">geltungsbereich_gml_25832</span><span class="o">=</span><span class="n">AsGML</span><span class="p">(</span><span class="n">Transform</span><span class="p">(</span><span class="s2">&quot;geltungsbereich&quot;</span><span class="p">,</span> <span class="mi">25832</span><span class="p">),</span> <span class="n">version</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">queryset</span>
+
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Um einen XPlanung-konformen Auszug zu bekommen, werden gml_id(s) verwendet.</span>
+        <span class="c1"># Es handelt sich um uuids, die noch das Prefix &quot;GML_&quot; bekommen. Grundsätzlich sollten die </span>
+        <span class="c1"># aus den Daten in der DB stammen und dort vergeben werden. </span>
+        <span class="c1"># Im ersten Schritt synthetisieren wir sie einfach ;-)</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;auszug_uuid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GML_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;bplan_uuid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GML_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+        <span class="c1"># Irgendwie gibt es keine django model function um direkt den Extent der Geometrie zu erhalten. Daher nutzen wir hier gdal</span>
+        <span class="c1"># und Transformieren die Daten erneut im RAM</span>
+        <span class="c1"># Definition der Transformation (Daten sind immer in WGS 84 - 4326)</span>
+        <span class="n">ct</span> <span class="o">=</span> <span class="n">CoordTransform</span><span class="p">(</span><span class="n">SpatialReference</span><span class="p">(</span><span class="mi">4326</span><span class="p">,</span> <span class="n">srs_type</span><span class="o">=</span><span class="s1">&#39;epsg&#39;</span><span class="p">),</span> <span class="n">SpatialReference</span><span class="p">(</span><span class="mi">25832</span><span class="p">,</span> <span class="n">srs_type</span><span class="o">=</span><span class="s1">&#39;epsg&#39;</span><span class="p">))</span>
+        <span class="c1"># OGRGeoemtry Objekt erstellen</span>
+        <span class="n">ogr_geom</span> <span class="o">=</span> <span class="n">OGRGeometry</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;bplan&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">geltungsbereich</span><span class="p">),</span> <span class="n">srs</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+        <span class="c1"># Transformation nach EPSG:25832</span>
+        <span class="n">ogr_geom</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+        <span class="c1"># Speichern des Extents in den Context</span>
+        <span class="n">context</span><span class="p">[</span><span class="s1">&#39;extent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ogr_geom</span><span class="o">.</span><span class="n">extent</span>
+        <span class="c1"># Ausgabe der GML Variante zu Testzwecken </span>
+        <span class="c1"># print(context[&#39;bplan&#39;].geltungsbereich_gml_25832)</span>
+        <span class="c1"># Da die GML Daten nicht alle Attribute beinhalten, die XPlanung fordert, müssen wir sie anpassen, bzw. umschreiben</span>
+        <span class="c1"># Hierzu nutzen wir etree</span>
+        <span class="n">ET</span><span class="o">.</span><span class="n">register_namespace</span><span class="p">(</span><span class="s1">&#39;gml&#39;</span><span class="p">,</span><span class="s1">&#39;http://www.opengis.net/gml/3.2&#39;</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">&quot;&lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&gt;&lt;snippet xmlns:gml=&#39;http://www.opengis.net/gml/3.2&#39;&gt;&quot;</span> <span class="o">+</span> <span class="n">context</span><span class="p">[</span><span class="s1">&#39;bplan&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">geltungsbereich_gml_25832</span> <span class="o">+</span> <span class="s2">&quot;&lt;/snippet&gt;&quot;</span><span class="p">)</span>
+        <span class="n">ns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gml&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.opengis.net/gml/3.2&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c1"># print(&quot;&lt;?xml version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;?&gt;&lt;snippet xmlns:gml=&#39;http://www.opengis.net/gml/3.2&#39;&gt;&quot; + context[&#39;bplan&#39;].geltungsbereich_gml_25832 + &quot;&lt;/snippet&gt;&quot;)</span>
+        <span class="c1"># Test ob ein Polygon zurück kommt - damit wäre nur ein einziges Polygon im geometry Field</span>
+        <span class="n">polygons</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;gml:Polygon&#39;</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+        <span class="c1"># print(len(polygons))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">polygons</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># print(&quot;Kein Polygon auf oberer Ebene gefunden - es sind wahrscheinlich mehrere!&quot;)</span>
+            <span class="n">multi_polygon_element</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;gml:MultiSurface&#39;</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+            <span class="n">uuid_multisurface</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+            <span class="n">multi_polygon_element</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;gml:id&quot;</span><span class="p">,</span> <span class="s2">&quot;GML_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid_multisurface</span><span class="p">))</span>
+            <span class="c1"># Füge gml_id Attribute hinzu - besser diese als Hash aus den Geometrien zu rechnen, oder in Zukunft generic_ids der Bereiche zu verwenden </span>
+            <span class="n">polygons</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;gml:MultiSurface/gml:surfaceMember/gml:Polygon&#39;</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">polygon</span> <span class="ow">in</span> <span class="n">polygons</span><span class="p">:</span>
+                <span class="n">uuid_polygon</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+                <span class="n">polygon</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;gml:id&quot;</span><span class="p">,</span> <span class="s2">&quot;GML_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid_polygon</span><span class="p">))</span>
+            <span class="n">context</span><span class="p">[</span><span class="s1">&#39;multisurface_geometry_25832&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">multi_polygon_element</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;xml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">polygon_element</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;gml:Polygon&#39;</span><span class="p">,</span> <span class="n">ns</span><span class="p">)</span>
+            <span class="c1">#polygon_element.set(&quot;xmlns:gml&quot;, &quot;http://www.opengis.net/gml/3.2&quot;)   </span>
+            <span class="n">uuid_polygon</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+            <span class="n">polygon_element</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;gml:id&quot;</span><span class="p">,</span> <span class="s2">&quot;GML_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid_polygon</span><span class="p">))</span>
+            <span class="c1"># Ausgabe der Geometrie in ein XML-Snippet - erweitert um den MultiSurface/surfaceMember Rahmen</span>
+            <span class="n">ET</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">polygon_element</span><span class="p">)</span> 
+            <span class="n">context</span><span class="p">[</span><span class="s1">&#39;multisurface_geometry_25832&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;gml:MultiSurface srsName=&quot;EPSG:25832&quot;&gt;&lt;gml:surfaceMember&gt;&#39;</span> <span class="o">+</span> <span class="n">ET</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">polygon_element</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;xml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&lt;/gml:surfaceMember&gt;&lt;/gml:MultiSurface&gt;&#39;</span>
+        <span class="k">return</span> <span class="n">context</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">    def get_object(self):</span>
+<span class="sd">        single_object = super().get_object(self.get_queryset())</span>
+<span class="sd">        # print(single_object.geltungsbereich)</span>
+<span class="sd">        # print(single_object.geltungsbereich_gml_25832)</span>
+<span class="sd">        return single_object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">dispatch</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Content-type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;application/xml&quot;</span>  <span class="c1"># set header</span>
+        <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</section>
+<section id="url-fur-export">
+<h2>URL für Export<a class="headerlink" href="#url-fur-export" title="Link to this heading"></a></h2>
+<p>Um die Export Funktion nutzen zu können, brauchen wir noch einen neuen Endpunkt.</p>
+<p>xplanung_light/urls.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="kn">from</span> <span class="nn">xplanung_light.views</span> <span class="kn">import</span> <span class="n">BPlanCreateView</span><span class="p">,</span> <span class="n">BPlanUpdateView</span><span class="p">,</span> <span class="n">BPlanDeleteView</span><span class="p">,</span> <span class="n">BPlanListView</span><span class="p">,</span> <span class="n">BPlanDetailXmlRasterView</span>
+<span class="c1">#...</span>
+ <span class="c1"># export xplanung gml</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;bplan/&lt;int:pk&gt;/xplan/&quot;</span><span class="p">,</span> <span class="n">BPlanDetailXmlRasterView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">template_name</span><span class="o">=</span><span class="s2">&quot;xplanung_light/bplan_template_xplanung_raster_6.xml&quot;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bplan-export-xplan-raster-6&quot;</span><span class="p">),</span>
+<span class="c1">#...</span>
+</pre></div>
+</div>
+</section>
+<section id="link-in-table-view">
+<h2>Link in Table View<a class="headerlink" href="#link-in-table-view" title="Link to this heading"></a></h2>
+<p>Den Link auf den Endpunkt übernehmen wir in die Bebauungsplantabelle</p>
+<p>xplanung_light/tables.py</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#...</span>
+<span class="k">class</span> <span class="nc">BPlanTable</span><span class="p">(</span><span class="n">tables</span><span class="o">.</span><span class="n">Table</span><span class="p">):</span>
+    <span class="c1">#download = tables.LinkColumn(&#39;gedis-document-pdf&#39;, text=&#39;Download&#39;, args=[A(&#39;pk&#39;)], \</span>
+    <span class="c1">#                     orderable=False, empty_values=())</span>
+    <span class="n">xplan_gml</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">&#39;bplan-export-xplan-raster-6&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Exportieren&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">&#39;pk&#39;</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">edit</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">&#39;bplan-update&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Bearbeiten&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">&#39;pk&#39;</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+    <span class="n">delete</span> <span class="o">=</span> <span class="n">tables</span><span class="o">.</span><span class="n">LinkColumn</span><span class="p">(</span><span class="s1">&#39;bplan-delete&#39;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Löschen&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">A</span><span class="p">(</span><span class="s1">&#39;pk&#39;</span><span class="p">)],</span> \
+                         <span class="n">orderable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">empty_values</span><span class="o">=</span><span class="p">())</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    geojson = Column(</span>
+<span class="sd">        accessor=A(&#39;geojson&#39;),</span>
+<span class="sd">        orderable=False,</span>
+<span class="sd">        # ...</span>
+<span class="sd">    )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">BPlan</span>
+        <span class="n">template_name</span> <span class="o">=</span> <span class="s2">&quot;django_tables2/bootstrap5.html&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;gemeinde&quot;</span><span class="p">,</span> <span class="s2">&quot;planart&quot;</span><span class="p">,</span> <span class="s2">&quot;xplan_gml&quot;</span><span class="p">,</span> <span class="s2">&quot;edit&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="xml-template">
+<h2>XML Template<a class="headerlink" href="#xml-template" title="Link to this heading"></a></h2>
+<p>Fehlt nur noch das Template ;-)</p>
+<p>komserv2/xplanung_light/templates/xplanung_light/bplan_template_xplanung_raster_6.xml</p>
+<div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; standalone=&quot;yes&quot;?&gt;</span>
+<span class="x">&lt;xplan:XPlanAuszug xmlns:xplan=&quot;http://www.xplanung.de/xplangml/6/0&quot; xmlns:gml=&quot;http://www.opengis.net/gml/3.2&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:wfs=&quot;http://www.opengis.net/wfs&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xsi:schemaLocation=&quot;http://www.xplanung.de/xplangml/6/0 http://repository.gdi-de.org/schemas/de.xleitstelle.xplanung/6.0/XPlanung-Operationen.xsd&quot; gml:id=&quot;</span><span class="cp">{{</span> <span class="nv">auszug_uuid</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="x">  &lt;gml:boundedBy&gt;</span>
+<span class="x">    &lt;gml:Envelope srsName=&quot;EPSG:25832&quot;&gt;</span>
+<span class="x">      &lt;gml:lowerCorner&gt;567015.8040 5937951.7580&lt;/gml:lowerCorner&gt;</span>
+<span class="x">      &lt;gml:upperCorner&gt;567582.8240 5938562.2710&lt;/gml:upperCorner&gt;</span>
+<span class="x">    &lt;/gml:Envelope&gt;</span>
+<span class="x">  &lt;/gml:boundedBy&gt;</span>
+<span class="x">  &lt;gml:featureMember&gt;</span>
+<span class="x">    &lt;xplan:BP_Plan gml:id=&quot;</span><span class="cp">{{</span> <span class="nv">bplan_uuid</span> <span class="cp">}}</span><span class="x">&quot;&gt;</span>
+<span class="x">      &lt;gml:boundedBy&gt;</span>
+<span class="x">        &lt;gml:Envelope srsName=&quot;EPSG:25832&quot;&gt;</span>
+<span class="x">          &lt;gml:lowerCorner&gt;</span><span class="cp">{{</span> <span class="nv">extent.0</span> <span class="cp">}}</span><span class="x"> </span><span class="cp">{{</span> <span class="nv">extent.1</span> <span class="cp">}}</span><span class="x">&lt;/gml:lowerCorner&gt;</span>
+<span class="x">          &lt;gml:upperCorner&gt;</span><span class="cp">{{</span> <span class="nv">extent.2</span> <span class="cp">}}</span><span class="x"> </span><span class="cp">{{</span> <span class="nv">extent.3</span> <span class="cp">}}</span><span class="x">&lt;/gml:upperCorner&gt;</span>
+<span class="x">        &lt;/gml:Envelope&gt;</span>
+<span class="x">      &lt;/gml:boundedBy&gt;</span>
+<span class="x">      &lt;xplan:name&gt;</span><span class="cp">{{</span> <span class="nv">bplan.name</span> <span class="cp">}}</span><span class="x">&lt;/xplan:name&gt;</span>
+<span class="x">      &lt;xplan:erstellungsMassstab&gt;1000&lt;/xplan:erstellungsMassstab&gt;</span>
+<span class="x">      &lt;xplan:raeumlicherGeltungsbereich&gt;</span>
+<span class="x">            </span><span class="cp">{%</span> <span class="k">autoescape</span> <span class="nv">off</span> <span class="cp">%}</span>
+<span class="x">            </span><span class="cp">{{</span> <span class="nv">multisurface_geometry_25832</span> <span class="cp">}}</span>
+<span class="x">            </span><span class="cp">{%</span> <span class="k">endautoescape</span> <span class="cp">%}</span>
+<span class="x">      &lt;/xplan:raeumlicherGeltungsbereich&gt;</span>
+<span class="x">      &lt;xplan:gemeinde&gt;</span>
+<span class="x">        &lt;xplan:XP_Gemeinde&gt;</span>
+<span class="x">          &lt;xplan:ags&gt;</span><span class="cp">{{</span> <span class="nv">bplan.gemeinde.ls</span> <span class="cp">}}{{</span> <span class="nv">bplan.gemeinde.ks</span> <span class="cp">}}{{</span> <span class="nv">bplan.gemeinde.vs</span> <span class="cp">}}{{</span> <span class="nv">bplan.gemeinde.gs</span> <span class="cp">}}</span><span class="x">&lt;/xplan:ags&gt;</span>
+<span class="x">          &lt;xplan:gemeindeName&gt;</span><span class="cp">{{</span> <span class="nv">bplan.gemeinde.name</span> <span class="cp">}}</span><span class="x">&lt;/xplan:gemeindeName&gt;</span>
+<span class="x">        &lt;/xplan:XP_Gemeinde&gt;</span>
+<span class="x">      &lt;/xplan:gemeinde&gt;</span>
+<span class="x">      &lt;xplan:planArt&gt;</span><span class="cp">{{</span> <span class="nv">bplan.planart</span> <span class="cp">}}</span><span class="x">&lt;/xplan:planArt&gt;</span>
+<span class="x">      &lt;xplan:staedtebaulicherVertrag&gt;false&lt;/xplan:staedtebaulicherVertrag&gt;</span>
+<span class="x">      &lt;xplan:erschliessungsVertrag&gt;false&lt;/xplan:erschliessungsVertrag&gt;</span>
+<span class="x">      &lt;xplan:durchfuehrungsVertrag&gt;false&lt;/xplan:durchfuehrungsVertrag&gt;</span>
+<span class="x">      &lt;xplan:gruenordnungsplan&gt;false&lt;/xplan:gruenordnungsplan&gt;</span>
+<span class="x">    &lt;/xplan:BP_Plan&gt;</span>
+<span class="x">  &lt;/gml:featureMember&gt;</span>
+<span class="x">&lt;/xplan:XPlanAuszug&gt;</span>
+</pre></div>
+</div>
+</section>
+<section id="neue-spalte-fur-export-in-tabelle">
+<h2>Neue Spalte für Export in Tabelle<a class="headerlink" href="#neue-spalte-fur-export-in-tabelle" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/">http://127.0.0.1:8000/bplan/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/bplan_list_tables2_xml_export.png"><img alt="Neue Spalte für Export in Tabelle" class="bg-primary align-center" src="_images/bplan_list_tables2_xml_export.png" style="width: 800px;" />
+</a>
+</section>
+<section id="xml-export">
+<h2>XML Export<a class="headerlink" href="#xml-export" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="http://127.0.0.1:8000/bplan/1/xplan/">http://127.0.0.1:8000/bplan/1/xplan/</a></p>
+<a class="bg-primary reference internal image-reference" href="_images/xplan_export_1.png"><img alt="XML Export" class="bg-primary align-center" src="_images/xplan_export_1.png" style="width: 800px;" />
+</a>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="leaflet_conf.html" class="btn btn-neutral float-left" title="Zentrale Konfiguration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Zurück</a>
+        <a href="map_view.html" class="btn btn-neutral float-right" title="Kartenansicht" accesskey="n" rel="next">Weiter <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Armin Retterath.</p>
+  </div>
+
+  Erstellt mit <a href="https://www.sphinx-doc.org/">Sphinx</a> mit einem
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    bereitgestellt von <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
